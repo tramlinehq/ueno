@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 void main() {
   runApp(const App());
@@ -14,11 +15,13 @@ class App extends StatefulWidget {
 
 class Home extends State {
   late AudioPlayer player;
+  String versionString = "";
 
   @override
   void initState() {
     super.initState();
     player = AudioPlayer();
+    setVersionString();
   }
 
   @override
@@ -27,13 +30,19 @@ class Home extends State {
     super.dispose();
   }
 
+  void setVersionString() {
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      String version = packageInfo.version;
+      String buildNumber = packageInfo.buildNumber;
+      versionString = version + " • " + buildNumber;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final border =
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0));
-
     const paddingGrids = EdgeInsets.all(10.0);
-    const paddingTitle = EdgeInsets.symmetric(vertical: 50.0);
+    const paddingHeader = EdgeInsets.symmetric(vertical: 50.0);
+    const paddingFooter = EdgeInsets.symmetric(vertical: 5.0);
 
     // japanese, english, mp3-name, color
     const stations = [
@@ -92,7 +101,7 @@ class Home extends State {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Padding(
-                          padding: paddingTitle,
+                          padding: paddingHeader,
                           child: Text("~ ueno (上野) aesthetic ~",
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 30))),
@@ -131,7 +140,12 @@ class Home extends State {
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 16))
                                           ])))
-                          ]))
+                          ])),
+                      Padding(
+                          padding: paddingFooter,
+                          child: Text(versionString,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 15)))
                     ]))));
   }
 }
