@@ -15,13 +15,13 @@ class App extends StatefulWidget {
 
 class Home extends State {
   late AudioPlayer player;
-  String versionString = "";
+  String _versionString = "";
 
   @override
   void initState() {
     super.initState();
     player = AudioPlayer();
-    setVersionString();
+    initVersion();
   }
 
   @override
@@ -30,12 +30,18 @@ class Home extends State {
     super.dispose();
   }
 
-  void setVersionString() {
+  initVersion() {
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       String version = packageInfo.version;
       String buildNumber = packageInfo.buildNumber;
-      versionString = version + " • " + buildNumber;
+
+      setState(() {
+        _versionString = version + " • " + buildNumber;
+      });
     });
+  }
+
+  void setVersionString() {
   }
 
   @override
@@ -143,7 +149,7 @@ class Home extends State {
                           ])),
                       Padding(
                           padding: paddingFooter,
-                          child: Text(versionString,
+                          child: Text(_versionString,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 15)))
                     ]))));
