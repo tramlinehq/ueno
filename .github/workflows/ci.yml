@@ -2,15 +2,6 @@ name: Flutter CI
 
 on:
   push:
-    inputs:
-      versionName:
-        description: 'User-facing release version name'
-        required: true
-        default: "1.0.0"
-      versionCode:
-          description: 'versionCode or build number'
-          required: true
-          default: 1
     branches:
       - main
 
