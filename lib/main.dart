@@ -41,16 +41,14 @@ class Home extends State {
     });
   }
 
-  void setVersionString() {
-  }
-
   @override
   Widget build(BuildContext context) {
+    const title = "~ ueno (上野) aesthetic ~";
     const paddingGrids = EdgeInsets.all(10.0);
     const paddingHeader = EdgeInsets.symmetric(vertical: 50.0);
     const paddingFooter = EdgeInsets.symmetric(vertical: 5.0);
 
-    // japanese, english, mp3-name, color
+    // japanese, english, mp3-name
     const stations = [
       ["品川", "Shinagawa", "shinagawa"],
       ["大崎", "Ōsaki", "osaki"],
@@ -108,7 +106,7 @@ class Home extends State {
                     children: [
                       const Padding(
                           padding: paddingHeader,
-                          child: Text("~ ueno (上野) aesthetic ~",
+                          child: Text(title,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 30))),
                       Expanded(
