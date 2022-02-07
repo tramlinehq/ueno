@@ -35,12 +35,6 @@ jobs:
     # Get flutter dependencies.
     - run: flutter pub get
 
-    # Statically analyze the Dart code for any errors.
-    - run: flutter analyze .
-
-    # Run widget tests for our flutter project.
-    - run: flutter test
-
     # Build apk.
     - run: flutter build apk --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
