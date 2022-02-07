@@ -14,7 +14,7 @@ on:
       versionCode:
         description: 'versionCode or build number'
         required: true
-        default: "1"
+        default: 1
 
 jobs:
   build:
