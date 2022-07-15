@@ -1,4 +1,4 @@
-name: Flutter (Android aab) 
+name: Android Play Store release build aab
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
 
     # Setup Java environment in order to build the Android app.
     - uses: actions/checkout@v3
-    - uses: actions/setup-java@v1
+    - uses: actions/setup-java@v3
       with:
         java-version: '12.x'
 
@@ -36,6 +36,14 @@ jobs:
 
     # Get flutter dependencies.
     - run: flutter pub get
+    
+    - name: Retrieve secrets 
+      env:
+        KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+        KEY_PROPERTIES_B64: ${{ secrets.KEY_PROPERTIES_B64 }} 
+      run: |
+        echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+        echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
 
     # Build apk.
     - run: flutter build appbundle --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
