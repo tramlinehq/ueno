@@ -1,10 +1,6 @@
 name: Android Play Store release build aab
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
     inputs:
       versionName:
@@ -14,9 +10,18 @@ on:
       versionCode:
         description: 'versionCode or build number'
         required: true
-        default: 1
+        default: '1'
 
 jobs:
+  tramline:
+    runs-on: ubuntu-latest
+    steps: 
+    - run: echo ${{ github.event.inputs.versionCode }} > version.txt
+
+    - uses: actions/upload-artifact@v3
+      with:
+       name: version
+       path: version.txt
   build:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
