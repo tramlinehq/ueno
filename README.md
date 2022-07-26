@@ -1,3 +1,5 @@
+26 jul 1849, slack debug step 
+
 # ueno
 
 yamanote aesthetic
