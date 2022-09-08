@@ -113,7 +113,7 @@ class Home extends State {
                           child: GridView.count(
                               crossAxisCount: 2,
                               shrinkWrap: true,
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(13.0),
                               children: <Widget>[
                             for (var station in stations)
                               Padding(
