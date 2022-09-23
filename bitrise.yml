@@ -32,9 +32,6 @@ workflows:
     - flutter-analyze@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
-    - flutter-test@1:
-        inputs:
-        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
     - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
@@ -57,9 +54,6 @@ workflows:
         inputs:
         - is_update: 'false'
     - cache-pull@2: {}
-    - flutter-test@1:
-        inputs:
-        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
 meta:
