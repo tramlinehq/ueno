@@ -24,11 +24,9 @@ workflows:
       Android
     steps:
     - git-clone@6: {}
-    - certificate-and-profile-installer@1: {}
     - flutter-installer@0:
         inputs:
         - is_update: 'false'
-    - cache-pull@2: {}
     - flutter-analyze@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
