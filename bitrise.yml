@@ -34,6 +34,7 @@ workflows:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: both
+        - is_debug_mode: 'true'
         - ios_output_type: archive
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
