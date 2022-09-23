@@ -33,9 +33,8 @@ workflows:
     - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
-        - platform: both
+        - platform: android
         - is_debug_mode: 'true'
-        - ios_output_type: archive
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
   primary:
