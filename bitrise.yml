@@ -73,7 +73,6 @@ workflows:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: android
-        - android_additional_params: '--release --build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION'
         - android_output_type: appbundle
         - additional_build_params: '--build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION'
         - is_debug_mode: 'true'
