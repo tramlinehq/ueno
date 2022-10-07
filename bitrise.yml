@@ -63,13 +63,17 @@ workflows:
             ls $BITRISE_SOURCE_DIR
 
             ls $HOME
+
+            echo $BUILD_VERSION
+
+            echo $BUILD_NUMBER
     - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: android
-        - android_additional_params: '--release --build-number=$BUILD_NUMBER --build-name=$VERSION'
+        - android_additional_params: '--release --build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION'
         - android_output_type: appbundle
-        - additional_build_params: '--build-number=$BUILD_NUMBER --build-name=$VERSION'
+        - additional_build_params: '--build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION'
         - is_debug_mode: 'true'
     - cache-pull@2: {}
     - cache-push@2: {}
