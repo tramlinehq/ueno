@@ -67,6 +67,8 @@ workflows:
             echo $BUILD_VERSION
 
             echo $BUILD_NUMBER
+
+            echo "Finished debug script"
     - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
