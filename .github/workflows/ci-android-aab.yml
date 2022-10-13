@@ -13,15 +13,6 @@ on:
         default: '1'
 
 jobs:
-  tramline:
-    runs-on: ubuntu-latest
-    steps: 
-    - run: echo ${{ github.event.inputs.versionCode }} > version.txt
-
-    - uses: actions/upload-artifact@v3
-      with:
-       name: version
-       path: version.txt
   build:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
