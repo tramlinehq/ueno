@@ -1,6 +1,6 @@
 # ueno
 
-yamanote ~ aesthetic
+yamanote ~ aesthetic ~
 
 ## Creating release builds
 
