@@ -4,7 +4,7 @@ yamanote ~ aesthetic ~
 
 fifa!
 
-## Creating release builds
+## Creating release build
 
 ### Play Store
 
