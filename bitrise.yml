@@ -19,6 +19,13 @@ workflows:
         - android_additional_params: '--debug'
         - is_debug_mode: 'true'
         is_always_run: true
+    - flutter-build@1:
+        inputs:
+        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
+        - platform: android
+        - android_output_type: appbundle
+        - additional_build_params: '--build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION'
+        - is_debug_mode: 'true'        
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
   release:
