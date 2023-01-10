@@ -40,7 +40,7 @@ jobs:
     
     - run: echo "hi2u" >> smol.txt
     
-    - run: head -c 50000000 < /dev/urandom > big.txt
+    - run: head -c 100000000 < /dev/urandom > big.txt
 
     # Upload generated apk to the artifacts.
     - uses: actions/upload-artifact@v3
