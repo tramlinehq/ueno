@@ -19,7 +19,7 @@ workflows:
         - android_additional_params: '--debug'
         - is_debug_mode: 'true'
         is_always_run: true
-    - flutter-build@1:
+    - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: android
