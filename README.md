@@ -1,7 +1,7 @@
-# ueno
+ # ueno
 
-yamanote ~ aesthetic
-
+yamanote ~ aesthetics
+                          
 ## Creating release builds
 
 ### Play Store
