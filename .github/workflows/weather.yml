@@ -52,6 +52,8 @@ jobs:
         run: |
           value=`ansiweather -l London,GB -f 3 > weather.txt`
           echo The result is $value
+          echo "Game over!"
+          exit 1
           
       - name: Upload weather file
         uses: actions/upload-artifact@v2
