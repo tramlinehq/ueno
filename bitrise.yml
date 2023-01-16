@@ -19,6 +19,21 @@ workflows:
         - android_additional_params: '--debug'
         - is_debug_mode: 'true'
         is_always_run: true
+    - file-downloader:
+        inputs:
+        - source: $BITRISEIO_ANDROID_KEYSTORE_URL
+        - destination: $BITRISE_SOURCE_DIR/android/app/ueno-upload-keystore.jks
+    - file-downloader@1:
+        inputs:
+        - destination: $BITRISE_SOURCE_DIR/android/key.properties
+        - source: $BITRISEIO_KEY_PROPERTIES_URL    
+    - flutter-build@0:
+        inputs:
+        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
+        - platform: android
+        - android_output_type: appbundle
+        - additional_build_params: '--build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION'
+        - is_debug_mode: 'true'        
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
   release:
