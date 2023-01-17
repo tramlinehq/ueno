@@ -2,7 +2,7 @@
 
 yamanote ~ aesthetic
 
-## Creating release builds
+## Creating release buildss
 
 ### Play Store
 
