@@ -1,6 +1,6 @@
 # ueno
 
-yamanote lines ~ oral aesthetics
+yamanote lines ~ oral aestheticsss
 
 ## Creating release builds
 
