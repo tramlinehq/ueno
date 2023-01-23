@@ -1,6 +1,6 @@
 # ueno
 
-yamanote lines ~ aurals aesthetic
+yamanote lines ~ aural aesthetics
 
 ## Creating release builds
 
