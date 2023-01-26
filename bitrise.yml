@@ -29,11 +29,6 @@ workflows:
         - additional_build_params: --build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION
         - ios_output_type: archive
     - cache-push@2: {}
-    - set-xcode-build-number@1:
-        inputs:
-        - build_short_version_string: $BUILD_VERSION
-        - plist_path: ios/Runner/Info.plist
-        - build_version: $BUILD_NUMBER
     - xcode-archive@4:
         inputs:
         - distribution_method: app-store
