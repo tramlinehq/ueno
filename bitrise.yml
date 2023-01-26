@@ -34,6 +34,7 @@ workflows:
         - distribution_method: app-store
     - deploy-to-itunesconnect-deliver@2:
         inputs:
+        - bundle_id: com.tramline.ueno
         - connection: api_key
     envs:
     - opts:
