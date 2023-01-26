@@ -102,3 +102,73 @@ app:
   - opts:
       is_expand: false
     BITRISE_FLUTTER_PROJECT_LOCATION: .
+    
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: flutter
+workflows:
+  deploy:
+    description: |
+      Builds and deploys app using [Deploy to bitrise.io Step](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html#deploying-a-flutter-app).
+
+      If you build for iOS, make sure to set up code signing secrets on Bitrise for a successful build.
+
+      Next steps:
+      - Check out [Getting started with Flutter apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html) for signing and deployment options.
+      - Check out the [Code signing guide](https://devcenter.bitrise.io/en/code-signing.html) for iOS and Android
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@7: {}
+    - certificate-and-profile-installer@1: {}
+    - flutter-installer@0:
+        inputs:
+        - is_update: 'false'
+    - cache-pull@2: {}
+    - flutter-build@0:
+        inputs:
+        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+        - platform: ios
+        - ios_output_type: archive
+    - cache-push@2: {}
+    - set-xcode-build-number@1:
+        inputs:
+        - build_short_version_string: "$BUILD_VERSION"
+        - build_version: "$BUILD_NUMBER"
+    - xcode-archive@4:
+        inputs:
+        - distribution_method: app-store
+    - deploy-to-itunesconnect-deliver@2:
+        inputs:
+        - connection: api_key
+    envs:
+    - opts:
+        is_expand: false
+      BUILD_VERSION: ''
+    - opts:
+        is_expand: false
+      BUILD_NUMBER: ''
+  primary:
+    description: |
+      Builds project and runs tests.
+
+      Next steps:
+      - Check out [Getting started with Flutter apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html).
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@7: {}
+    - flutter-installer@0:
+        inputs:
+        - is_update: 'false'
+    - cache-pull@2: {}
+    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
+meta:
+  bitrise.io:
+    stack: osx-xcode-14.2.x-ventura
+    machine_type_id: g2.4core
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_FLUTTER_PROJECT_LOCATION: "."
