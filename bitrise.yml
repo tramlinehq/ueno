@@ -26,7 +26,7 @@ workflows:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: ios
-        - additional_build_params: '--build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION'
+        - additional_build_params: --build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION
         - ios_output_type: archive
     - cache-push@2: {}
     - xcode-archive@4:
@@ -38,10 +38,10 @@ workflows:
     envs:
     - opts:
         is_expand: false
-      BUILD_VERSION: ""
+      BUILD_VERSION: 1.2.0
     - opts:
         is_expand: false
-      BUILD_NUMBER: ""
+      BUILD_NUMBER: "7000"
     - opts:
         is_expand: false
       BITRISE_PROJECT_PATH: ios/Runner.xcworkspace
