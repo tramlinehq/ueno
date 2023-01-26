@@ -1,5 +1,4 @@
----
-format_version: '11'
+format_version: "11"
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: flutter
 workflows:
@@ -18,18 +17,21 @@ workflows:
     - certificate-and-profile-installer@1: {}
     - flutter-installer@0:
         inputs:
-        - is_update: 'false'
+        - is_update: "false"
     - cache-pull@2: {}
+    - manage-ios-code-signing@1:
+        inputs:
+        - distribution_method: app-store
     - flutter-build@0:
         inputs:
-        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: ios
         - ios_output_type: archive
     - cache-push@2: {}
     - set-xcode-build-number@1:
         inputs:
-        - build_short_version_string: "$BUILD_VERSION"
-        - build_version: "$BUILD_NUMBER"
+        - build_short_version_string: $BUILD_VERSION
+        - build_version: $BUILD_NUMBER
     - xcode-archive@4:
         inputs:
         - distribution_method: app-store
@@ -39,10 +41,10 @@ workflows:
     envs:
     - opts:
         is_expand: false
-      BUILD_VERSION: ''
+      BUILD_VERSION: ""
     - opts:
         is_expand: false
-      BUILD_NUMBER: ''
+      BUILD_NUMBER: ""
   primary:
     description: |
       Builds project and runs tests.
@@ -54,7 +56,7 @@ workflows:
     - git-clone@7: {}
     - flutter-installer@0:
         inputs:
-        - is_update: 'false'
+        - is_update: "false"
     - cache-pull@2: {}
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
@@ -66,4 +68,4 @@ app:
   envs:
   - opts:
       is_expand: false
-    BITRISE_FLUTTER_PROJECT_LOCATION: "."
+    BITRISE_FLUTTER_PROJECT_LOCATION: .
