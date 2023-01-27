@@ -1,0 +1,12 @@
+Build:
+flutter "build" "ipa" "--build-number=7000" "--build-name=1.2.0" "--release"
+
+Reads: 
+xcodebuild "-workspace" "/Users/[REDACTED]/git/ios/Runner.xcworkspace" "-scheme" "Runner" "-resolvePackageDependencies"
+xcodebuild "-workspace" "/Users/[REDACTED]/git/ios/Runner.xcworkspace" "-scheme" "Runner" "-showBuildSettings"
+xcodebuild "-project" "/Users/[REDACTED]/git/ios/Runner.xcodeproj" "-target" "Runner" "-configuration" "Release" "-showBuildSettings"
+
+Archive and deliver:
+set -o pipefail && xcodebuild "archive" "-workspace" "/Users/[REDACTED]/git/ios/Runner.xcworkspace" "-scheme" "Runner" "-xcconfig" "/var/folders/11/nh0v1jld7zd7b9zqm1774gtm0000gn/T/3267692600/temp.xcconfig" "-archivePath" "/var/folders/11/nh0v1jld7zd7b9zqm1774gtm0000gn/T/xcodeArchive966598037/Runner.xcarchive" "-destination" "generic/platform=iOS" | xcpretty
+set -o pipefail && xcodebuild "-exportArchive" "-archivePath" "/var/folders/11/nh0v1jld7zd7b9zqm1774gtm0000gn/T/xcodeArchive966598037/Runner.xcarchive" "-exportPath" "/var/folders/11/nh0v1jld7zd7b9zqm1774gtm0000gn/T/xcodeIPAExport463832960/exported" "-exportOptionsPlist" "/var/folders/11/nh0v1jld7zd7b9zqm1774gtm0000gn/T/xcodeIPAExport463832960/export_options.plist" | xcpretty
+fastlane "deliver" "--api_key_path" "/var/folders/11/nh0v1jld7zd7b9zqm1774gtm0000gn/T/apiKey4286053394/api_key.json" "--precheck_include_in_app_purchases" "false" "--app_identifier" "com.tramline.ueno" "--ipa" "/var/folders/11/nh0v1jld7zd7b9zqm1774gtm0000gn/T/ipaOrPkg902585826/tmp.ipa" "--skip_screenshots" "--skip_metadata" "--force" "--platform" "ios"
