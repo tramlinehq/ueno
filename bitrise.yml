@@ -39,12 +39,6 @@ workflows:
     envs:
     - opts:
         is_expand: false
-      BUILD_VERSION: 1.2.0
-    - opts:
-        is_expand: false
-      BUILD_NUMBER: "7000"
-    - opts:
-        is_expand: false
       BITRISE_PROJECT_PATH: ios/Runner.xcworkspace
     - opts:
         is_expand: false
