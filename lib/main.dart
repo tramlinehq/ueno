@@ -83,6 +83,7 @@ class Home extends State {
     ];
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'ueno aesthetic',
         theme: ThemeData(
           fontFamily: 'NotoSerifJP',

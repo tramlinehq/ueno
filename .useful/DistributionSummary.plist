@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ueno.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>bitcode</key>
+			<false/>
+			<key>buildNumber</key>
+			<string>6</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>51754FE3802F63599B6F13F30254C27FDA63E4FA</string>
+				<key>dateExpires</key>
+				<string>09/12/23</string>
+				<key>type</key>
+				<string>Cloud Managed Apple Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>6</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51754FE3802F63599B6F13F30254C27FDA63E4FA</string>
+						<key>dateExpires</key>
+						<string>09/12/23</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>App.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>VF4NQ93FG5</string>
+						<key>name</key>
+						<string>Akshay Gupta</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>6</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51754FE3802F63599B6F13F30254C27FDA63E4FA</string>
+						<key>dateExpires</key>
+						<string>09/12/23</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Flutter.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>VF4NQ93FG5</string>
+						<key>name</key>
+						<string>Akshay Gupta</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0.0</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>VF4NQ93FG5.com.tramline.ueno</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>VF4NQ93FG5</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>Runner.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>a6e6c5d3-3d4f-4c7f-8a69-62789a8c5879</string>
+				<key>dateExpires</key>
+				<string>09/12/23</string>
+				<key>name</key>
+				<string>iOS Team Store Provisioning Profile: com.tramline.ueno</string>
+			</dict>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>VF4NQ93FG5</string>
+				<key>name</key>
+				<string>Akshay Gupta</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>
