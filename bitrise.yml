@@ -43,6 +43,11 @@ workflows:
     - opts:
         is_expand: false
       BITRISE_SCHEME: Runner
+  no_op:
+    description: '- Does nothing'
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@7: {}
   primary:
     description: |
       Builds project and runs tests.
