@@ -252,7 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(stationNameEn,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 16,
                       fontStyle: FontStyle.normal,
                       backgroundColor: textBgColor(),
                       color: textColor()))),
