@@ -37,38 +37,38 @@ CupertinoDynamicColor textColor() {
 
 const title = "~ ueno (上野) aesthetic ~ ";
 
-// japanese, english, asset-name
+// japanese, english, asset-name, distance from prev station
 const stations = [
-  ["品川", "Shinagawa", "shinagawa"],
-  ["大崎", "Ōsaki", "osaki"],
-  ["五反田", "Gotanda", "gotanda"],
-  ["目黒", "Meguro", "meguro"],
-  ["恵比寿", "Ebisu", "ebisu"],
-  ["渋谷", "Shibuya", "shibuya"],
-  ["原宿", "Harajuku", "harajuku"],
-  ["代々木", "Yoyogi", "yoyogi"],
-  ["新宿", "Shinjuku", "shinjuku"],
-  ["新大久保", "Shin-Ōkubo", "shinokubo"],
-  ["高田馬場", "Takadanobaba", "takadanobaba"],
-  ["目白", "Mejiro", "mejiro"],
-  ["池袋", "Ikebukuro", "ikebukuro"],
-  ["大塚", "Ōtsuka", "otsuka"],
-  ["巣鴨", "Sugamo", "sugamo"],
-  ["駒込", "Komagome", "seseragi"],
-  ["田端", "Tabata", "tabata"],
-  ["西日暮里", "Nishi-Nippori", "nishinippori"],
-  ["日暮里", "Nippori", "nippori"],
-  ["鶯谷", "Uguisudani", "uguisudani"],
-  ["上野", "Ueno", "ueno"],
-  ["御徒町", "Okachimachi", "okachimachi"],
-  ["秋葉原", "Akihabara", "akihabara"],
-  ["神田", "Kanda", "kanda"],
-  ["東京", "Tōkyō", "tokyo"],
-  ["有楽町", "Yūrakuchō", "yurakucho"],
-  ["新橋", "Shimbashi", "shimbashi"],
-  ["浜松町", "Hamamatsuchō", "hamamatsucho"],
-  ["田町", "Tamachi", "tamachi"],
-  ["高輪ゲートウェイ", "Takanawa Gateway", "tokyo"],
+  ["品川", "Shinagawa", "shinagawa", "0.9"],
+  ["大崎", "Ōsaki", "osaki", "2.0"],
+  ["五反田", "Gotanda", "gotanda", "0.9"],
+  ["目黒", "Meguro", "meguro", "1.2"],
+  ["恵比寿", "Ebisu", "ebisu", "1.5"],
+  ["渋谷", "Shibuya", "shibuya", "1.6"],
+  ["原宿", "Harajuku", "harajuku", "1.2"],
+  ["代々木", "Yoyogi", "yoyogi", "1.5"],
+  ["新宿", "Shinjuku", "shinjuku", "0.7"],
+  ["新大久保", "Shin-Ōkubo", "shinokubo", "1.3"],
+  ["高田馬場", "Takadanobaba", "takadanobaba", "1.4"],
+  ["目白", "Mejiro", "mejiro", "0.9"],
+  ["池袋", "Ikebukuro", "ikebukuro", "1.2"],
+  ["大塚", "Ōtsuka", "otsuka", "1.8"],
+  ["巣鴨", "Sugamo", "sugamo", "1.1"],
+  ["駒込", "Komagome", "seseragi", "0.7"],
+  ["田端", "Tabata", "tabata", "1.6"],
+  ["西日暮里", "Nishi-Nippori", "nishinippori", "0.8"],
+  ["日暮里", "Nippori", "nippori", "0.5"],
+  ["鶯谷", "Uguisudani", "uguisudani", "1.1"],
+  ["上野", "Ueno", "ueno", "1.1"],
+  ["御徒町", "Okachimachi", "okachimachi", "0.6"],
+  ["秋葉原", "Akihabara", "akihabara", "1.0"],
+  ["神田", "Kanda", "kanda", "0.7"],
+  ["東京", "Tōkyō", "tokyo", "1.3"],
+  ["有楽町", "Yūrakuchō", "yurakucho", "0.8"],
+  ["新橋", "Shimbashi", "shimbashi", "1.1"],
+  ["浜松町", "Hamamatsuchō", "hamamatsucho", "1.2"],
+  ["田町", "Tamachi", "tamachi", "1.5"],
+  ["高輪ゲートウェイ", "Takanawa Gateway", "tokyo", "1.3"],
 ];
 
 class Home extends State {
@@ -132,57 +132,57 @@ class _MyHomePageState extends State<MyHomePage> {
     return CupertinoPageScaffold(
         child: SafeArea(
             child: Center(
-          child: Column(
-            children: [
-              Padding(
-                  padding: paddingHeader,
-                  child: Text(title,
-                      style: TextStyle(
-                          backgroundColor: textBgColor(),
-                          color: textColor(),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 30))),
-              Padding(padding: const EdgeInsets.only(bottom: 20),
-                child:
-                Column(children: [
-                  Text("swipe right to play station audio, swipe left to stop",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 12,
-                          backgroundColor: bgColor(),
-                          color: textBgColor())),
-                  Text(_versionString,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 12,
-                          backgroundColor: bgColor(),
-                          color: textBgColor())),
-                ])),
-              Expanded(
-                  child: Container(
-                width: MediaQuery.of(context).size.width * 0.98,
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: SingleChildScrollView(
-                  child: CupertinoListSection.insetGrouped(
-                    backgroundColor: bgColor(),
-                    children: [
-                      ...List.generate(
-                        stations.length,
-                        (index) => GestureDetector(
-                          onPanUpdate: (details) async {
-                            onSwipe(details, index);
-                          },
-                          child: buildCupertinoFormRow(stations[index],
-                              playing: _setPlayingIndex == index),
-                        ),
-                      ),
-                    ],
+      child: Column(
+        children: [
+          Padding(
+              padding: paddingHeader,
+              child: Text(title,
+                  style: TextStyle(
+                      backgroundColor: textBgColor(),
+                      color: textColor(),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30))),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Column(children: [
+                Text("swipe right to play station audio, swipe left to stop",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 12,
+                        backgroundColor: textBgColor(),
+                        color: textColor())),
+                Text(_versionString,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 12,
+                        backgroundColor: textBgColor(),
+                        color: textColor())),
+              ])),
+          Expanded(
+              child: Container(
+            width: MediaQuery.of(context).size.width * 0.98,
+            padding: const EdgeInsets.symmetric(vertical: 2),
+            child: SingleChildScrollView(
+              child: CupertinoListSection.insetGrouped(
+                backgroundColor: bgColor(),
+                children: [
+                  ...List.generate(
+                    stations.length,
+                    (index) => GestureDetector(
+                      onPanUpdate: (details) async {
+                        onSwipe(details, index);
+                      },
+                      child: buildCupertinoFormRow(stations[index], index,
+                          playing: _setPlayingIndex == index),
+                    ),
                   ),
-                ),
-              )),
-            ],
-          ),
-        )));
+                ],
+              ),
+            ),
+          )),
+        ],
+      ),
+    )));
   }
 
   void onSwipe(details, index) async {
@@ -215,10 +215,19 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Widget buildCupertinoFormRow(stations, {bool playing = true}) {
-    var stationNameEn = "${stations[1]}";
-    var stationNameJp = stations[0];
-    var coverImage = "assets/cover/${stations[2]}.jpg";
+  Widget buildCupertinoFormRow(station, index, {bool playing = true}) {
+    var stationNameEn = "${station[1]}";
+    var stationNameJp = station[0];
+    var coverImage = "assets/cover/${station[2]}.jpg";
+    var prevStation = [];
+
+    if (index == 0) {
+      prevStation = stations[stations.length - 1];
+    } else {
+      prevStation = stations[index - 1];
+    }
+
+    var stationDistanceBetween = "from ${prevStation[1]} – ${station[3]}kms";
 
     return CupertinoListTile(
         title: DropShadow(
@@ -227,7 +236,15 @@ class _MyHomePageState extends State<MyHomePage> {
             spread: 1,
             offset: const Offset(0.0, 1.0),
             child: Image.asset(coverImage, width: 150.0)),
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(10.0),
+        subtitle: Padding(
+            padding: const EdgeInsets.only(bottom: 1),
+            child: Text(stationDistanceBetween,
+                style: TextStyle(
+                    fontSize: 11,
+                    fontStyle: FontStyle.normal,
+                    backgroundColor: textBgColor(),
+                    color: textColor()))),
         additionalInfo:
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
           Padding(
