@@ -15,9 +15,7 @@ workflows:
     - activate-ssh-key@4: {}
     - git-clone@7: {}
     - certificate-and-profile-installer@1: {}
-    - flutter-installer@0:
-        inputs:
-        - is_update: "false"
+    - flutter-installer@0: {}
     - cache-pull@2: {}
     - manage-ios-code-signing@1:
         inputs:
