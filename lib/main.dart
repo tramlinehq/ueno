@@ -218,7 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget buildCupertinoFormRow(station, index, {bool playing = true}) {
     var stationNameEn = station[1];
     var stationNameJp = station[0];
-    var totalDistanceCovered = "total covered: ${station[4]}kms";
+    var totalDistanceCovered = "total covered – ${station[4]}kms";
     var coverImage = "assets/cover/${station[2]}.jpg";
     var prevStation = [];
 
