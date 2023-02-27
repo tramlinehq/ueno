@@ -89,7 +89,7 @@ const stations = [
   ["新橋", "Shimbashi", "shimbashi", "1.1", "29.6", []],
   ["浜松町", "Hamamatsuchō", "hamamatsucho", "1.2", "30.8", []],
   ["田町", "Tamachi", "tamachi", "1.5", "32.3", []],
-  ["高輪ゲートウェイ", "Takanawa Gateway", "tokyo", "1.3", "33.6", []],
+  ["高輪ゲートウェイ", "Takanawa Gateway", "takanawagateway", "1.3", "33.6", []],
 ];
 
 class Home extends State {
