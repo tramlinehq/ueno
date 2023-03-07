@@ -244,8 +244,6 @@ class _MyHomePageState extends State<MyHomePage> {
     var coverImage = "assets/cover/${station[2]}.jpg";
     var prevStation = [];
 
-    if (station[5].length != 0) {}
-
     if (index == 0) {
       prevStation = stations[stations.length - 1];
     } else {
