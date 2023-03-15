@@ -189,13 +189,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   ...List.generate(
                     stations.length,
-                    (index) => GestureDetector(
-                      onPanUpdate: (details) async {
-                        onSwipe(details, index);
-                      },
-                      child: buildCupertinoFormRow(stations[index], index,
-                          playing: _setPlayingIndex == index),
-                    ),
+                    (index) => buildCupertinoFormRow(stations[index], index,
+                        playing: _setPlayingIndex == index),
                   ),
                 ],
               ),
@@ -252,74 +247,80 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var stationDistanceBetween = "from ${prevStation[1]} – ${station[3]}kms";
 
-    return CupertinoListTile(
-        title: DropShadow(
-            blurRadius: 1,
-            borderRadius: 5,
-            spread: 1,
-            offset: const Offset(0.0, 1.0),
-            child: Image.asset(coverImage, width: 150.0)),
-        padding: const EdgeInsets.all(10.0),
-        subtitle:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-              padding: const EdgeInsets.only(bottom: 1),
-              child: Text(stationDistanceBetween,
-                  style: TextStyle(
-                      fontSize: 11,
-                      fontStyle: FontStyle.normal,
-                      backgroundColor: textBgColor(),
-                      color: textColor()))),
-          Padding(
-              padding: const EdgeInsets.only(bottom: 1),
-              child: Text(totalDistanceCovered,
-                  style: TextStyle(
-                      fontSize: 11,
-                      fontStyle: FontStyle.normal,
-                      backgroundColor: textBgColor(),
-                      color: textColor())))
-        ]),
-        additionalInfo:
-            Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Padding(
-              padding: const EdgeInsets.only(bottom: 1),
-              child: Text(stationNameEn,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontStyle: FontStyle.normal,
-                      backgroundColor: textBgColor(),
-                      color: textColor()))),
-          Padding(
-              padding: const EdgeInsets.only(bottom: 1),
-              child: Text(stationNameJp,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontStyle: FontStyle.normal,
-                      backgroundColor: textBgColor(),
-                      color: textColor()))),
-          ...List.generate(
-            shinkansens.length,
-            (index) => DropShadow(
-                blurRadius: 0.2,
-                borderRadius: 0,
-                spread: 1,
-                offset: const Offset(0.0, 1.0),
-                child: Image.asset(
-                    "assets/misc/shinkansen/${shinkansens[index]}.png",
-                    width: 25.0)),
-          ),
-          Visibility(
-              maintainState: true,
-              maintainAnimation: true,
-              maintainSize: true,
-              visible: playing,
-              child: Text(" playing…",
-                  style: TextStyle(
-                      fontSize: 11,
-                      fontStyle: FontStyle.normal,
-                      backgroundColor: textBgColor(),
-                      color: textColor())))
-        ]));
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onPanUpdate: (details) async {
+        onSwipe(details, index);
+      },
+      child: CupertinoListTile(
+          title: DropShadow(
+              blurRadius: 1,
+              borderRadius: 5,
+              spread: 1,
+              offset: const Offset(0.0, 1.0),
+              child: Image.asset(coverImage, width: 150.0)),
+          padding: const EdgeInsets.all(10.0),
+          subtitle:
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Padding(
+                padding: const EdgeInsets.only(bottom: 1),
+                child: Text(stationDistanceBetween,
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontStyle: FontStyle.normal,
+                        backgroundColor: textBgColor(),
+                        color: textColor()))),
+            Padding(
+                padding: const EdgeInsets.only(bottom: 1),
+                child: Text(totalDistanceCovered,
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontStyle: FontStyle.normal,
+                        backgroundColor: textBgColor(),
+                        color: textColor())))
+          ]),
+          additionalInfo:
+          Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+            Padding(
+                padding: const EdgeInsets.only(bottom: 1),
+                child: Text(stationNameEn,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.normal,
+                        backgroundColor: textBgColor(),
+                        color: textColor()))),
+            Padding(
+                padding: const EdgeInsets.only(bottom: 1),
+                child: Text(stationNameJp,
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontStyle: FontStyle.normal,
+                        backgroundColor: textBgColor(),
+                        color: textColor()))),
+            ...List.generate(
+              shinkansens.length,
+                  (index) => DropShadow(
+                  blurRadius: 0.2,
+                  borderRadius: 0,
+                  spread: 1,
+                  offset: const Offset(0.0, 1.0),
+                  child: Image.asset(
+                      "assets/misc/shinkansen/${shinkansens[index]}.png",
+                      width: 25.0)),
+            ),
+            Visibility(
+                maintainState: true,
+                maintainAnimation: true,
+                maintainSize: true,
+                visible: playing,
+                child: Text(" playing…",
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontStyle: FontStyle.normal,
+                        backgroundColor: textBgColor(),
+                        color: textColor())))
+          ])),
+    );
   }
 }
