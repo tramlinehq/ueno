@@ -33,6 +33,7 @@ workflows:
     - deploy-to-itunesconnect-deliver@2:
         inputs:
         - bundle_id: com.tramline.ueno
+        - skip_app_version_update: "yes"
         - connection: api_key
     envs:
     - opts:
