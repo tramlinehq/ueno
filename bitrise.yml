@@ -59,8 +59,8 @@ workflows:
             set -x
 
             # write your script here
-            echo version code -- $BUILD_NUMBER
-            echo version name -- $BUILD_VERSION
+            echo version code -- $versionCode
+            echo version name -- $versionName
   primary:
     description: |
       Builds project and runs tests.
