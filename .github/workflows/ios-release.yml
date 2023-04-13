@@ -60,7 +60,7 @@ jobs:
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
     - name: Build the app
-      run: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
+      run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
     - name: Clean up keychain and provisioning profile
       if: ${{ always() }}
