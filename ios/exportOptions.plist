@@ -1,15 +1,17 @@
-<?xml version=”1.0" encoding=”UTF-8"?>
-<!DOCTYPE plist PUBLIC “-//Apple//DTD PLIST 1.0//EN” “http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version=”1.0">
-<dict>
- <key>method</key>
- <string>development</string>
- <key>teamID</key>
- <string>VF4NQ93FG5</string>
- <key>provisioningProfiles</key>
- <dict>
- <key>com.tramline.ueno</key>
- <string>Github Actions</string>
- </dict>
-</dict>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>method</key>
+    <string>app-store</string>
+    <key>teamID</key>
+    <string>VF4NQ93FG5</string>
+    <key>signingStyle</key>
+    <string>manual</string>
+    <key>provisioningProfiles</key>
+    <dict>
+      <key>com.tramline.ueno</key>
+      <string>d0733689-17c7-4af7-8771-c23d05e4c5e7</string>
+    </dict>
+  </dict>
 </plist>
