@@ -50,7 +50,10 @@ jobs:
         run: flutter pub get
 
       - name: Build the app
-        run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
+        run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign
+
+      - name: Sign the release
+        run: cd ios && bundle exec fastlane sigh resign
 
       - name: Upload to testflight
         run: cd ios && bundle exec fastlane ios upload_release
