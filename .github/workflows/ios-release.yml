@@ -76,6 +76,7 @@ jobs:
         security find-identity -v -p codesigning
         # show provisioning profiles
         ls -al ~/Library/MobileDevice/Provisioning\ Profiles
+        cat ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
         # build
         flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
