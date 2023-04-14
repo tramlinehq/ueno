@@ -56,21 +56,25 @@ jobs:
       run: |
         # create variables
         CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-        DEV_CERTIFIFACTE_PATH=$RUNNER_TEMP/dev_build_certificate.p12
+        DEV_CERTIFICATE_PATH=$RUNNER_TEMP/dev_build_certificate.p12
         PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
         KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
         # import certificate and provisioning profile from secrets
         echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
         echo -n "$DEV_BUILD_CERTIFICATE_BASE64" | base64 --decode --output $DEV_CERTIFICATE_PATH
         echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode --output $PP_PATH
+
         # create temporary keychain
         security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
         security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
         security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
         # import certificate to keychain
         security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
         security import $DEV_CERTIFICATE_PATH -P "$DEV_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
         security list-keychain -d user -s $KEYCHAIN_PATH
+
         # apply provisioning profile
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
@@ -79,9 +83,11 @@ jobs:
       run: |
         # show codesign identities
         security find-identity -v -p codesigning
+
         # show provisioning profiles
         ls -al ~/Library/MobileDevice/Provisioning\ Profiles
         cat ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+
         # build
         flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
