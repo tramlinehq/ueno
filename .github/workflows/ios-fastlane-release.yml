@@ -50,7 +50,7 @@ jobs:
         run: flutter pub get
 
       - name: Build the app
-        run: flutter build ipa --release --export-options-plist=ios/exportOptions.plist --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
+        run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
       - name: Upload to testflight
         run: cd ios && bundle exec fastlane ios upload_release
