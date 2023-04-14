@@ -89,7 +89,14 @@ jobs:
         cat ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
 
         # build
-        flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
+        flutter build ios --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign
+
+    - name: Build xArchive
+      run: |
+        xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Release DEVELOPMENT_TEAM=VF4NQ93FG5 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/Runner.xcarchive PROVISIONING_PROFILE=fccab5a7-119a-4a44-a3a3-7c63e853b12d clean archive CODE_SIGN_IDENTITY="iPhone Distribution: Akshay Gupta (VF4NQ93FG5)"
+
+    - name: Export ipa
+      run: xcodebuild -exportArchive -archivePath build-output/Runner.xcarchive -exportPath build-output/ios -exportOptionsPlist ios/exportOptions.plist
 
     - name: Clean up keychain and provisioning profile
       if: ${{ always() }}
