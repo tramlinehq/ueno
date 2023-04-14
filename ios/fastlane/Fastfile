@@ -80,8 +80,6 @@ platform :ios do
  lane :ship_to_testflight do
    load_asc_api_key
    prepare_signing
-   # disable auto signing
-   disable_automatic_code_signing(path: "Running.xcodeproj")
 
    # build for app store / testflight
    gym(scheme: "Runner",
