@@ -38,7 +38,7 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
           ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
           SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          SIGNING_KEY_FILE_PATH: signing-cert.p12
+          SIGNING_KEY_FILE_PATH: ../signing-cert.p12
 
       - name: Setup the flutter environment
         uses: subosito/flutter-action@v2
