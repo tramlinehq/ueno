@@ -36,7 +36,7 @@ jobs:
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
-          ASC_KEY: ${{ secrets.$APPSTORE_PRIVATE_API_KEY }}
+          ASC_KEY: ${{ secrets.APPSTORE_PRIVATE_API_KEY }}
           SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
           SIGNING_KEY_FILE_PATH: signing-cert.p12
 
@@ -48,6 +48,6 @@ jobs:
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
-          ASC_KEY: ${{ secrets.$APPSTORE_PRIVATE_API_KEY }}
+          ASC_KEY: ${{ secrets.APPSTORE_PRIVATE_API_KEY }}
           SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
           SIGNING_KEY_FILE_PATH: signing-cert.p12
