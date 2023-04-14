@@ -40,6 +40,15 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
           SIGNING_KEY_FILE_PATH: signing-cert.p12
 
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Get flutter dependencies
+        run: flutter pub get
+
       - name: Build the app
         run: flutter build ipa --release --export-options-plist=ios/exportOptions.plist --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
