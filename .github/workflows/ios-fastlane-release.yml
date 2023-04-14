@@ -31,15 +31,6 @@ jobs:
         run: |
           echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
 
-      - name: Setup signing environment for the build
-        run: cd ios && bundle install && bundle exec fastlane ios prepare_for_build
-        env:
-          ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
-          ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          SIGNING_KEY_FILE_PATH: ../signing-cert.p12
-
       - name: Setup the flutter environment
         uses: subosito/flutter-action@v2
         with:
@@ -50,16 +41,20 @@ jobs:
         run: flutter pub get
 
       - name: Build the app
-        run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
+        run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign
 
-      - name: Sign the release
-        run: cd ios && bundle exec fastlane sigh resign
-
-      - name: Upload to testflight
-        run: cd ios && bundle exec fastlane ios upload_release
+      - name: Sign and ship the build
+        working-directory: ios
+        run: bundle install && bundle exec fastlane ios ship_to_testflight
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
-          ASC_KEY: ${{ secrets.APPSTORE_PRIVATE_API_KEY }}
+          ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
           SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          SIGNING_KEY_FILE_PATH: signing-cert.p12
+          SIGNING_KEY_FILE_PATH: ../signing-cert.p12
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: iOS IPA
+          path: ios/*.ipa

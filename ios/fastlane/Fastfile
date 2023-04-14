@@ -77,8 +77,17 @@ platform :ios do
  end
 
  desc "Prepare for build"
- lane :prepare_for_build do
+ lane :ship_to_testflight do
    load_asc_api_key
    prepare_signing
+   # disable auto signing
+   disable_automatic_code_signing(path: "Running.xcodeproj")
+
+   # build for app store / testflight
+   gym(scheme: "Runner",
+       workspace: "Runner.xcworkspace",
+       export_method: "app-store")
+
+   upload_release
  end
 end
