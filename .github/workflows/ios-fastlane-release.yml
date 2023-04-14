@@ -31,12 +31,12 @@ jobs:
         run: |
           echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
 
-      - name: Build & upload iOS binary
+      - name: Setup signing environment for the build
         run: cd ios && bundle install && bundle exec fastlane ios prepare_for_build
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
-          ASC_KEY: ${{ secrets.APPSTORE_PRIVATE_API_KEY }}
+          ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
           SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
           SIGNING_KEY_FILE_PATH: signing-cert.p12
 
