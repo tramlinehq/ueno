@@ -48,21 +48,17 @@ jobs:
     - name: Install the Apple certificate and provisioning profile
       env:
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-        DEV_BUILD_CERTIFICATE_BASE64: ${{ secrets.DEV_BUILD_CERTIFICATE_BASE64 }}
         P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-        DEV_P12_PASSWORD: ${{ secrets.DEV_P12_PASSWORD }}
         BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       run: |
         # create variables
         CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-        DEV_CERTIFICATE_PATH=$RUNNER_TEMP/dev_build_certificate.p12
         PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
         KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
         # import certificate and provisioning profile from secrets
         echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
-        echo -n "$DEV_BUILD_CERTIFICATE_BASE64" | base64 --decode --output $DEV_CERTIFICATE_PATH
         echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode --output $PP_PATH
 
         # create temporary keychain
@@ -72,7 +68,6 @@ jobs:
 
         # import certificate to keychain
         security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-        security import $DEV_CERTIFICATE_PATH -P "$DEV_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
         security list-keychain -d user -s $KEYCHAIN_PATH
 
         # apply provisioning profile
@@ -84,19 +79,16 @@ jobs:
         # show codesign identities
         security find-identity -v -p codesigning
 
-        # show provisioning profiles
-        ls -al ~/Library/MobileDevice/Provisioning\ Profiles
-        cat ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
-
-        # build
+        # build without signing
         flutter build ios --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign
 
-    - name: Build xArchive
+    - name: Build xArchive and sign
       run: |
         xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Release DEVELOPMENT_TEAM=VF4NQ93FG5 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/Runner.xcarchive PROVISIONING_PROFILE=fccab5a7-119a-4a44-a3a3-7c63e853b12d clean archive CODE_SIGN_IDENTITY="iPhone Distribution: Akshay Gupta (VF4NQ93FG5)"
 
     - name: Export ipa
-      run: xcodebuild -exportArchive -archivePath build-output/Runner.xcarchive -exportPath build-output/ios -exportOptionsPlist ios/exportOptions.plist
+      run: |
+        xcodebuild -exportArchive -archivePath build-output/Runner.xcarchive -exportPath build-output/ios -exportOptionsPlist ios/exportOptions.plist
 
     - name: Clean up keychain and provisioning profile
       if: ${{ always() }}
@@ -109,7 +101,8 @@ jobs:
         API_KEY: ${{ secrets.APPSTORE_API_KEY_ID }}
         API_ISSUER: ${{ secrets.APPSTORE_ISSUER_ID }}
         APP_PATH: build-output/ios/*.ipa
-      run: xcrun altool --upload-app --type ios -f $APP_PATH --apiKey $API_KEY --apiIssuer $API_ISSUER
+      run: |
+        xcrun altool --upload-app --type ios -f $APP_PATH --apiKey $API_KEY --apiIssuer $API_ISSUER
 
     - name: Publish iOS Artifacts
       uses: actions/upload-artifact@v1
