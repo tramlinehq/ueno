@@ -19,6 +19,7 @@ workflows:
     - cache-pull@2: {}
     - manage-ios-code-signing@1:
         inputs:
+        - verbose_log: "yes"
         - distribution_method: app-store
     - flutter-build@0:
         inputs:
