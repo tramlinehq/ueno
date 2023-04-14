@@ -82,9 +82,7 @@ platform :ios do
    prepare_signing
 
    # build for app store / testflight
-   gym(scheme: "Runner",
-       workspace: "Runner.xcworkspace",
-       export_method: "app-store")
+   build_app(scheme: "Runner", workspace: "Runner.xcworkspace", export_method: "app-store", export_options: { provisioningProfiles: { "com.tramline.ueno" => "Bitrise iOS app-store - (com.tramline.ueno)" }})
 
    upload_release
  end
