@@ -69,11 +69,13 @@ jobs:
         # apply provisioning profile
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-        # show codesign identities
-        security find-identity -v -p codesigning
 
     - name: Build the app
-      run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
+      run: |
+        # show codesign identities
+        security find-identity -v -p codesigning
+        # build
+        flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
     - name: Clean up keychain and provisioning profile
       if: ${{ always() }}
