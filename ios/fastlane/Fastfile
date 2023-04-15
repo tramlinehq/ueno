@@ -76,14 +76,21 @@ platform :ios do
   )
  end
 
+ desc "Build an ipa"
+ lane :build_ipa do
+    build_app(
+    export_method: "app-store",
+    skip_build_archive: true,
+    archive_path: "./build/ios/archive/Runner.xcarchive",
+    export_team_id: "VF4NQ93FG5"
+    )
+  end
+
  desc "Prepare for build"
  lane :ship_to_testflight do
    load_asc_api_key
    prepare_signing
-
-   # build for app store / testflight
-   build_app(scheme: "Runner", workspace: "Runner.xcworkspace", export_method: "app-store", export_options: { provisioningProfiles: { "com.tramline.ueno" => "Bitrise iOS app-store - (com.tramline.ueno)" }})
-
+   build_ipa
    upload_release
  end
 end
