@@ -41,7 +41,9 @@ jobs:
         run: flutter pub get
 
       - name: Build the app
-        run: flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign
+        run: |
+          flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign
+          ls -la build/ios/archive
 
       - name: Sign and ship the build
         working-directory: ios

@@ -80,7 +80,7 @@ platform :ios do
     build_app(
     export_method: "app-store",
     skip_build_archive: true,
-    archive_path: "./build/ios/archive/Runner.xcarchive",
+    archive_path: "../build/ios/archive/Runner.xcarchive",
     export_team_id: "VF4NQ93FG5"
     )
   end
