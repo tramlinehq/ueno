@@ -2,9 +2,17 @@ import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter/widgets.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() {
-  runApp(const App());
+  SentryFlutter.init(
+    (options) {
+      options.dsn = const String.fromEnvironment('SENTRY_DSN', defaultValue: 'dummy');
+      options.tracesSampleRate = 0.1;
+    },
+    appRunner: () => runApp(const App()),
+  );
 }
 
 class App extends StatefulWidget {
