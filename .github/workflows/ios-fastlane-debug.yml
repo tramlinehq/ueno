@@ -49,7 +49,7 @@ jobs:
         working-directory: ios
         run: |
           bundle install && bundle exec fastlane ios ad_hoc_build
-          ls -la build/ios/ipa
+          ls -la ../build/ios/ipa
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
