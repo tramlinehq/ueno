@@ -1,4 +1,4 @@
-name: iOS Fastlane Release
+name: iOS Fastlane AdHoc
 
 on:
   workflow_dispatch:
@@ -48,7 +48,7 @@ jobs:
       - name: Generate and sign the ipa
         working-directory: ios
         run: |
-          bundle install && bundle exec fastlane ios ship_to_testflight
+          bundle install && bundle exec fastlane ios ad_hoc_build
           ls -la build/ios/ipa
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
@@ -58,7 +58,7 @@ jobs:
           SIGNING_KEY_FILE_PATH: ../signing-cert.p12
 
       - name: Upload artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: iOS IPA
-            path: build/ios/*.ipa
+        uses: actions/upload-artifact@v3
+        with:
+          name: iOS IPA
+          path: build/ios/*.ipa
