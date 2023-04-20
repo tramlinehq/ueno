@@ -56,6 +56,7 @@ platform :ios do
 
     # fetches and installs provisioning profiles from ASC
     sigh(
+      adhoc: (options[:release] ? false : true),
       api_key: api_key,
       readonly: true
     )
@@ -76,20 +77,27 @@ platform :ios do
  end
 
  desc "Build an ipa"
- lane :build_ipa do
+ lane :build_ipa do |options|
     build_app(
-    export_method: "app-store",
+    export_method: (options[:release] ? "app-store" : "ad-hoc"),
     skip_build_archive: true,
     archive_path: "../build/ios/archive/Runner.xcarchive",
     export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
     )
   end
 
- desc "Prepare for build"
+ desc "Ship to testflight"
  lane :ship_to_testflight do
    load_asc_api_key
-   prepare_signing
-   build_ipa
+   prepare_signing(release: true)
+   build_ipa(release: true)
    upload_release
  end
+
+ desc "Generate ad-hoc build"
+  lane :ad_hoc_build do
+    load_asc_api_key
+    prepare_signing(release: false)
+    build_ipa(release: false)
+  end
 end
