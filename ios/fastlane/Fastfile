@@ -58,7 +58,7 @@ platform :ios do
     sigh(
       adhoc: (options[:release] ? false : true),
       api_key: api_key,
-      readonly: true
+      readonly: (options[:release] ? true : false)
     )
   end
 
