@@ -57,8 +57,7 @@ platform :ios do
     # fetches and installs provisioning profiles from ASC
     sigh(
       adhoc: (options[:release] ? false : true),
-      api_key: api_key,
-      readonly: (options[:release] ? true : false)
+      api_key: api_key
     )
   end
 
