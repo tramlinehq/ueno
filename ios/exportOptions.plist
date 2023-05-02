@@ -10,7 +10,7 @@
     <string>manual</string>
     <key>provisioningProfiles</key>
     <dict>
-      <key>com.tramline.ueno</key>
+      <key>com.tramline.ueno.staging</key>
       <string>fccab5a7-119a-4a44-a3a3-7c63e853b12d</string>
     </dict>
   </dict>
