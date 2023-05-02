@@ -4,11 +4,21 @@ import 'package:just_audio/just_audio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:amplitude_flutter/amplitude.dart';
+import 'package:amplitude_flutter/identify.dart';
+
+final Amplitude amplitude = Amplitude.getInstance();
 
 void main() {
+  amplitude.init(
+      const String.fromEnvironment('AMPLITUDE_API_KEY', defaultValue: 'dummy'));
+
+  Amplitude.getInstance().logEvent('APP_OPENED');
+
   SentryFlutter.init(
     (options) {
-      options.dsn = const String.fromEnvironment('SENTRY_DSN', defaultValue: 'dummy');
+      options.dsn =
+          const String.fromEnvironment('SENTRY_DSN', defaultValue: 'dummy');
       options.tracesSampleRate = 0.1;
     },
     appRunner: () => runApp(const App()),
@@ -269,7 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Image.asset(coverImage, width: 150.0)),
           padding: const EdgeInsets.all(10.0),
           subtitle:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
                 padding: const EdgeInsets.only(bottom: 1),
                 child: Text(stationDistanceBetween,
@@ -288,7 +298,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: textColor())))
           ]),
           additionalInfo:
-          Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
             Padding(
                 padding: const EdgeInsets.only(bottom: 1),
                 child: Text(stationNameEn,
@@ -308,7 +318,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: textColor()))),
             ...List.generate(
               shinkansens.length,
-                  (index) => DropShadow(
+              (index) => DropShadow(
                   blurRadius: 0.2,
                   borderRadius: 0,
                   spread: 1,
