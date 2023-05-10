@@ -27,7 +27,9 @@ jobs:
   tramline:
     runs-on: tramline-runner
     steps: 
-    - run: echo ${{ github.event.inputs.versionCode }} > version.txt
+    - run: |
+        sleep 10
+        echo ${{ github.event.inputs.versionCode }} > version.txt
 
     - uses: actions/upload-artifact@v3
       with:
