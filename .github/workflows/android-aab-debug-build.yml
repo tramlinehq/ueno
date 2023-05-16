@@ -36,6 +36,8 @@ jobs:
     # Get flutter dependencies.
     - run: flutter pub get
     
+    - run: flutter --version
+    
     # Build apk.
     - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }}
 
