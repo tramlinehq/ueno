@@ -15,7 +15,9 @@ workflows:
     - activate-ssh-key@4: {}
     - git-clone@7: {}
     - certificate-and-profile-installer@1: {}
-    - flutter-installer@0: {}
+    - flutter-installer@0:
+        inputs:
+        - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.7.5-stable.zip
     - cache-pull@2: {}
     - manage-ios-code-signing@1:
         inputs:
