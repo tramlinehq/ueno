@@ -8,7 +8,7 @@
 
 an aural experience of the very excellent [yamanote line](https://en.wikipedia.org/wiki/Yamanote_Line).
 
-## Creating release builds
+## Creating release build
 
 ### Play Store
 
