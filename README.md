@@ -9,7 +9,7 @@
 an aural experience of the very excellent [yamanote line](https://en.wikipedia.org/wiki/Yamanote_Line).
 change in main.
 
-## Creating release builds
+## Creating release build
 
 ### Play Store
 
