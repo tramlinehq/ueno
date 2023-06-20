@@ -1,0 +1,59 @@
+name: Weather Fail
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: 'User-facing release version name'
+        required: true
+        default: "1.0.0"
+      versionCode:
+        description: 'versionCode or build number'
+        required: true
+        default: 1
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  tramline:
+    runs-on: ubuntu-latest 
+    steps: 
+    - run: echo ${{ github.event.inputs.versionCode }} > version.txt
+
+    - uses: actions/upload-artifact@v3
+      with:
+       name: version
+       path: version.txt      
+  
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Install weather 📚
+        run: |
+          sudo apt-get update && sudo apt-get install -y ansiweather
+
+      - name: Print the London weather 🌦
+        run: |
+          ansiweather -l London,GB -f 3
+
+      - name: Write the weather to a file
+        shell: bash
+        run: |
+          value=`ansiweather -l London,GB -f 3 > weather.txt`
+          echo The result is $value
+          exit 1
+          
+      - name: Upload weather file
+        uses: actions/upload-artifact@v2
+        with:
+          name: weather
+          path: weather.txt          
