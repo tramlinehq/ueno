@@ -18,3 +18,5 @@ To generate a release build you need two files that are not, for good reasons, p
 - `key.properties` in the `android` directory
 
 You can get these files from our Google Cloud Storage account.
+
+ok./
