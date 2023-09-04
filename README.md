@@ -10,8 +10,6 @@ an aural experience of the very excellent [yamanote line](https://en.wikipedia.o
 
 ## Creating a release builds
 
-### Play Store
-
 To generate a release build you need two files that are not, for good reasons, part of this repository:
 
 - `ueno-upload-keystore.jks` in the `android/app` directory
