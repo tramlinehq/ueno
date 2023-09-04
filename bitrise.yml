@@ -65,10 +65,6 @@ workflows:
             set -x
 
             # write your script here
-            echo $HOME
-            echo $BITRISE_SOURCE_DIR
-            ls $BITRISE_SOURCE_DIR
-            ls $HOME
             echo $BUILD_VERSION
             echo $BUILD_NUMBER
             echo "Finished debug script"
