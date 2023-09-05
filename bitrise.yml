@@ -31,9 +31,6 @@ workflows:
             set -x
 
             # write your script here
-            echo version code -- $versionCode
-            echo version name -- $versionName
-
             echo "this is an artifact" > /bitrise/deploy/artifact.txt
     - deploy-to-bitrise-io@2: {}
   release:
