@@ -1,7 +1,7 @@
 Build:
 flutter "build" "ipa" "--build-number=7000" "--build-name=1.2.0" "--release"
 
-Reads: 
+Reads:
 xcodebuild "-workspace" "/Users/[REDACTED]/git/ios/Runner.xcworkspace" "-scheme" "Runner" "-resolvePackageDependencies"
 xcodebuild "-workspace" "/Users/[REDACTED]/git/ios/Runner.xcworkspace" "-scheme" "Runner" "-showBuildSettings"
 xcodebuild "-project" "/Users/[REDACTED]/git/ios/Runner.xcodeproj" "-target" "Runner" "-configuration" "Release" "-showBuildSettings"
