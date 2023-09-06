@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   drop_shadow: ^0.0.2+1
   sentry_flutter: ^7.4.2
+  amplitude_flutter: ^3.13.0
 
 dev_dependencies:
   flutter_test:
