@@ -1,4 +1,4 @@
-name: iOS Fastlane AdHoc
+name: New iOS Fastlane AdHoc
 
 on:
   workflow_dispatch:
