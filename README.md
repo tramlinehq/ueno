@@ -6,7 +6,4 @@
 
 an aural experience of the very excellent [yamanote line](https://en.wikipedia.org/wiki/Yamanote_Line)
 
-## Creating a release build
-
-To generate a release build you need two files that are not, for good reasons, part of this repository:
 
