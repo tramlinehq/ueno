@@ -81,7 +81,7 @@ jobs:
         security find-identity -v -p codesigning
 
         # build without signing
-        flutter build ios --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+        flutter build ios --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign --dart-define=BUGSNAG_API_KEY=${{ secrets.BUGSNAG_API_KEY }}
 
     - name: Build xArchive and sign
       run: |

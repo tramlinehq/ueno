@@ -3,15 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:bugsnag_flutter/bugsnag_flutter.dart';
 
 void main() {
-  SentryFlutter.init(
-    (options) {
-      options.dsn = const String.fromEnvironment('SENTRY_DSN', defaultValue: 'dummy');
-      options.tracesSampleRate = 0.1;
-    },
-    appRunner: () => runApp(const App()),
+  bugsnag.start(
+    apiKey: const String.fromEnvironment('BUGSNAG_API_KEY', defaultValue: 'dummy'),
+    runApp: () => runApp(const App()),
   );
 }
 
