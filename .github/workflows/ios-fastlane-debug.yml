@@ -43,7 +43,7 @@ jobs:
 
       - name: Build the app
         run: |
-          flutter build ipa --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build ipa --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign --dart-define=BUGSNAG_API_KEY=${{ secrets.BUGSNAG_API_KEY }}
           ls -la build/ios/archive
 
       - name: Generate and sign the ipa

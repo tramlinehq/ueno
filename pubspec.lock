@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  bugsnag_flutter:
+    dependency: "direct main"
+    description:
+      name: bugsnag_flutter
+      sha256: "38d85eb4894633fcfdd7b31b12c3f247c589ac075635b2f4b827134a7c0abb87"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.0"
   characters:
     dependency: transitive
     description:
