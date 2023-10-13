@@ -80,6 +80,46 @@ workflows:
     - cache-pull@2: {}
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
+  debug:
+    description: |
+      Builds and deploys app using [Deploy to bitrise.io Step](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html#deploying-a-flutter-app).
+
+      If you build for iOS, make sure to set up code signing secrets on Bitrise for a successful build.
+
+      Next steps:
+      - Check out [Getting started with Flutter apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html) for signing and deployment options.
+      - Check out the [Code signing guide](https://devcenter.bitrise.io/en/code-signing.html) for iOS and Android
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@7: {}
+    - certificate-and-profile-installer@1: {}
+    - flutter-installer@0:
+        inputs:
+        - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.7.5-stable.zip
+    - cache-pull@2: {}
+    - manage-ios-code-signing@1:
+        inputs:
+        - verbose_log: "yes"
+        - distribution_method: ad-hoc
+    - flutter-build@0:
+        inputs:
+        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
+        - platform: ios
+        - additional_build_params: --build-number=$versionCode --build-name=$versionName
+        - ios_additional_params: --debug
+        - ios_output_type: archive
+    - cache-push@2: {}
+    - xcode-archive@4:
+        inputs:
+        - distribution_method: ad-hoc
+    - deploy-to-bitrise-io@2: {}
+    envs:
+    - opts:
+        is_expand: false
+      BITRISE_PROJECT_PATH: ios/Runner.xcworkspace
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: Runner
 meta:
   bitrise.io:
     stack: osx-xcode-14.2.x-ventura
