@@ -52,9 +52,21 @@ jobs:
         run: |
           value=`ansiweather -l London,GB -f 3 > weather.txt`
           echo The result is $value
+
+      - name: Write the weather to another file
+        shell: bash
+        run: |
+          value=`ansiweather -l London,GB -f 3 > WeatherAgain.txt`
+          echo The result is $value
           
       - name: Upload weather file
         uses: actions/upload-artifact@v2
         with:
           name: weather
-          path: weather.txt          
+          path: weather.txt
+
+      - name: Upload another weather file
+        uses: actions/upload-artifact@v2
+        with:
+          name: weatheragain
+          path: WeatherAgain.txt
