@@ -70,3 +70,17 @@ jobs:
         with:
           name: weatheragain
           path: WeatherAgain.txt
+
+      - run: echo "hi2u" >> smol.txt
+
+      - run: head -c 50000000 < /dev/urandom > big.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-smol-fake
+          path: smol.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-big-fake
+          path: big.txt
