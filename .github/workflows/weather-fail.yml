@@ -50,7 +50,7 @@ jobs:
         run: |
           value=`ansiweather -l London,GB -f 3 > weather.txt`
           echo The result is $value
-          exit 1
+          exit 0
           
       - name: Upload weather file
         uses: actions/upload-artifact@v2
