@@ -73,15 +73,14 @@ android {
         }
     }
 
-    flavorDimensions "default"
+    flavorDimensions "app"
 
     productFlavors {
-        defaultFlavor {
-            dimension "default"
-            signingConfig signingConfigs.release
+        prod {
+            dimension "app"
         }
         staging {
-            dimension "default"
+            dimension "app"
             applicationIdSuffix ".staging"
         }
     }
