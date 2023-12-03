@@ -43,4 +43,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: release-aab
-        path: build/app/outputs/flutter-apk/app-debug.apk
+        path: build/app/outputs/flutter-apk/app-prod-debug.apk
