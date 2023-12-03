@@ -72,6 +72,15 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        staging {
+            dimension "default"
+            applicationIdSuffix ".staging"
+        }
+    }
 }
 
 flutter {
