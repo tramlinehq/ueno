@@ -50,4 +50,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: release-aab
-        path: build/app/outputs/bundle/release/app-prod-release.aab
+        path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
