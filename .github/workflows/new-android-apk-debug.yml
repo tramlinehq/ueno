@@ -46,3 +46,15 @@ jobs:
       with:
         name: release-aab
         path: build/app/outputs/flutter-apk/app-prod-debug.apk
+
+  another:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get the output
+      run: |
+        echo "vcode: ${{ steps.tramline.outputs.version_code }}"
+        echo "vname: ${{ steps.tramline.outputs.version_name }}"
+        echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
+        echo "cref: ${{ steps.tramline.outputs.build_notes }}"
+    
