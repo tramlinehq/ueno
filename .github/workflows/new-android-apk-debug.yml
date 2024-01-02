@@ -51,6 +51,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Configure Tramline
+      id: tramline
+      uses: tramlinehq/deploy-action@v0.1.6
+      with:
+        input: ${{ github.event.inputs.tramline-input }}
+
     - name: Get the output
       run: |
         echo "vcode: ${{ steps.tramline.outputs.version_code }}"
