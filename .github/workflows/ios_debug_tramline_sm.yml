@@ -19,11 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up ruby env
-        uses: ruby/setup-ruby@v1.138.0
-        with:
-          ruby-version: 3.2.1
-          bundler-cache: true
+      # - name: Set up ruby env
+      #   uses: ruby/setup-ruby@v1.138.0
+      #   with:
+      #     ruby-version: 3.2.1
+      #     bundler-cache: true
 
       - name: Decode signing certificate into a file
         env:
