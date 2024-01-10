@@ -29,6 +29,7 @@ jobs:
         env:
           CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
         run: |
+          brew install jnettop
           echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
 
       - name: Setup the flutter environment
