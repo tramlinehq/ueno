@@ -1,4 +1,4 @@
-name: iOS Fastlane AdHoc Tramline Small
+name: iOS Fastlane AdHoc Tramline Medium
 
 on:
   workflow_dispatch:
@@ -14,16 +14,10 @@ on:
 
 jobs:
   deploy:
-    runs-on: tramline-runner-sm-v3
+    runs-on: tramline-runner-md
 
     steps:
       - uses: actions/checkout@v2
-
-      # - name: Set up ruby env
-      #   uses: ruby/setup-ruby@v1.138.0
-      #   with:
-      #     ruby-version: 3.2.1
-      #     bundler-cache: true
 
       - name: Decode signing certificate into a file
         env:
