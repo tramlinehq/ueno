@@ -14,7 +14,7 @@ jobs:
     steps:
     - name: Configure Tramline
       id: tramline
-      uses: tramlinehq/deploy-action@v0.1.5
+      uses: tramlinehq/deploy-action@v0.1.6
       with:
         input: ${{ github.event.inputs.tramline-input }}
 
@@ -35,6 +35,8 @@ jobs:
     - run: flutter pub get
     
     - run: flutter --version
+
+    - run: echo ${{ steps.tramline.outputs.build_notes }}
     
     # Build apk.
     - run: flutter build apk --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --flavor prod
@@ -44,3 +46,21 @@ jobs:
       with:
         name: release-aab
         path: build/app/outputs/flutter-apk/app-prod-debug.apk
+
+  another:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Configure Tramline
+      id: tramline
+      uses: tramlinehq/deploy-action@v0.1.6
+      with:
+        input: ${{ github.event.inputs.tramline-input }}
+
+    - name: Get the output
+      run: |
+        echo "vcode: ${{ steps.tramline.outputs.version_code }}"
+        echo "vname: ${{ steps.tramline.outputs.version_name }}"
+        echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
+        echo "cref: ${{ steps.tramline.outputs.build_notes }}"
+    
