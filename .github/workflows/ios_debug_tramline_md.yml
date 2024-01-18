@@ -14,7 +14,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: tramline-runner-md
+    runs-on: tramline-runner
 
     steps:
       - uses: actions/checkout@v2
