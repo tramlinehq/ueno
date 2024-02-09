@@ -1,4 +1,4 @@
-name: New Android debug build
+name: Single Input Android Debug APK
 
 on:
   workflow_dispatch:

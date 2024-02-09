@@ -1,4 +1,4 @@
-name: Android Play Store release build aab
+name: Android Play Store Release Build AAB
 
 on:
   workflow_dispatch:
