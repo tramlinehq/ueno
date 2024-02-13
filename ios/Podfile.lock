@@ -1,6 +1,10 @@
 PODS:
   - audio_session (0.0.1):
     - Flutter
+  - Bugsnag (6.28.0)
+  - bugsnag_flutter (0.0.1):
+    - Bugsnag (= 6.28.0)
+    - Flutter
   - Flutter (1.0.0)
   - just_audio (0.0.1):
     - Flutter
@@ -9,17 +13,34 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - Sentry/HybridSDK (8.19.0):
+    - SentryPrivate (= 8.19.0)
+  - sentry_flutter (0.0.1):
+    - Flutter
+    - FlutterMacOS
+    - Sentry/HybridSDK (= 8.19.0)
+  - SentryPrivate (8.19.0)
 
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
+  - bugsnag_flutter (from `.symlinks/plugins/bugsnag_flutter/ios`)
   - Flutter (from `Flutter`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Bugsnag
+    - Sentry
+    - SentryPrivate
 
 EXTERNAL SOURCES:
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
+  bugsnag_flutter:
+    :path: ".symlinks/plugins/bugsnag_flutter/ios"
   Flutter:
     :path: Flutter
   just_audio:
@@ -27,15 +48,22 @@ EXTERNAL SOURCES:
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  sentry_flutter:
+    :path: ".symlinks/plugins/sentry_flutter/ios"
 
 SPEC CHECKSUMS:
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Bugsnag: dd258f499a0a041e3ffc856c8d0c802e02fe3026
+  bugsnag_flutter: c8874e8a3851c1cb006f4a066e8e5f2eb4687fd1
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
-  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
-  path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
+  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
+  Sentry: 1ebcaef678a27c8ac515f974cb5425dd1bbdec2f
+  sentry_flutter: ecdfbedee55337205561cfa782ee02d31ec83e1f
+  SentryPrivate: 765c9b4ebe9ac1a5fcdc067c5a1cfbf3f10e1677
 
-PODFILE CHECKSUM: 663715e941f9adb426e33bf9376914006f9ea95b
+PODFILE CHECKSUM: 1a782344d33c12ced0182eeab11e8668d253eb48
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2

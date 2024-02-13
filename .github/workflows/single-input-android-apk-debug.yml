@@ -1,4 +1,4 @@
-name: New Android debug build
+name: Single Input Android Debug APK
 
 on:
   workflow_dispatch:
@@ -8,10 +8,9 @@ on:
 
 jobs:
   build:
-    # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
 
-    steps:
+s    steps:
     - name: Configure Tramline
       id: tramline
       uses: tramlinehq/deploy-action@v0.1.6
@@ -24,24 +23,28 @@ jobs:
         java-version: 11
         cache: 'gradle'
 
-    # Setup the flutter environment.
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.7.5'
-        channel: 'stable' 
+        flutter-version: '3.16.9'
+        channel: 'stable'
         cache: true
 
-    # Get flutter dependencies.
     - run: flutter pub get
-    
+
     - run: flutter --version
+<<<<<<< HEAD:.github/workflows/new-android-apk-debug.yml
 
     - run: echo ${{ steps.tramline.outputs.build_notes }}
     
     # Build apk.
+||||||| 57a2f9f:.github/workflows/new-android-apk-debug.yml
+    
+    # Build apk.
+=======
+
+>>>>>>> new-bundle:.github/workflows/single-input-android-apk-debug.yml
     - run: flutter build apk --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --flavor prod
 
-    # Upload generated apk to the artifacts.
     - uses: actions/upload-artifact@v3
       with:
         name: release-aab
