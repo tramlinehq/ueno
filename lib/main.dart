@@ -5,11 +5,11 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bugsnag_flutter/bugsnag_flutter.dart';
 
-void main() {
-  bugsnag.start(
+Future<void> main() async {
+  await bugsnag.start(
     apiKey: const String.fromEnvironment('BUGSNAG_API_KEY', defaultValue: 'dummy'),
-    runApp: () => runApp(const App()),
   );
+  runApp(const App());
 }
 
 class App extends StatefulWidget {
