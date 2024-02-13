@@ -32,22 +32,14 @@ s    steps:
     - run: flutter pub get
 
     - run: flutter --version
-<<<<<<< HEAD:.github/workflows/new-android-apk-debug.yml
 
     - run: echo ${{ steps.tramline.outputs.build_notes }}
-    
-    # Build apk.
-||||||| 57a2f9f:.github/workflows/new-android-apk-debug.yml
-    
-    # Build apk.
-=======
 
->>>>>>> new-bundle:.github/workflows/single-input-android-apk-debug.yml
     - run: flutter build apk --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --flavor prod
 
     - uses: actions/upload-artifact@v3
       with:
-        name: release-aab
+        name: release-apk
         path: build/app/outputs/flutter-apk/app-prod-debug.apk
 
   another:
@@ -66,4 +58,3 @@ s    steps:
         echo "vname: ${{ steps.tramline.outputs.version_name }}"
         echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
         echo "cref: ${{ steps.tramline.outputs.build_notes }}"
-    
