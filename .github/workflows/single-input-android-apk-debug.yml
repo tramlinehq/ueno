@@ -8,13 +8,12 @@ on:
 
 jobs:
   build:
-    # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
 
-    steps:
+s    steps:
     - name: Configure Tramline
       id: tramline
-      uses: tramlinehq/deploy-action@v0.1.5
+      uses: tramlinehq/deploy-action@v0.1.6
       with:
         input: ${{ github.event.inputs.tramline-input }}
 
@@ -24,22 +23,18 @@ jobs:
         java-version: 11
         cache: 'gradle'
 
-    # Setup the flutter environment.
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.7.5'
-        channel: 'stable' 
+        flutter-version: '3.16.9'
+        channel: 'stable'
         cache: true
 
-    # Get flutter dependencies.
     - run: flutter pub get
-    
+
     - run: flutter --version
-    
-    # Build apk.
+
     - run: flutter build apk --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --flavor prod
 
-    # Upload generated apk to the artifacts.
     - uses: actions/upload-artifact@v3
       with:
         name: release-aab

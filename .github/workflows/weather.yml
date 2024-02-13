@@ -19,18 +19,18 @@ on:
 
 jobs:
   tramline:
-    runs-on: ubuntu-latest 
-    steps: 
+    runs-on: ubuntu-latest
+    steps:
     - run: echo ${{ github.event.inputs.versionCode }} > version.txt
 
     - uses: actions/upload-artifact@v3
       with:
        name: version
-       path: version.txt      
-  
+       path: version.txt
+
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Install weather 📚
         run: |
@@ -45,7 +45,7 @@ jobs:
         run: |
           value=`ansiweather -l London,GB -f 3 > weather.txt`
           echo The result is $value
-          
+
       - name: Upload weather file
         uses: actions/upload-artifact@v2
         with:
