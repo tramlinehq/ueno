@@ -50,9 +50,8 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.tramline.ueno"
-        minSdkVersion 21
+        applicationId "org.tramline.ueno"
+        minSdkVersion 33
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -73,14 +72,14 @@ android {
         }
     }
 
-    flavorDimensions "app"
+    flavorDimensions "default"
 
     productFlavors {
         prod {
-            dimension "app"
+            dimension "default"
         }
         staging {
-            dimension "app"
+            dimension "default"
             applicationIdSuffix ".staging"
         }
     }
