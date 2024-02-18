@@ -18,7 +18,7 @@ jobs:
           input: ${{ github.event.inputs.tramline-input }}
 
       - name: Set up ruby env
-        uses: ruby/setup-ruby@latest
+        uses: ruby/setup-ruby@v1.171.0
         with:
           ruby-version: 3.2.1
           bundler-cache: true
