@@ -6,7 +6,7 @@ on:
       versionName:
         description: 'User-facing release version name'
         required: true
-        default: "1.0.0"
+        default: "6.6.6"
       versionCode:
         description: 'versionCode or build number'
         required: true
