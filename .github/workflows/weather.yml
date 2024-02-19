@@ -21,7 +21,7 @@ jobs:
   tramline:
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ github.event.inputs.versionCode }} > version.txt
+    - run: "echo ${{ github.event.inputs.versionCode }} > version.txt"
 
     - uses: actions/upload-artifact@v3
       with:
