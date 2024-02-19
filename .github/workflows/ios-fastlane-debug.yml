@@ -14,13 +14,13 @@ on:
 
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: tramline-macos-sonoma-md
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up ruby env
-        uses: ruby/setup-ruby@v1.138.0
+        uses: ruby/setup-ruby@v1.171.0
         with:
           ruby-version: 3.2.1
           bundler-cache: true
