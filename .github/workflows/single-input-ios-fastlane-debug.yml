@@ -17,6 +17,12 @@ jobs:
         with:
           input: ${{ github.event.inputs.tramline-input }}
 
+      - name: Debug ruby
+        run: ruby --version
+
+      - name: Debug cocoapods
+        run: gem info cocoapods
+
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.171.0
         with:
@@ -39,10 +45,14 @@ jobs:
       - name: Get flutter dependencies
         run: flutter pub get
 
-      - name: Debug
-        run: |
-          ruby --version
-          gem info cocoapods
+      - name: Debug ruby
+        run: ruby --version
+
+      - name: Debug cocoapods
+        run: gem info cocoapods
+
+      - name: Debug flutter
+        run: flutter doctor -v
 
       - name: Build the app
         run: |
