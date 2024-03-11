@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: tramline-macos-sonoma-md
+    runs-on: macos-14
 
     steps:
       - name: Configure Tramline
@@ -38,6 +38,11 @@ jobs:
 
       - name: Get flutter dependencies
         run: flutter pub get
+
+      - name: Debug
+        run: |
+          ruby --version
+          gem info cocoapods
 
       - name: Build the app
         run: |
