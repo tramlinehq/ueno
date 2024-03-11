@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: macos-14
+    runs-on: tramline-macos-sonoma-md
 
     steps:
       - name: Configure Tramline
@@ -49,7 +49,7 @@ jobs:
         run: ruby --version
 
       - name: Debug cocoapods
-        run: gem info cocoapods
+        run: gem install cocoapods
 
       - name: Debug flutter
         run: flutter doctor -v
