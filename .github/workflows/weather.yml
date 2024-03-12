@@ -19,18 +19,19 @@ on:
 
 jobs:
   tramline:
-    runs-on: ubuntu-latest
+    runs-on: tramline-macos-sonoma-md-dev
     steps:
-    - run: echo ${{ github.event.inputs.versionCode }} > version.txt
+      - run: |
+          echo ${{ github.event.inputs.versionCode }} > version.txt
+          exit 1
 
-    - uses: actions/upload-artifact@v3
-      with:
-       name: version
-       path: version.txt
+      - uses: actions/upload-artifact@v3
+        with:
+         name: version
+         path: version.txt
 
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: tramline-macos-sonoma-md-dev
     steps:
       - name: Install weather 📚
         run: |
