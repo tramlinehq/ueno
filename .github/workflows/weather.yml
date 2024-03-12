@@ -30,26 +30,6 @@ jobs:
          name: version
          path: version.txt
 
-  tramline-2:
-    runs-on: tramline-macos-sonoma-md-dev
-    steps:
-      - run: echo ${{ github.event.inputs.versionCode }} > version.txt
-
-      - uses: actions/upload-artifact@v3
-        with:
-         name: version
-         path: version.txt
-
-  tramline-3:
-    runs-on: tramline-macos-sonoma-md-dev
-    steps:
-      - run: echo ${{ github.event.inputs.versionCode }} > version.txt
-
-      - uses: actions/upload-artifact@v3
-        with:
-         name: version
-         path: version.txt
-
   build:
     runs-on: ubuntu-latest
     steps:
