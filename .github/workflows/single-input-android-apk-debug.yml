@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-s    steps:
+    steps:
     - name: Configure Tramline
       id: tramline
       uses: tramlinehq/deploy-action@v0.1.6
