@@ -51,7 +51,7 @@ android {
 
     defaultConfig {
         applicationId "org.tramline.ueno"
-        minSdkVersion 33
+        minSdkVersion 30
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
