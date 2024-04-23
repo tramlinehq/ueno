@@ -27,6 +27,26 @@ jobs:
         with:
          name: version
          path: version.txt
+  
+  tramline-2:
+    runs-on: tramline-macos-sonoma-md
+    steps:
+      - run: echo ${{ github.event.inputs.versionCode }} > version.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+         name: version
+         path: version.txt
+
+  tramline-3:
+    runs-on: tramline-macos-sonoma-md
+    steps:
+      - run: echo ${{ github.event.inputs.versionCode }} > version.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+         name: version
+         path: version.txt
 
   build:
     runs-on: ubuntu-latest
@@ -58,3 +78,8 @@ jobs:
         with:
           name: release-smol-fake
           path: smol.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-big-fake
+          path: big.txt
