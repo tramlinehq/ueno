@@ -18,7 +18,7 @@ on:
         default: 1
 
 jobs:
-  tramline-1:
+  tramline:
     runs-on: tramline-macos-sonoma-md
     steps:
       - run: echo ${{ github.event.inputs.versionCode }} > version.txt
