@@ -27,34 +27,3 @@ jobs:
         with:
          name: version
          path: version.txt
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install weather 📚
-        run: |
-          sudo apt-get update && sudo apt-get install -y ansiweather
-
-      - name: Print the London weather 🌦
-        run: |
-          ansiweather -l London,GB -f 3
-
-      - name: Write the weather to a file
-        shell: bash
-        run: |
-          value=`ansiweather -l London,GB -f 3 > weather.txt`
-          echo The result is $value
-
-      - name: Upload weather file
-        uses: actions/upload-artifact@v2
-        with:
-          name: weather
-          path: weather.txt
-
-      - run: echo "hi2u" >> smol.txt
-      - run: head -c 50000000 < /dev/urandom > big.txt
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: release-smol-fake
-          path: smol.txt
