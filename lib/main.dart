@@ -1,12 +1,13 @@
+import 'dart:ui';
+import 'firebase_options.dart';
 import 'package:drop_shadow/drop_shadow.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bugsnag_flutter/bugsnag_flutter.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-
 
 Future<void> main() async {
   await bugsnag.start(
@@ -15,6 +16,17 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   runApp(const App());
 }
 
