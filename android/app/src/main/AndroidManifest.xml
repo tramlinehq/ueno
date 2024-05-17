@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.tramline.ueno">
+    package="com.tramline.ueno">
    <application
         android:label="ueno"
         android:name="${applicationName}"
