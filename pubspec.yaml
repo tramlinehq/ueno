@@ -37,6 +37,7 @@ dependencies:
   drop_shadow: ^0.1.0
   sentry_flutter: ^7.4.2
   bugsnag_flutter: ^3.0.1
+  firebase_core: ^2.27.0
 
 dev_dependencies:
   flutter_test:
