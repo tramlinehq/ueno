@@ -1,4 +1,4 @@
-package org.tramline.ueno
+package com.tramline.ueno
 
 import io.flutter.embedding.android.FlutterActivity
 
