@@ -4,10 +4,16 @@ import 'package:just_audio/just_audio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bugsnag_flutter/bugsnag_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 
 Future<void> main() async {
   await bugsnag.start(
     apiKey: const String.fromEnvironment('BUGSNAG_API_KEY', defaultValue: 'dummy'),
+  );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const App());
 }
