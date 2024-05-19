@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:math';
 import 'firebase_options.dart';
 import 'package:drop_shadow/drop_shadow.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,8 +12,10 @@ import 'package:bugsnag_flutter/bugsnag_flutter.dart';
 
 Future<void> main() async {
   await bugsnag.start(
-    apiKey: const String.fromEnvironment('BUGSNAG_API_KEY', defaultValue: 'dummy'),
+    apiKey:
+        const String.fromEnvironment('BUGSNAG_API_KEY', defaultValue: 'dummy'),
   );
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -27,7 +30,23 @@ Future<void> main() async {
     return true;
   };
 
+  try {
+    randomException();
+  } catch (e, stack) {
+    bugsnag.notify(e, stack);
+    await FirebaseCrashlytics.instance
+        .recordError(e, stack, reason: 'a fake, generated non-fatal err');
+  }
+
   runApp(const App());
+}
+
+void randomException() {
+  final random = Random();
+  if (random.nextBool()) {
+    throw Exception(
+        'dis exception was randomly generated to fill up ur error trackerz');
+  }
 }
 
 class App extends StatefulWidget {
@@ -284,7 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Image.asset(coverImage, width: 150.0)),
           padding: const EdgeInsets.all(10.0),
           subtitle:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
                 padding: const EdgeInsets.only(bottom: 1),
                 child: Text(stationDistanceBetween,
@@ -303,7 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: textColor())))
           ]),
           additionalInfo:
-          Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
             Padding(
                 padding: const EdgeInsets.only(bottom: 1),
                 child: Text(stationNameEn,
@@ -323,7 +342,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: textColor()))),
             ...List.generate(
               shinkansens.length,
-                  (index) => DropShadow(
+              (index) => DropShadow(
                   blurRadius: 0.2,
                   borderRadius: 0,
                   spread: 1,
