@@ -11,6 +11,9 @@ on:
         description: 'versionCode or build number'
         required: true
         default: '1'
+      buildNotes:
+        description: 'notes for testers'
+        required: false
 
 jobs:
   deploy:
@@ -18,6 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Show build notes
+        run: echo "${{ inputs.buildNotes }}"
 
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.171.0
