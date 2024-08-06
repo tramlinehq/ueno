@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    runs-on: tramline-macos-sonoma-md
+    runs-on: warp-ubuntu-latest-x64-32x
 
     steps:
     - uses: actions/checkout@v3
