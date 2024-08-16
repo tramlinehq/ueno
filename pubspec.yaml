@@ -65,3 +65,4 @@ flutter:
     - assets/media/
     - assets/cover/
     - assets/misc/shinkansen/
+    - shorebird.yaml
