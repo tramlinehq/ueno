@@ -17,10 +17,9 @@ on:
 
 jobs:
   tramline-1:
-    runs-on: tramline-macos-sonoma-md
+    runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.event.inputs.versionCode }} > version.txt
-
       - uses: actions/upload-artifact@v3
         with:
          name: version
