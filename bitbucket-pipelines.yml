@@ -23,7 +23,39 @@ pipelines:
 
     # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
     - step:
-        name: 'Deployment to Staging'
-        deployment: staging
+        name: Android Release Build AAB
+        image: cirrusci/flutter:latest
+        caches:
+          - gradle
         script:
-          - echo "Your deployment to staging script goes here..."
+          - echo 'Fetching Dependencies'
+          - flutter pub get
+
+          - echo 'Retrieving secrets'
+          - echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+          - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+
+          - echo 'Building App Bundle'
+          - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+          - echo 'Archiving Artifacts'
+          - mv build/app/outputs/bundle/prodRelease/app-prod-release.aab ./
+        artifacts:
+          - app-prod-release.aab
+
+    - step:
+        name: Android Debug Build APK
+        image: cirrusci/flutter:latest
+        caches:
+          - gradle
+        script:
+          - echo 'Fetching Dependencies'
+          - flutter pub get
+
+          - echo 'Building apk'
+          - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+          - echo 'Archiving Artifacts'
+          - mv build/app/outputs/flutter-apk/app-prod-debug.apk ./
+        artifacts:
+          - app-prod-debug.apk
