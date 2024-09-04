@@ -20,42 +20,43 @@ pipelines:
           name: 'Security scan'
           script:
             - echo "Your security scan goes here..."
+  custom:
+    android-debug-apk:
+      - step:
+          name: Android Debug Build APK
+          image: ghcr.io/cirruslabs/flutter:3.22.0
+          caches:
+            - gradle
+          script:
+            - echo 'Fetching Dependencies'
+            - flutter pub get
 
-    # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
-    - step:
-        name: Android Release Build AAB
-        image: cirrusci/flutter:latest
-        caches:
-          - gradle
-        script:
-          - echo 'Fetching Dependencies'
-          - flutter pub get
+            - echo 'Building apk'
+            - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
-          - echo 'Retrieving secrets'
-          - echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
-          - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+            - echo 'Archiving Artifacts'
+            - mv build/app/outputs/flutter-apk/app-prod-debug.apk ./
+          artifacts:
+            - app-prod-debug.apk
+    android-release-aab:
+      - step:
+          name: Android Release Build AAB
+          image: ghcr.io/cirruslabs/flutter:3.22.0
+          caches:
+            - gradle
+          script:
+            - echo 'Fetching Dependencies'
+            - flutter pub get
 
-          - echo 'Building App Bundle'
-          - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+            - echo 'Retrieving secrets'
+            - echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+            - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
 
-          - echo 'Archiving Artifacts'
-          - mv build/app/outputs/bundle/prodRelease/app-prod-release.aab ./
-        artifacts:
-          - app-prod-release.aab
+            - echo 'Building App Bundle'
+            - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
-    - step:
-        name: Android Debug Build APK
-        image: cirrusci/flutter:latest
-        caches:
-          - gradle
-        script:
-          - echo 'Fetching Dependencies'
-          - flutter pub get
+            - echo 'Archiving Artifacts'
+            - mv build/app/outputs/bundle/prodRelease/app-prod-release.aab ./
+          artifacts:
+            - app-prod-release.aab
 
-          - echo 'Building apk'
-          - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
-
-          - echo 'Archiving Artifacts'
-          - mv build/app/outputs/flutter-apk/app-prod-debug.apk ./
-        artifacts:
-          - app-prod-debug.apk
