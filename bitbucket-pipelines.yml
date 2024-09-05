@@ -5,6 +5,9 @@
 
 image: atlassian/default-image:3
 
+options:
+  size: 2x
+
 pipelines:
   custom:
     android-debug-apk:
