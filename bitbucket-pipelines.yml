@@ -25,7 +25,8 @@ pipelines:
 
             - pipe: atlassian/bitbucket-upload-file:0.1.2
               variables:
-                BITBUCKET_ACCESS_TOKEN: $BITBUCKET_ACCESS_TOKEN
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
                 FILENAME: "app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk"
           artifacts:
             - app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk
