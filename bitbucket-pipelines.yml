@@ -6,20 +6,6 @@
 image: atlassian/default-image:3
 
 pipelines:
-  default:
-    - parallel:
-      - step:
-          name: 'Build and Test'
-          script:
-            - echo "Your build and test goes here..."
-      - step:
-          name: 'Lint'
-          script:
-            - echo "Your linting goes here..."
-      - step:
-          name: 'Security scan'
-          script:
-            - echo "Your security scan goes here..."
   custom:
     android-debug-apk:
       - step:
@@ -28,6 +14,9 @@ pipelines:
           caches:
             - gradle
           script:
+            - echo 'Fail the pipeline'
+            - exit 1
+          
             - echo 'Fetching Dependencies'
             - flutter pub get
 
