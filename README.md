@@ -12,7 +12,7 @@ an aural experience of the very excellent [yamanote line](https://en.wikipedia.o
 
 ### Play Store
 
-To generate a release build you need two files that are not, for good reasons, part of this repository —
+To generate a release build you need two files that are not, for good reasons, part of this repository:
 
 - `ueno-upload-keystore.jks` in the `android/app` directory
 - `key.properties` in the `android` directory
