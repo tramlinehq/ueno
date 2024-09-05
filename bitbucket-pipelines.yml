@@ -9,6 +9,11 @@ options:
   size: 2x
 
 pipelines:
+  default:
+    - step:
+        name: Lint and Test
+        script:
+          - echo 'This will run teh lint and test'
   custom:
     android-debug-apk:
       - step:
