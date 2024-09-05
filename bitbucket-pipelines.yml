@@ -14,9 +14,6 @@ pipelines:
           caches:
             - gradle
           script:
-            - echo 'Fail the pipeline'
-            - exit 1
-          
             - echo 'Fetching Dependencies'
             - flutter pub get
 
@@ -24,9 +21,14 @@ pipelines:
             - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
             - echo 'Archiving Artifacts'
-            - mv build/app/outputs/flutter-apk/app-prod-debug.apk ./
+            - mv build/app/outputs/flutter-apk/app-prod-debug.apk ./app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk
+
+            - pipe: atlassian/bitbucket-upload-file:0.1.2
+              variables:
+                BITBUCKET_ACCESS_TOKEN: $BITBUCKET_ACCESS_TOKEN
+                FILENAME: "app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk"
           artifacts:
-            - app-prod-debug.apk
+            - app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk
     android-release-aab:
       - step:
           name: Android Release Build AAB
