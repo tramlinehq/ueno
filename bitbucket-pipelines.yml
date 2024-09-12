@@ -28,16 +28,14 @@ pipelines:
             - echo 'Building apk'
             - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
-            - echo 'Archiving Artifacts'
-            - mv build/app/outputs/flutter-apk/app-prod-debug.apk ./app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk
+            - echo 'Prepare build for upload'
+            - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${BITBUCKET_PIPELINE_UUID}
 
-            - pipe: atlassian/bitbucket-upload-file:0.1.2
+            - pipe: atlassian/bitbucket-upload-file:0.7.3
               variables:
                 BITBUCKET_USERNAME: $BITBUCKET_USERNAME
                 BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
-                FILENAME: "app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk"
-          artifacts:
-            - app-prod-debug-${VERSION_NAME}-${VERSION_CODE}.apk
+                FILENAME: "build-${BITBUCKET_PIPELINE_UUID}"
     android-release-aab:
       - step:
           name: Android Release Build AAB
@@ -55,8 +53,11 @@ pipelines:
             - echo 'Building App Bundle'
             - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
-            - echo 'Archiving Artifacts'
-            - mv build/app/outputs/bundle/prodRelease/app-prod-release.aab ./
-          artifacts:
-            - app-prod-release.aab
+            - echo 'Prepare build for upload'
+            - cp build/app/outputs/bundle/prodRelease/app-prod-release.aab ./build-${BITBUCKET_PIPELINE_UUID}
 
+            - pipe: atlassian/bitbucket-upload-file:0.7.3
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: "build-${BITBUCKET_PIPELINE_UUID}"
