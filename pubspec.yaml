@@ -48,10 +48,11 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   package_info_plus: ^3.1.2
 
-flutter_icons:
+flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/icon/icon.png"
+  image_path_android: "assets/icon/android.png"
 
 flutter:
   uses-material-design: true
