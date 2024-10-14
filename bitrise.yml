@@ -34,7 +34,7 @@ workflows:
             echo version code -- $versionCode
             echo version name -- $versionName
 
-            echo "this is an artifact" > /bitrise/deploy/artifact.txt
+            echo "is this an artifact?" > /bitrise/deploy/artifact.txt
     - deploy-to-bitrise-io@2: {}
   release:
     steps:
