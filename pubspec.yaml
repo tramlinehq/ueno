@@ -1,5 +1,5 @@
 name: Ueno
-description: ueno aesthetic
+description: An aural experience of the very excellent Yamanote Line
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -40,6 +40,7 @@ dependencies:
   firebase_core: ^2.27.0
   firebase_crashlytics: ^3.5.5
   firebase_analytics: ^10.10.5
+  rename_app: ^1.6.1
 
 dev_dependencies:
   flutter_test:
