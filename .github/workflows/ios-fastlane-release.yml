@@ -46,9 +46,9 @@ jobs:
           flutter build ipa --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign --dart-define=BUGSNAG_API_KEY=${{ secrets.BUGSNAG_API_KEY }}
           ls -la build/ios/archive
 
-      - name: Sign and ship the ipa
+      - name: Sign the ipa
         working-directory: ios
-        run: bundle install && bundle exec fastlane ios ship_to_testflight
+        run: bundle install && bundle exec fastlane ios sign_build
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
@@ -60,4 +60,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: iOS IPA
-          path: build/ios/*.ipa
+          path: ios/*.ipa
