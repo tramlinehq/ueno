@@ -63,3 +63,8 @@ jobs:
         echo "vname: ${{ steps.tramline.outputs.version_name }}"
         echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
         echo "cref: ${{ steps.tramline.outputs.build_notes }}"
+
+    - name: Fail randomly
+      run: |
+        echo "This will fail randomly"
+        exit $((RANDOM % 2))
