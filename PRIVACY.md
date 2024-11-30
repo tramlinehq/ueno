@@ -1,3 +1,5 @@
+kya privacy kaunsi privacy
+
 **Privacy Policy**
 
 Akshay Gupta built the Ueno app as an Open Source app. This SERVICE is provided by Akshay Gupta at no cost and is intended for use as is.
