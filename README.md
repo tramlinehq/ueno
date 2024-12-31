@@ -1,4 +1,4 @@
-# ~ ueno ~
+# ueno
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/tramlinehq/ueno/blob/master/LICENSE)
 [![](https://img.shields.io/itunes/v/1658845856)](https://apps.apple.com/us/app/ueno/id1658845856)
