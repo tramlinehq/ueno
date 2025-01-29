@@ -1,0 +1,50 @@
+name: Android Staging Debug APK (with params)
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: 'User-facing release version name'
+        required: true
+        default: "1.0.0"
+      versionCode:
+        description: 'versionCode or build number'
+        required: true
+        default: '1'
+      parameter_1:
+        desciption: 'just a test parameter'
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 11
+          cache: 'gradle'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+          channel: 'stable'
+          cache: true
+
+      - run: |
+          echo 'printing out custom params'
+          echo ${{ github.event.inputs.parameter_1 }}
+
+      - run: flutter pub get
+
+      - run: flutter --version
+
+      - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --flavor staging
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-staging-debug.apk
