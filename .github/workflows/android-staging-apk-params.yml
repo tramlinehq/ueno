@@ -13,7 +13,7 @@ on:
         default: '1'
       parameter_1:
         desciption: 'just a test parameter'
-        required: false
+        required: true
 
 jobs:
   build:
