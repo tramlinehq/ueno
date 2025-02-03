@@ -38,6 +38,7 @@ android {
     compileSdkVersion flutter.compileSdkVersion
 
     ndkVersion "25.1.8937393"
+    namespace "com.tramline.ueno"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
