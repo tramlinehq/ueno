@@ -1,4 +1,4 @@
-name: Android Staging Debug APK
+name: Android Staging Debug APK (with params)
 
 on:
   workflow_dispatch:
@@ -11,6 +11,9 @@ on:
         description: 'versionCode or build number'
         required: true
         default: '1'
+      parameter_1:
+        desciption: 'just a test parameter'
+        required: false
 
 jobs:
   build:
@@ -30,6 +33,10 @@ jobs:
           flutter-version: '3.22.0'
           channel: 'stable'
           cache: true
+
+      - run: |
+          echo 'printing out custom params'
+          echo ${{ github.event.inputs.parameter_1 }}
 
       - run: flutter pub get
 
