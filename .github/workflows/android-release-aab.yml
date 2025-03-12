@@ -48,4 +48,4 @@ jobs:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
         packageName: tramline.ueno.app
         releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
-        track: qa
+        track: internal
