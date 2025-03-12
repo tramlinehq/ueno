@@ -43,7 +43,9 @@ jobs:
 
     - run: flutter build appbundle --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --dart-define=BUGSNAG_API_KEY=${{ secrets.BUGSNAG_API_KEY }} --flavor prod
 
-    - uses: actions/upload-artifact@v4
+    - uses: r0adkll/upload-google-play@v1
       with:
-        name: release-aab
-        path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+        serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        packageName: tramline.ueno.app
+        releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+        track: qa
