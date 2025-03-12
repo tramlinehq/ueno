@@ -37,7 +37,8 @@ jobs:
 
     - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --flavor prod
 
-    - uses: actions/upload-artifact@v4
+    - uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0
       with:
-        name: release-aab
-        path: build/app/outputs/flutter-apk/app-prod-debug.apk
+        appId: ${{ secrets.FIREBASE_APP_ID }}
+        serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
+        file: build/app/outputs/flutter-apk/app-prod-debug.apk
