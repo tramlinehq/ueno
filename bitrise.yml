@@ -42,6 +42,10 @@ workflows:
         inputs:
         - source: $BITRISEIO_ANDROID_KEYSTORE_URL
         - destination: $BITRISE_SOURCE_DIR/android/app/ueno-upload-keystore.jks
+    - file-downloader@1:
+        inputs:
+          - destination: $BITRISE_SOURCE_DIR/android/key.properties
+          - source: $BITRISEIO_KEY_PROPERTIES_URL
     - script@1:
         inputs:
         - content: |-
