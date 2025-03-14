@@ -12,56 +12,32 @@ workflows:
             set -o pipefail
             # debug log
             set -x
-
-            # write your script here
-            echo parameter1 -- $parameter_1
+            echo version code -- $versionCode
+            echo version name -- $versionName
     - flutter-installer@0:
         inputs:
-        - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.7.5-stable.tar.xz
+        - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.0-stable.tar.xz
         - is_update: "false"
     - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: android
-        - android_additional_params: --debug
+        - android_additional_params: --debug --flavor prod
         - is_debug_mode: "true"
         is_always_run: true
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
-  no_op:
-    steps:
-    - activate-ssh-key@4: {}
-    - git-clone@8.0: {}
-    - script@1:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            # fail if any commands fails
-            set -e
-            # make pipeline return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
-            set -o pipefail
-            set -x
-
-            # write your script here
-            echo version code -- $versionCode
-            echo version name -- $versionName
-
-            echo "this is an artifact" > /bitrise/deploy/artifact.txt
-    - deploy-to-bitrise-io@2: {}
   release:
     steps:
-    - git-clone@6: {}
+    - git-clone@8.0: {}
     - flutter-installer@0:
         inputs:
+        - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.0-stable.tar.xz
         - is_update: "false"
     - file-downloader:
         inputs:
         - source: $BITRISEIO_ANDROID_KEYSTORE_URL
         - destination: $BITRISE_SOURCE_DIR/android/app/ueno-upload-keystore.jks
-    - file-downloader@1:
-        inputs:
-        - destination: $BITRISE_SOURCE_DIR/android/key.properties
-        - source: $BITRISEIO_KEY_PROPERTIES_URL
     - script@1:
         inputs:
         - content: |-
@@ -72,21 +48,35 @@ workflows:
             set -o pipefail
             # debug log
             set -x
-
-            # write your script here
-            echo $BUILD_VERSION
-            echo $BUILD_NUMBER
-            echo "Finished debug script"
+            echo version code -- $versionCode
+            echo version name -- $versionName
     - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: android
         - android_output_type: appbundle
-        - additional_build_params: --build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION
+        - additional_build_params: --build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION --flavor prods
         - is_debug_mode: "true"
     - cache-pull@2: {}
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
+  no_op:
+    steps:
+      - activate-ssh-key@4: { }
+      - git-clone@8.0: { }
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                # fail if any commands fails
+                set -e
+                # make pipeline return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+                set -o pipefail
+                set -x
+                # write your script here
+                echo version code -- $versionCode
+                echo version name -- $versionName
+      - deploy-to-bitrise-io@2: { }
 meta:
   bitrise.io:
     stack: linux-docker-android-20.04
