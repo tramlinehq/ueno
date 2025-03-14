@@ -59,7 +59,7 @@ workflows:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: android
         - android_output_type: appbundle
-        - additional_build_params: --build-number=$BUILD_NUMBER --build-name=$BUILD_VERSION --flavor prods
+        - additional_build_params: --build-number=$versionCode --build-name=$versionName --flavor prods
         - is_debug_mode: "true"
     - cache-pull@2: {}
     - cache-push@2: {}
