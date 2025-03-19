@@ -57,12 +57,12 @@ android {
         minSdkVersion 30
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionName "1.17.0"
     }
 
     signingConfigs {
         release {
-            versionName flutterVersionName
+            versionName "1.17.0"
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
