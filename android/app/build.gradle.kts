@@ -34,14 +34,14 @@ android {
         1
       }
 
-    versionName = "1.0.0"
+    versionName = "1.16.0"
   }
 
   compileOptions { isCoreLibraryDesugaringEnabled = true }
 
   signingConfigs {
     create("release") {
-      versionName = 1.0.0
+      versionName = "1.16.0".0.0
       storeFile = file("$rootDir/release/reader.jks")
       storePassword = "${project.properties["READER_KEYSTORE_PASSWORD"]}"
       keyAlias = "reader_alias"
