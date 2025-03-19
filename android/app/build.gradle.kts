@@ -34,12 +34,7 @@ android {
         1
       }
 
-    versionName =
-      if (project.properties["VERSION_NAME"] != null) {
-        project.properties["VERSION_NAME"] as String
-      } else {
-        "1.0.0"
-      }
+    versionName = "1.0.0"
   }
 
   compileOptions { isCoreLibraryDesugaringEnabled = true }
