@@ -34,7 +34,7 @@ android {
         1
       }
 
-    versionName = "1.25.0"
+    versionName = "1.31.0"
   }
 
   compileOptions { isCoreLibraryDesugaringEnabled = true }
