@@ -1,5 +1,11 @@
 name: Android Staging Debug APK (build number from workflow)
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
