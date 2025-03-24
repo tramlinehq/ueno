@@ -19,16 +19,17 @@ platform :android do
   desc "Distribute to Firebase"
   lane :distribute_to_firebase do
     File.open("firebase-service-account.json", "w") do |f|
-      f.write(JSON.pretty_generate(ENV["FIREBASE_CREDENTIALS_JSON"]))
+      f.write(ENV["FIREBASE_CREDENTIALS_JSON"])
     end
     firebase_app_distribution(
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-prod-debug.apk",
-      service_credentials_file: "firebase-service-account.json",
+      service_credentials_file: "./fastlane/firebase-service-account.json",
       app: ENV["FIREBASE_APP_ID"] || "1:123456789:android:abcd1234",
       testers: "akshay@tramline.app",
       release_notes: "This was released by Fastlane.",
     )
+    sh("rm -f firebase-service-account.json")
   end
 
   desc "Build and distribute the flutter aab (playstore)"
@@ -49,15 +50,16 @@ platform :android do
   desc "Distribute to Play Store (prod)"
   lane :distribute_to_play_store do
     File.open("play-store-service-account.json", "w") do |f|
-      f.write(JSON.pretty_generate(ENV["GOOGLE_SERVICE_ACCOUNT_JSON"]))
+      f.write(ENV["FIREBASE_CREDENTIALS_JSON"])
     end
     upload_to_play_store(
       track: 'internal',
-      json_key_data: "play-store-service-account.json",
+      json_key: "./fastlane/play-store-service-account.json",
       skip_upload_apk: true,
       skip_upload_aab: false,
       package_name: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
       aab: "../build/app/outputs/bundle/prodRelease/app-prod-release.aab"
     )
+    sh("rm -f firebase-service-account.json")
   end
 end
