@@ -23,6 +23,12 @@ jobs:
           java-version: 11
           cache: "gradle"
 
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1.171.0
+        with:
+          ruby-version: 3.2.1
+          bundler-cache: true
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.22.0"
