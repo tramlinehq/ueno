@@ -30,6 +30,7 @@ pipelines:
 
             - echo 'Uploading to Firebase'
             - gem install fastlane
+            - cd android
             - bundle install && bundle exec fastlane android distribute_to_firebase
 
             - echo 'Prepare build for bitbucket upload'
@@ -105,6 +106,7 @@ pipelines:
 
             - echo 'Uploading to Play Store'
             - gem install fastlane
+            - cd android
             - bundle install && bundle exec fastlane android distribute_to_play_store
 
             - echo 'Prepare build for bitbucket upload'
