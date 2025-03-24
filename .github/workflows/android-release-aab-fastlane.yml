@@ -49,7 +49,7 @@ jobs:
       - name: Build and send to play store
         env:
           BUILD_NUMBER: ${{ github.run_number }}
-          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.KEYSTORE_B64 }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
         run: |
           cd android
           bundle install && bundle exec fastlane android build_and_distribute_aab_to_play_store

@@ -18,9 +18,7 @@ platform :android do
 
   desc "Distribute to Firebase"
   lane :distribute_to_firebase do
-    File.open("firebase-service-account.json", "w") do |f|
-      f.write(ENV["FIREBASE_CREDENTIALS_JSON"])
-    end
+    File.open("firebase-service-account.json", "w") { |f| f.write(ENV["FIREBASE_CREDENTIALS_JSON"]) }
     firebase_app_distribution(
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-prod-debug.apk",
@@ -49,9 +47,7 @@ platform :android do
 
   desc "Distribute to Play Store (prod)"
   lane :distribute_to_play_store do
-    File.open("play-store-service-account.json", "w") do |f|
-      f.write(ENV["FIREBASE_CREDENTIALS_JSON"])
-    end
+    File.open("play-store-service-account.json", "w") { |f| f.write(ENV["GOOGLE_SERVICE_ACCOUNT_JSON"]) }
     upload_to_play_store(
       track: 'internal',
       json_key: "./fastlane/play-store-service-account.json",
@@ -60,6 +56,6 @@ platform :android do
       package_name: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
       aab: "../build/app/outputs/bundle/prodRelease/app-prod-release.aab"
     )
-    sh("rm -f firebase-service-account.json")
+    sh("rm -f play-store-service-account.json")
   end
 end
