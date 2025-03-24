@@ -18,3 +18,56 @@ To generate a release build you need two files that are not, for good reasons, p
 
 You can get these files from our Google Cloud Storage account
 
+## Pipeline Configuration
+
+### GitHub
+
+| Workflow Name                          | Type               | Category                   | Custom Parameters | Deploy-Action | Workflow Run Number as Build Number |
+|----------------------------------------|--------------------|----------------------------|-------------------|---------------|------------------------------------|
+| andoid-signed-apk.yml                 | Signed APK         | Release Build              | No                | No            | No                                 |
+| android-debug-apk-fastlane.yml         | Unsigned APK       | Debug Build & Firebase     | No                | No            | Yes                                |
+| android-debug-apk.yml                  | Unsigned APK       | Debug Build              | No                | No            | No                                 |
+| android-release-aab-fastlane.yml       | Signed AAB         | Release Build & Play Store | No                | No            | Yes                                |
+| android-release-aab.yml                | Signed AAB         | Release Build              | No                | No            | No                                 |
+| android-apk-external.yml               | Unsigned APK       | Debug Build              | No                | No            | Yes                                |
+| android-staging-apk-params.yml         | Unsigned APK       | Staging Build              | Yes               | Yes           | No                                 |
+| android-staging-apk.yml                | Unsigned APK       | Staging Build              | No                | No            | No                                 |
+| ios-fastlane-debug.yml                 | Dev Signed IPA     | Debug Build              | No                | No            | No                                 |
+| ios-fastlane-release.yml               | Dev Signed IPA     | Release Build & TestFlight | No                | No            | No                                 |
+| ios-non-fastlane-release.yml           | Dev Signed IPA     | Release Build & TestFlight | No                | No            | No                                 |
+| single-input-android-apk-debug-params.yml | Unsigned APK       | Debug Build              | Yes               | Yes           | No                                 |
+| single-input-android-apk-debug.yml     | Unsigned APK       | Debug Build              | No                | Yes           | No                                 |
+| single-input-ios-fastlane-debug.yml    | Dev Signed IPA     | Debug Build              | Yes               | Yes           | No                                 |
+
+### Bitrise
+
+#### Android
+
+| Workflow Name                      | Platform   | Type          | Category            | Publishing Destination |
+|------------------------------------|------------|---------------|---------------------|------------------------|
+| debug                              | Android    | Signed APK    | Debug Build         | None                   |
+| debug_firebase                     | Android    | Signed APK    | Debug Build         | Firebase               |
+| release                            | Android    | Signed AAB    | Release Build       | None                   |
+| release_play_store                 | Android    | Signed AAB    | Release Build       | Play Store             |
+
+
+#### iOS
+
+This is available in the `main-ios` branch.
+
+
+| Workflow Name | Platform | Type                                    | Category      | Publishing Destination |
+|---------------|----------|-----------------------------------------|---------------|------------------------|
+| deploy        | iOS      | Signed app-store distribution certificate | Release Build | TestFlight             |
+| debug         | iOS      | Signed ad-hoc distribution certificate  | Debug Build   | None                   |
+
+### Bitbucket Pipelines
+
+These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/ueno) of this repository.
+
+| Workflow Name                      | Platform   | Type          | Category            | Publishing Destination |
+|------------------------------------|------------|---------------|---------------------|------------------------|
+| android-debug-apk-firebase         | Bitbucket  | Unsigned APK  | Debug Build         | Firebase               |
+| android-debug-apk                  | Bitbucket  | Unsigned APK  | Debug Build         | None                   |
+| android-release-aab                | Bitbucket  | Signed AAB    | Release Build       | None                   |
+| android-release-aab-playstore      | Bitbucket  | Signed AAB    | Release Build       | Play Store             |
