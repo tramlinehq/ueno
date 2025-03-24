@@ -42,7 +42,7 @@ jobs:
         env:
           BUILD_NUMBER: ${{ github.run_number }}
           FIREBASE_CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
-          FIREBASE_APP_ID: ${ secrets.FIREBASE_APP_ID }}
+          FIREBASE_APP_ID: ${ vars.FIREBASE_APP_ID }}
         run: |
           cd android
           bundle install && bundle exec fastlane android build_and_distribute_apk_to_firebase
