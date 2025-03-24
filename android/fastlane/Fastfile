@@ -21,7 +21,7 @@ platform :android do
   firebase_app_distribution(
               android_artifact_type: "APK",
               android_artifact_path: "../build/app/outputs/flutter-apk/app-prod-debug.apk",
-              service_credentials_file: ENV["FIREBASE_SERVICE_CREDENTIALS_PATH"].to_s || "firebase-service-account.json",
+              service_credentials_file: ENV["FIREBASE_CREDENTIALS_JSON"].to_s || "firebase-service-account.json",
               app:  ENV["FIREBASE_APP_ID"] || "1:123456789:android:abcd1234",
               testers: "akshay@tramline.app",
               release_notes: "This was released by Fastlane.",
@@ -47,7 +47,7 @@ platform :android do
   lane :distribute_to_play_store do
     upload_to_play_store(
       track: 'internal',
-      json_key: ENV["PLAY_STORE_JSON_KEY_PATH"] || "google-play-api-key.json",
+      json_key: ENV["GOOGLE_SERVICE_ACCOUNT_JSON"] || "google-play-api-key.json",
       skip_upload_apk: true,
       skip_upload_aab: false,
       package_name: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
