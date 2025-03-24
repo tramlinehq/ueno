@@ -1,19 +1,10 @@
 name: Android Staging Debug APK (build number from workflow)
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
-      inputs:
-        versionName:
-          description: 'User-facing release version name'
-          required: true
-          default: "1.0.0"
-        versionCode:
-          description: 'versionCode or build number'
-          required: true
-          default: '1'
+    inputs:
+      tramline-input:
+        required: false
 
 jobs:
   build:
@@ -35,9 +26,7 @@ jobs:
           cache: true
 
       - run: flutter pub get
-
       - run: flutter --version
-
       - run: flutter build apk --debug --build-number=${{ github.run_number }} --build-name=${{ github.event.inputs.versionName }} --flavor staging
 
       - uses: actions/upload-artifact@v4

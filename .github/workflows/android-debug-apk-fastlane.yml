@@ -29,6 +29,9 @@ jobs:
       - run: flutter --version
 
       - name: Build and send to firebase
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+          FIREBASE_CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
         run: bundle install && bundle exec fastlane android build_and_distribute_apk_to_firebase
 
       - uses: actions/upload-artifact@v4

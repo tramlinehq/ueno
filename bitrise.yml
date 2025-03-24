@@ -4,6 +4,10 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: flutter
 workflows:
   debug_firebase:
+    envs:
+      - opts:
+          is_expand: true
+          BUILD_NUMBER: $BITRISE_TRIGGERED_WORKFLOW_ID
     steps:
       - git-clone@8.0: { }
       - script@1:
@@ -27,7 +31,7 @@ workflows:
           inputs:
             - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
             - platform: android
-            - android_additional_params: --debug --flavor prod
+            - android_additional_params: --build-number=$BUILD_NUMBER --build-name=$versionName  --debug --flavor prod
             - is_debug_mode: "true"
           is_always_run: true
       - script@1:
@@ -69,7 +73,7 @@ workflows:
           inputs:
             - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
             - platform: android
-            - android_additional_params: --debug --flavor prod
+            - android_additional_params: --build-number=$versionCode --build-name=$versionName  --debug --flavor prod
             - is_debug_mode: "true"
           is_always_run: true
       - cache-push@2: { }
@@ -124,6 +128,10 @@ workflows:
       - cache-push@2: { }
       - deploy-to-bitrise-io@2: { }
   release_play_store:
+    envs:
+      - opts:
+          is_expand: true
+          BUILD_NUMBER: $BITRISE_TRIGGERED_WORKFLOW_ID
     steps:
       - git-clone@8.0: { }
       - flutter-installer@0:
@@ -155,7 +163,7 @@ workflows:
             - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
             - platform: android
             - android_output_type: appbundle
-            - additional_build_params: --build-number=$versionCode --build-name=$versionName --flavor prod
+            - additional_build_params: --build-number=$BUILD_NUMBER --build-name=$versionName --flavor prod
             - is_debug_mode: "true"
       - cache-pull@2: { }
       - cache-push@2: { }
