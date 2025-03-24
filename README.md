@@ -43,31 +43,35 @@ You can get these files from our Google Cloud Storage account
 
 #### Android
 
-| Workflow Name                      | Platform   | Type          | Category            | Publishing Destination |
-|------------------------------------|------------|---------------|---------------------|------------------------|
-| debug                              | Android    | Signed APK    | Debug Build         | None                   |
-| debug_firebase                     | Android    | Signed APK    | Debug Build         | Firebase               |
-| release                            | Android    | Signed AAB    | Release Build       | None                   |
-| release_play_store                 | Android    | Signed AAB    | Release Build       | Play Store             |
-
+| Workflow Name                      | Type          | Category            | Publishing Destination |
+|------------------------------------|---------------|---------------------|------------------------|
+| debug                              | Signed APK    | Debug Build         | None                   |
+| debug_firebase                     | Signed APK    | Debug Build         | Firebase               |
+| release                            | Signed AAB    | Release Build       | None                   |
+| release_play_store                 | Signed AAB    | Release Build       | Play Store             |
 
 #### iOS
 
 This is available in the `main-ios` branch.
 
-
-| Workflow Name | Platform | Type                                    | Category      | Publishing Destination |
-|---------------|----------|-----------------------------------------|---------------|------------------------|
-| deploy        | iOS      | Signed app-store distribution certificate | Release Build | TestFlight             |
-| debug         | iOS      | Signed ad-hoc distribution certificate  | Debug Build   | None                   |
+| Workflow Name | Type                                    | Category      | Publishing Destination |
+|---------------|-----------------------------------------|---------------|------------------------|
+| deploy        | Signed app-store distribution certificate | Release Build | TestFlight             |
+| debug         | Signed ad-hoc distribution certificate  | Debug Build   | None                   |
 
 ### Bitbucket Pipelines
 
 These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/ueno) of this repository.
 
-| Workflow Name                      | Platform   | Type          | Category            | Publishing Destination |
-|------------------------------------|------------|---------------|---------------------|------------------------|
-| android-debug-apk-firebase         | Bitbucket  | Unsigned APK  | Debug Build         | Firebase               |
-| android-debug-apk                  | Bitbucket  | Unsigned APK  | Debug Build         | None                   |
-| android-release-aab                | Bitbucket  | Signed AAB    | Release Build       | None                   |
-| android-release-aab-playstore      | Bitbucket  | Signed AAB    | Release Build       | Play Store             |
+#### Android
+
+| Workflow Name                      | Type          | Category            | Publishing Destination |
+|------------------------------------|---------------|---------------------|------------------------|
+| android-debug-apk-firebase         | Unsigned APK  | Debug Build         | Firebase               |
+| android-debug-apk                  | Unsigned APK  | Debug Build         | None                   |
+| android-release-aab                | Signed AAB    | Release Build       | None                   |
+| android-release-aab-playstore      | Signed AAB    | Release Build       | Play Store             |
+
+#### iOS
+
+iOS pipelines are currently not functional on Bitbucket.
