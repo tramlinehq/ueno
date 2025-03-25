@@ -19,6 +19,7 @@ platform :android do
   desc "Distribute to Firebase"
   lane :distribute_to_firebase do
     File.open("firebase-service-account.json", "w") { |f| f.write(ENV["FIREBASE_CREDENTIALS_JSON"]) }
+    puts File.read("firebase-service-account.json")
     firebase_app_distribution(
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-prod-debug.apk",
@@ -48,6 +49,7 @@ platform :android do
   desc "Distribute to Play Store (prod)"
   lane :distribute_to_play_store do
     File.open("play-store-service-account.json", "w") { |f| f.write(ENV["GOOGLE_SERVICE_ACCOUNT_JSON"]) }
+    puts File.read("play-store-service-account.json")
     upload_to_play_store(
       track: 'internal',
       json_key: "./fastlane/play-store-service-account.json",
