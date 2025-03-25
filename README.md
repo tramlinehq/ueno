@@ -51,6 +51,7 @@ You can get these files from our Google Cloud Storage account
 | release                            | Signed AAB    | Release Build       | None                   |
 | release_play_store                 | Signed AAB    | Release Build       | Play Store             |
 | debug_firebase_no_artifact         | Unsigned APK  | Debug Build (no artifact) | Firebase         |
+| debug_no_artifact                  | Unsigned APK  | Debug Build (no artifact) | None             |
 
 #### iOS
 
