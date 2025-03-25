@@ -5,7 +5,7 @@ project_type: flutter
 workflows:
   debug_firebase:
     envs:
-      BUILD_NUMBER: $BITRISE_TRIGGERED_WORKFLOW_ID
+      - BUILD_NUMBER: $BITRISE_TRIGGERED_WORKFLOW_ID
     steps:
       - git-clone@8.0: { }
       - script@1:
