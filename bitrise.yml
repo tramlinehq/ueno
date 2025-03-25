@@ -7,6 +7,7 @@ workflows:
     envs:
       - BUILD_NUMBER: $BITRISE_BUILD_NUMBER
       - FIREBASE_CREDENTIALS_JSON: $FIREBASE_SERVICE_ACCOUNT
+      - FIREBASE_APP_ID: $FIREBASE_APP_ID
     steps:
       - git-clone@8.0: { }
       - script@1:
@@ -54,6 +55,7 @@ workflows:
     envs:
       - BUILD_NUMBER: $BITRISE_BUILD_NUMBER
       - FIREBASE_CREDENTIALS_JSON: $FIREBASE_SERVICE_ACCOUNT
+      - FIREBASE_APP_ID: $FIREBASE_APP_ID
     steps:
       - git-clone@8.0: { }
       - script@1:
