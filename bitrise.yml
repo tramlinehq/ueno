@@ -123,7 +123,7 @@ workflows:
           is_always_run: true
       - cache-push@2: { }
       - deploy-to-bitrise-io@2: { }
- debug_no_artifact:
+  debug_no_artifact:
     steps:
       - git-clone@8.0: { }
       - script@1:
