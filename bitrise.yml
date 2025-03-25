@@ -21,6 +21,7 @@ workflows:
 
                 echo version code -- $versionCode
                 echo version name -- $versionName
+                echo BUILD_NUMBER -- $BUILD_NUMBER
       - flutter-installer@0:
           inputs:
             - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.0-stable.tar.xz
@@ -156,6 +157,7 @@ workflows:
                 
                 echo version code -- $versionCode
                 echo version name -- $versionName
+                echo BUILD_NUMBER -- $BUILD_NUMBER
       - flutter-build@0:
           inputs:
             - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
