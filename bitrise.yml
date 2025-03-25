@@ -49,6 +49,51 @@ workflows:
                 bundle install && bundle exec fastlane android distribute_to_firebase
       - cache-push@2: { }
       - deploy-to-bitrise-io@2: { }
+  debug_firebase_no_artifact:
+    envs:
+      - BUILD_NUMBER: $BITRISE_BUILD_NUMBER
+    steps:
+      - git-clone@8.0: { }
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                # fail if any commands fails
+                set -e
+                # make pipeline return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+                set -o pipefail
+                # debug log
+                set -x
+
+                echo version code -- $versionCode
+                echo version name -- $versionName
+                echo BUILD_NUMBER -- $BUILD_NUMBER
+      - flutter-installer@0:
+          inputs:
+            - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.0-stable.tar.xz
+            - is_update: "false"
+      - flutter-build@0:
+          inputs:
+            - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
+            - platform: android
+            - android_additional_params: --build-number=$BUILD_NUMBER --build-name=$versionName  --debug --flavor prod
+            - is_debug_mode: "true"
+          is_always_run: true
+      - script@1:
+          title: Send to firebase
+          inputs:
+            - content: |
+                #!/usr/bin/env bash
+                # fail if any commands fails
+                set -e
+                # make pipeline return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+                set -o pipefail
+                # debug log
+                set -x
+
+                cd android
+                bundle install && bundle exec fastlane android distribute_to_firebase
+      - cache-push@2: { }      
   debug:
     steps:
       - git-clone@8.0: { }
@@ -78,6 +123,34 @@ workflows:
           is_always_run: true
       - cache-push@2: { }
       - deploy-to-bitrise-io@2: { }
+ debug_no_artifact:
+    steps:
+      - git-clone@8.0: { }
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                # fail if any commands fails
+                set -e
+                # make pipeline return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+                set -o pipefail
+                # debug log
+                set -x
+
+                echo version code -- $versionCode
+                echo version name -- $versionName
+      - flutter-installer@0:
+          inputs:
+            - installation_bundle_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.0-stable.tar.xz
+            - is_update: "false"
+      - flutter-build@0:
+          inputs:
+            - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
+            - platform: android
+            - android_additional_params: --build-number=$versionCode --build-name=$versionName  --debug --flavor prod
+            - is_debug_mode: "true"
+          is_always_run: true
+      - cache-push@2: { }
   release:
     steps:
       - git-clone@8.0: { }
