@@ -28,6 +28,7 @@ You can get these files from our Google Cloud Storage account
 | android-debug-apk-fastlane.yml         | Unsigned APK       | Debug Build & Firebase     | No                | No            | Yes                                |
 | android-debug-apk.yml                  | Unsigned APK       | Debug Build              | No                | No            | No                                 |
 | android-release-aab-fastlane.yml       | Signed AAB         | Release Build & Play Store | No                | No            | Yes                                |
+| android-debug-apk-no-artifact.yml      | Unsigned APK       | Debug build & Firebase & No Artifact     | No                | Yes           | Yes                                | 
 | android-release-aab.yml                | Signed AAB         | Release Build              | No                | No            | No                                 |
 | android-apk-external.yml               | Unsigned APK       | Debug Build              | No                | No            | Yes                                |
 | android-staging-apk-params.yml         | Unsigned APK       | Staging Build              | Yes               | Yes           | No                                 |
@@ -49,6 +50,7 @@ You can get these files from our Google Cloud Storage account
 | debug_firebase                     | Signed APK    | Debug Build         | Firebase               |
 | release                            | Signed AAB    | Release Build       | None                   |
 | release_play_store                 | Signed AAB    | Release Build       | Play Store             |
+| debug_firebase_no_artifact         | Unsigned APK  | Debug Build (no artifact) | Firebase         |
 
 #### iOS
 
@@ -71,6 +73,7 @@ These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/uen
 | android-debug-apk                  | Unsigned APK  | Debug Build         | None                   |
 | android-release-aab                | Signed AAB    | Release Build       | None                   |
 | android-release-aab-playstore      | Signed AAB    | Release Build       | Play Store             |
+| android-debug-apk-firebase-no-artifact | Unsigned APK | Debug Build (no artifact) | Firebase      |
 
 #### iOS
 
