@@ -97,7 +97,7 @@ workflows:
 
                 cd android
                 bundle install && bundle exec fastlane android distribute_to_firebase
-      - cache-push@2: { }      
+      - cache-push@2: { }
   debug:
     steps:
       - git-clone@8.0: { }
@@ -190,17 +190,6 @@ workflows:
             - android_output_type: appbundle
             - additional_build_params: --build-number=$versionCode --build-name=$versionName --flavor prod
             - is_debug_mode: "true"
-      - script@1:
-          title: Send to Play Store
-          inputs:
-            - content: |
-                #!/usr/bin/env bash
-                # fail if any commands fails
-                set -e
-                # make pipelines return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
-                set -o pipefail
-
-                bundle install && bundle exec fastlane android distribute_to_play_store
       - cache-pull@2: { }
       - cache-push@2: { }
       - deploy-to-bitrise-io@2: { }
@@ -232,7 +221,7 @@ workflows:
                 set -o pipefail
                 # debug log
                 set -x
-                
+
                 echo version code -- $versionCode
                 echo version name -- $versionName
                 echo BUILD_NUMBER -- $BUILD_NUMBER
@@ -244,7 +233,7 @@ workflows:
             - additional_build_params: --build-number=$BUILD_NUMBER --build-name=$versionName --flavor prod
             - is_debug_mode: "true"
       - script@1:
-          title: Send to firebase
+          title: Send to Play Store
           inputs:
             - content: |
                 #!/usr/bin/env bash
