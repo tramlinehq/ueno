@@ -49,6 +49,7 @@ jobs:
       - name: Build and send to play store
         env:
           BUILD_NUMBER: ${{ github.run_number }}
+          VERSION_NAME: ${{ steps.tramline.outputs.version_name }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
         run: |
           cd android

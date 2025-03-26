@@ -41,6 +41,7 @@ jobs:
       - name: Build and send to firebase
         env:
           BUILD_NUMBER: ${{ github.run_number }}
+          VERSION_NAME: ${{ steps.tramline.outputs.version_name }}
           FIREBASE_CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
           FIREBASE_APP_ID: ${{ vars.FIREBASE_APP_ID }}
         run: |
