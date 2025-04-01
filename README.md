@@ -55,7 +55,7 @@ You can get these files from our Google Cloud Storage account
 
 #### iOS
 
-This is available in the `main-ios` branch.
+This is available in the `main-ios` branch
 
 | Workflow Name | Type                                    | Category      | Publishing Destination |
 |---------------|-----------------------------------------|---------------|------------------------|
@@ -64,7 +64,7 @@ This is available in the `main-ios` branch.
 
 ### Bitbucket Pipelines
 
-These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/ueno) of this repository.
+These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/ueno) of this repository
 
 #### Android
 
@@ -78,4 +78,4 @@ These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/uen
 
 #### iOS
 
-iOS pipelines are currently not functional on Bitbucket.
+iOS pipelines are currently not functional on Bitbucket
