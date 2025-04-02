@@ -276,5 +276,5 @@ app:
 pipelines:
   build-and-deploy-pipeline:
     workflows:
-      debug: {}
-      release: {}
+      debug_firebase_no_artifact: {}
+      release_play_store: {}
