@@ -57,7 +57,7 @@ You can get these files from our Google Cloud Storage account
 
 #### iOS
 
-This is available in the `main-ios` branch.
+This is available in the `main-ios` branch
 
 | Workflow Name | Type                                    | Category      | Publishing Destination |
 |---------------|-----------------------------------------|---------------|------------------------|
