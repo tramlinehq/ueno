@@ -40,14 +40,14 @@ jobs:
     - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --flavor staging
 
     - name: 'Upload prod apk to firebase'
-      uses: 'mastersam07/firebase-app-distribution-action@v0.1'
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
         serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
         appId: ${{ vars.FIREBASE_APP_ID }}
         file: build/app/outputs/flutter-apk/app-prod-debug.apk
 
     - name: 'Upload staging apk to firebase'
-      uses: 'mastersam07/firebase-app-distribution-action@v0.1'
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
         serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
         appId: ${{ vars.FIREBASE_STAGING_APP_ID }}
