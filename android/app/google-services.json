@@ -1,0 +1,190 @@
+{
+  "project_info": {
+    "project_number": "946207521855",
+    "project_id": "decoded-theme-355014",
+    "storage_bucket": "decoded-theme-355014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946207521855:android:d4071217d566929da30c8a",
+        "android_client_info": {
+          "package_name": "com.tramline.ueno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4A0mStZq8O2ceswyIYD44HpR62K0Wl_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "946207521855-ad7p86jkgqct4umqmc1qpmgocnsp0uvg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tramline.ueno"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946207521855:android:6d9f7a7c3e1d9edda30c8a",
+        "android_client_info": {
+          "package_name": "org.tramline.ueno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4A0mStZq8O2ceswyIYD44HpR62K0Wl_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "946207521855-ad7p86jkgqct4umqmc1qpmgocnsp0uvg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tramline.ueno"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946207521855:android:4e8993b35a4a14dfa30c8a",
+        "android_client_info": {
+          "package_name": "tramline.ueno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4A0mStZq8O2ceswyIYD44HpR62K0Wl_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "946207521855-ad7p86jkgqct4umqmc1qpmgocnsp0uvg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tramline.ueno"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946207521855:android:295ff59439137f85a30c8a",
+        "android_client_info": {
+          "package_name": "tramline.ueno.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4A0mStZq8O2ceswyIYD44HpR62K0Wl_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "946207521855-ad7p86jkgqct4umqmc1qpmgocnsp0uvg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tramline.ueno"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946207521855:android:faca0944aa5cff04a30c8a",
+        "android_client_info": {
+          "package_name": "tramline.ueno.app.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4A0mStZq8O2ceswyIYD44HpR62K0Wl_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946207521855-04erl6uc8vk5lk3uqq521f21181v3o21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "946207521855-ad7p86jkgqct4umqmc1qpmgocnsp0uvg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tramline.ueno"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

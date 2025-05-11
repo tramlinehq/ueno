@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000252">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: Switch to android build_apk lane" time="0.000105">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: flutter clean" time="3.750953">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: flutter build apk --debug --build-number=1 --build-name=1.0.0 --flavor prod" time="22.313265">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: Switch to android distribute_to_firebase lane" time="0.001117">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: firebase_app_distribution" time="17.914618">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: rm -f firebase-service-account.json" time="0.021138">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>

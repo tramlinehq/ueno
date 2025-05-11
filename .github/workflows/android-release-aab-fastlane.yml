@@ -1,0 +1,61 @@
+name: Android Play Store Release Build AAB (+playstore)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tramline-input:
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure Tramline
+        id: tramline
+        uses: tramlinehq/deploy-action@v0.1.7
+        with:
+          input: ${{ github.event.inputs.tramline-input }}
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 11
+          cache: "gradle"
+
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.1
+          bundler-cache: true
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+          channel: "stable"
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter --version
+
+      - name: Retrieve secrets
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+          KEY_PROPERTIES_B64: ${{ secrets.KEY_PROPERTIES_B64 }}
+        run: |
+          echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+          echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+
+      - name: Build and send to play store
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+          VERSION_NAME: ${{ steps.tramline.outputs.version_name }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          cd android
+          bundle install && bundle exec fastlane android build_and_distribute_aab_to_play_store
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-aab
+          path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
