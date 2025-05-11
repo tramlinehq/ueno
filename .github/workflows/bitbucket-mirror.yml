@@ -1,0 +1,21 @@
+name: Mirror to Bitbucket
+
+on:
+  push:
+    branches:
+      - main
+      - main-ios
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Mirror to Bitbucket
+      uses: pixta-dev/repository-mirroring-action@v1
+      with:
+        target_repo_url: 
+          https://${{ secrets.BITBUCKET_MIRROR_USERNAME }}:${{ secrets.BITBUCKET_MIRROR_SECRET }}@bitbucket.org/tramline/ueno-mirror.git

@@ -1,0 +1,63 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build and distribute the flutter apk (firebase)"
+  lane :build_and_distribute_apk_to_firebase do
+    build_apk
+    distribute_to_firebase
+  end
+
+  desc "Build the APK"
+  lane :build_apk do
+    sh("flutter clean")
+    build_number = ENV["BUILD_NUMBER"] || "1"
+    version_name = ENV["VERSION_NAME"] || "1.0.0"
+    flavor = ENV["APP_FLAVOR"] || "prod"
+    sh("flutter build apk --debug --build-number=#{build_number} --build-name=#{version_name} --flavor #{flavor}")
+  end
+
+  desc "Distribute to Firebase"
+  lane :distribute_to_firebase do
+    File.open("firebase-service-account.json", "w") { |f| f.write(ENV["FIREBASE_CREDENTIALS_JSON"]) }
+    puts File.read("firebase-service-account.json")
+    firebase_app_distribution(
+      android_artifact_type: "APK",
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-prod-debug.apk",
+      service_credentials_file: "./fastlane/firebase-service-account.json",
+      app: ENV["FIREBASE_APP_ID"] || "1:123456789:android:abcd1234",
+      testers: "akshay@tramline.app",
+      release_notes: "This was released by Fastlane.",
+    )
+    sh("rm -f firebase-service-account.json")
+  end
+
+  desc "Build and distribute the flutter aab (playstore)"
+  lane :build_and_distribute_aab_to_play_store do
+    build_aab
+    distribute_to_play_store
+  end
+
+  desc "Build the AAB"
+  lane :build_aab do
+    sh("flutter clean")
+    build_number = ENV["BUILD_NUMBER"] || "1"
+    version_name = ENV["VERSION_NAME"] || "1.0.0"
+    flavor = ENV["APP_FLAVOR"] || "prod"
+    sh("flutter build appbundle --release --build-number=#{build_number} --build-name=#{version_name} --flavor #{flavor}")
+  end
+
+  desc "Distribute to Play Store (prod)"
+  lane :distribute_to_play_store do
+    File.open("play-store-service-account.json", "w") { |f| f.write(ENV["GOOGLE_SERVICE_ACCOUNT_JSON"]) }
+    puts File.read("play-store-service-account.json")
+    upload_to_play_store(
+      track: 'internal',
+      json_key: "./fastlane/play-store-service-account.json",
+      skip_upload_apk: true,
+      skip_upload_aab: false,
+      package_name: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
+      aab: "../build/app/outputs/bundle/prodRelease/app-prod-release.aab"
+    )
+    sh("rm -f play-store-service-account.json")
+  end
+end
