@@ -90,3 +90,4 @@ BUG-687: Fix search indexing
 INFRA-910: Update deployment scripts
 TEST-243: Add regression tests
 PROJ-133: Implement file storage
+SEC-799: Add request logging
