@@ -40,3 +40,4 @@ SEC-793: Add input sanitization
 UI-238: Improve accessibility features
 PERF-571: Optimize frontend bundle size
 DEV-894: Remove unused dependencies
+FEAT-349: Add real-time notifications
