@@ -36,3 +36,4 @@ BUG-681: Fix duplicate event handling
 INFRA-904: Upgrade Redis cluster
 TEST-237: Add performance benchmarks
 PROJ-127: Implement audit logging
+SEC-793: Add input sanitization
