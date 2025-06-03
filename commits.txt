@@ -5,3 +5,4 @@ UI-234: Improve responsive layout for mobile devices
 PERF-567: Optimize database queries for user dashboard
 DEV-890: Refactor authentication middleware
 FEAT-345: Add export to CSV functionality
+BUG-678: Fix race condition in concurrent file uploads
