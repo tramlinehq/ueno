@@ -23,3 +23,4 @@ UI-236: Update form validation feedback
 PERF-569: Optimize image processing pipeline
 DEV-892: Standardize error handling
 FEAT-347: Add multi-language support
+BUG-680: Fix sorting in data tables
