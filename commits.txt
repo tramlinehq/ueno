@@ -7,3 +7,4 @@ DEV-890: Refactor authentication middleware
 FEAT-345: Add export to CSV functionality
 BUG-678: Fix race condition in concurrent file uploads
 INFRA-901: Update Docker configuration for production
+TEST-234: Add integration tests for payment system
