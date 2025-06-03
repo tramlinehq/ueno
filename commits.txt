@@ -1,1 +1,2 @@
 PROJ-123: Add user authentication system
+TECH-456: Fix memory leak in background worker
