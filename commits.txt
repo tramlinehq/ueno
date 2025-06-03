@@ -125,3 +125,4 @@ INFRA-734: Update Docker container configuration
 DEV-845: Clean up deprecated utility functions
 BUG-156: Fix race condition in concurrent requests
 FEAT-267: Add export to Excel feature
+SEC-378: Enable HTTPS redirect policy
