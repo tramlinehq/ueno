@@ -43,3 +43,4 @@ DEV-894: Remove unused dependencies
 FEAT-349: Add real-time notifications
 BUG-682: Fix memory leak in WebSocket connections
 INFRA-905: Configure horizontal scaling
+TEST-238: Add load testing scripts
