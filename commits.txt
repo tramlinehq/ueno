@@ -129,3 +129,4 @@ SEC-378: Enable HTTPS redirect policy
 UI-489: Improve form validation messages
 PERF-591: Optimize image compression pipeline
 TEST-602: Add end-to-end authentication tests
+INFRA-713: Configure automated database backups
