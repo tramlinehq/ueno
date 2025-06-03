@@ -24,3 +24,4 @@ PERF-569: Optimize image processing pipeline
 DEV-892: Standardize error handling
 FEAT-347: Add multi-language support
 BUG-680: Fix sorting in data tables
+INFRA-903: Update CI/CD pipeline
