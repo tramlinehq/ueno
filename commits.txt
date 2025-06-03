@@ -120,3 +120,4 @@ FEAT-289: Add multi-file upload functionality
 SEC-390: Implement rate limiting middleware
 UI-401: Update responsive grid system
 PERF-512: Cache API response data
+TEST-623: Add integration tests for checkout flow
