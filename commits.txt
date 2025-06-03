@@ -100,3 +100,4 @@ INFRA-911: Configure monitoring
 TEST-244: Add accessibility tests
 PROJ-134: Add user preferences
 SEC-800: Implement IP filtering
+UI-245: Add responsive tables
