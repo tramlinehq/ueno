@@ -34,3 +34,4 @@ DEV-893: Update code documentation
 FEAT-348: Add webhook integration
 BUG-681: Fix duplicate event handling
 INFRA-904: Upgrade Redis cluster
+TEST-237: Add performance benchmarks
