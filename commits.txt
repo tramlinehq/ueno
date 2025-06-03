@@ -81,3 +81,4 @@ BUG-686: Fix pagination logic
 INFRA-909: Configure auto-scaling
 TEST-242: Add smoke tests
 PROJ-132: Add social sharing
+SEC-798: Update password policy
