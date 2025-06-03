@@ -96,3 +96,4 @@ PERF-577: Optimize image delivery
 DEV-900: Clean up legacy code
 FEAT-355: Add API versioning
 BUG-688: Fix cache invalidation
+INFRA-911: Configure monitoring
