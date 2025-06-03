@@ -75,3 +75,4 @@ PROJ-131: Implement commenting system
 SEC-797: Add request validation
 UI-242: Update form components
 PERF-575: Add query optimization
+DEV-898: Update API documentation
