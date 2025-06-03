@@ -84,3 +84,4 @@ PROJ-132: Add social sharing
 SEC-798: Update password policy
 UI-243: Improve error messages
 PERF-576: Implement lazy loading
+DEV-899: Refactor test helpers
