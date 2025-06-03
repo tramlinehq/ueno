@@ -10,3 +10,4 @@ INFRA-901: Update Docker configuration for production
 TEST-234: Add integration tests for payment system
 PROJ-124: Implement password reset flow
 SEC-790: Enable two-factor authentication
+UI-235: Update color scheme for dark mode
