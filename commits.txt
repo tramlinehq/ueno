@@ -52,3 +52,4 @@ DEV-895: Standardize coding style
 FEAT-350: Add PDF report generation
 BUG-683: Fix timezone handling
 INFRA-906: Update monitoring alerts
+TEST-239: Add API documentation tests
