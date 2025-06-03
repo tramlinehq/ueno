@@ -3,3 +3,4 @@ TECH-456: Fix memory leak in background worker
 SEC-789: Update dependencies to patch security vulnerabilities
 UI-234: Improve responsive layout for mobile devices
 PERF-567: Optimize database queries for user dashboard
+DEV-890: Refactor authentication middleware
