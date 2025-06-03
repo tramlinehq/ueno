@@ -106,3 +106,4 @@ DEV-901: Update coding standards
 FEAT-356: Add export templates
 BUG-689: Fix sorting algorithm
 INFRA-912: Update security groups
+PROJ-101: Add user registration endpoint
