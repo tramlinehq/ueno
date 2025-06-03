@@ -117,3 +117,4 @@ INFRA-856: Configure Redis cache cluster
 DEV-967: Refactor email notification service
 BUG-178: Fix date parsing in report generator
 FEAT-289: Add multi-file upload functionality
+SEC-390: Implement rate limiting middleware
