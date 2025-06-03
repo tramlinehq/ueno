@@ -66,3 +66,4 @@ PROJ-130: Add payment integration
 SEC-796: Implement audit trails
 UI-241: Add responsive images
 PERF-574: Optimize database queries
+DEV-897: Clean up test fixtures
