@@ -62,3 +62,4 @@ FEAT-351: Add data export API
 BUG-684: Fix file upload validation
 INFRA-907: Configure load balancing
 TEST-240: Add security penetration tests
+PROJ-130: Add payment integration
