@@ -32,3 +32,4 @@ UI-237: Add loading states to buttons
 PERF-570: Implement database connection pooling
 DEV-893: Update code documentation
 FEAT-348: Add webhook integration
+BUG-681: Fix duplicate event handling
