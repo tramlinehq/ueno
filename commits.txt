@@ -59,3 +59,4 @@ UI-240: Update navigation menu
 PERF-573: Implement request caching
 DEV-896: Update README documentation
 FEAT-351: Add data export API
+BUG-684: Fix file upload validation
