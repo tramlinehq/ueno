@@ -19,3 +19,4 @@ INFRA-902: Configure automated backups
 TEST-235: Add unit tests for user service
 PROJ-125: Implement email notification system
 SEC-791: Add rate limiting to API endpoints
+UI-236: Update form validation feedback
