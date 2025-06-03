@@ -39,3 +39,4 @@ PROJ-127: Implement audit logging
 SEC-793: Add input sanitization
 UI-238: Improve accessibility features
 PERF-571: Optimize frontend bundle size
+DEV-894: Remove unused dependencies
