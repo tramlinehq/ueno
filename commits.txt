@@ -69,3 +69,4 @@ PERF-574: Optimize database queries
 DEV-897: Clean up test fixtures
 FEAT-352: Add user activity logs
 BUG-685: Fix session handling
+INFRA-908: Update backup strategy
