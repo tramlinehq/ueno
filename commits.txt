@@ -99,3 +99,4 @@ BUG-688: Fix cache invalidation
 INFRA-911: Configure monitoring
 TEST-244: Add accessibility tests
 PROJ-134: Add user preferences
+SEC-800: Implement IP filtering
