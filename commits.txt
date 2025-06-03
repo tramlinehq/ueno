@@ -92,3 +92,4 @@ TEST-243: Add regression tests
 PROJ-133: Implement file storage
 SEC-799: Add request logging
 UI-244: Update button styles
+PERF-577: Optimize image delivery
