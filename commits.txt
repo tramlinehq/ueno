@@ -94,3 +94,4 @@ SEC-799: Add request logging
 UI-244: Update button styles
 PERF-577: Optimize image delivery
 DEV-900: Clean up legacy code
+FEAT-355: Add API versioning
