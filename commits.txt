@@ -13,3 +13,4 @@ SEC-790: Enable two-factor authentication
 UI-235: Update color scheme for dark mode
 PERF-568: Cache frequently accessed API responses
 DEV-891: Clean up deprecated code paths
+FEAT-346: Add bulk user import feature
