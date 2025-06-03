@@ -98,3 +98,4 @@ FEAT-355: Add API versioning
 BUG-688: Fix cache invalidation
 INFRA-911: Configure monitoring
 TEST-244: Add accessibility tests
+PROJ-134: Add user preferences
