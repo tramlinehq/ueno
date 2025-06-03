@@ -54,3 +54,4 @@ BUG-683: Fix timezone handling
 INFRA-906: Update monitoring alerts
 TEST-239: Add API documentation tests
 PROJ-129: Implement search functionality
+SEC-795: Add CORS configuration
