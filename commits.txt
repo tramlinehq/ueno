@@ -17,3 +17,4 @@ FEAT-346: Add bulk user import feature
 BUG-679: Fix date formatting in reports
 INFRA-902: Configure automated backups
 TEST-235: Add unit tests for user service
+PROJ-125: Implement email notification system
