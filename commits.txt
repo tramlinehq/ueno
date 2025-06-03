@@ -108,3 +108,4 @@ BUG-689: Fix sorting algorithm
 INFRA-912: Update security groups
 PROJ-101: Add user registration endpoint
 BUG-205: Fix null pointer exception in payment processor
+FEAT-312: Implement dashboard analytics widget
