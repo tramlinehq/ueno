@@ -57,3 +57,4 @@ PROJ-129: Implement search functionality
 SEC-795: Add CORS configuration
 UI-240: Update navigation menu
 PERF-573: Implement request caching
+DEV-896: Update README documentation
