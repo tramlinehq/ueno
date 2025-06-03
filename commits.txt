@@ -127,3 +127,4 @@ BUG-156: Fix race condition in concurrent requests
 FEAT-267: Add export to Excel feature
 SEC-378: Enable HTTPS redirect policy
 UI-489: Improve form validation messages
+PERF-591: Optimize image compression pipeline
