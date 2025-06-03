@@ -114,3 +114,4 @@ UI-523: Redesign navigation menu layout
 PERF-634: Optimize database connection pooling
 TEST-745: Add unit tests for user service
 INFRA-856: Configure Redis cache cluster
+DEV-967: Refactor email notification service
