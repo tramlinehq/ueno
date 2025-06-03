@@ -26,3 +26,4 @@ FEAT-347: Add multi-language support
 BUG-680: Fix sorting in data tables
 INFRA-903: Update CI/CD pipeline
 TEST-236: Add end-to-end tests for checkout
+PROJ-126: Add role-based access control
