@@ -102,3 +102,4 @@ PROJ-134: Add user preferences
 SEC-800: Implement IP filtering
 UI-245: Add responsive tables
 PERF-578: Optimize asset loading
+DEV-901: Update coding standards
