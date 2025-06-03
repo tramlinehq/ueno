@@ -104,3 +104,4 @@ UI-245: Add responsive tables
 PERF-578: Optimize asset loading
 DEV-901: Update coding standards
 FEAT-356: Add export templates
+BUG-689: Fix sorting algorithm
