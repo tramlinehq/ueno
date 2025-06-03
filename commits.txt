@@ -47,3 +47,4 @@ TEST-238: Add load testing scripts
 PROJ-128: Add analytics tracking
 SEC-794: Update SSL certificates
 UI-239: Implement infinite scroll
+PERF-572: Add database indexes
