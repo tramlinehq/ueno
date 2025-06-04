@@ -22,3 +22,4 @@ TICKET-021: Added role-based access control for administrative features
 TICKET-022: Fixed an intermittent issue in the payment gateway integration
 TICKET-023: Implemented dark mode theme toggle
 TICKET-024: Improved unit test coverage for the notifications feature
+TICKET-025: Updated CI/CD pipelines to include security scanning
