@@ -2,3 +2,4 @@ TICKET-001: Fixed a bug causing a null pointer exception when creating a new use
 TICKET-002: Improved performance of caching layer for better response times
 TICKET-003: Added validation for email field in user registration form
 TICKET-004: Refactored database queries to use Active Record’s `.where` clause optimally
+TICKET-005: Implemented logging for failed login attempts
