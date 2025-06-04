@@ -5,3 +5,4 @@ TICKET-004: Refactored database queries to use Active Record’s `.where` clause
 TICKET-005: Implemented logging for failed login attempts
 TICKET-006: Updated README.md with additional setup instructions
 TICKET-007: Fixed CSS issues causing layout distortion in mobile view
+TICKET-008: Added support for uploading profile pictures
