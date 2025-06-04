@@ -11,3 +11,4 @@ TICKET-010: Enhanced error handling for API endpoints
 TICKET-011: Created unit tests for user authentication module
 TICKET-012: Optimized search functionality with full-text indexing
 TICKET-013: Added new fields to the user model for extended profile customization
+TICKET-014: Fixed a bug in the email confirmation flow
