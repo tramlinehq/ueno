@@ -1,2 +1,3 @@
 TICKET-001: Fixed a bug causing a null pointer exception when creating a new user
 TICKET-002: Improved performance of caching layer for better response times
+TICKET-003: Added validation for email field in user registration form
