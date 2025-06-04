@@ -13,3 +13,4 @@ TICKET-012: Optimized search functionality with full-text indexing
 TICKET-013: Added new fields to the user model for extended profile customization
 TICKET-014: Fixed a bug in the email confirmation flow
 TICKET-015: Improved server-side input sanitization
+TICKET-016: Added feature to resend password reset email
