@@ -8,3 +8,4 @@ TICKET-007: Fixed CSS issues causing layout distortion in mobile view
 TICKET-008: Added support for uploading profile pictures
 TICKET-009: Migrated library dependencies to the latest compatible versions
 TICKET-010: Enhanced error handling for API endpoints
+TICKET-011: Created unit tests for user authentication module
