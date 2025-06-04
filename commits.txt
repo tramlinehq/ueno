@@ -15,3 +15,4 @@ TICKET-014: Fixed a bug in the email confirmation flow
 TICKET-015: Improved server-side input sanitization
 TICKET-016: Added feature to resend password reset email
 TICKET-017: Fixed race condition in the session management module
+TICKET-018: Integrated third-party service for SMS notifications
