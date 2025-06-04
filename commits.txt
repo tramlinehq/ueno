@@ -20,3 +20,4 @@ TICKET-019: Enhanced admin panel with user activity logs
 TICKET-020: Upgraded usage of deprecated methods to the new API structure
 TICKET-021: Added role-based access control for administrative features
 TICKET-022: Fixed an intermittent issue in the payment gateway integration
+TICKET-023: Implemented dark mode theme toggle
