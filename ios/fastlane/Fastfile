@@ -41,10 +41,6 @@ platform :ios do
       keychain_password: keychain_password
     )
 
-    set_keychain_settings(
-      keychain_path: File.expand_path("~/Library/Keychains/#{keychain_name}-db")
-    )
-
     sh("security set-key-partition-list -S apple-tool:,apple: -s -k #{keychain_password} #{keychain_name}")
 
     # fetches and installs provisioning profiles from ASC
