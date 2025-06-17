@@ -42,6 +42,7 @@ platform :ios do
     )
 
     sh("security set-key-partition-list -S apple-tool:,apple: -s -k #{keychain_password} #{keychain_name}")
+    sh("security find-identity -v -p codesigning")
 
     # fetches and installs provisioning profiles from ASC
     sigh(
