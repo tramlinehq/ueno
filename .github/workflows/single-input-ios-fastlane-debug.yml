@@ -61,7 +61,14 @@ jobs:
 
       - name: Generate and sign the ipa
         working-directory: ios
-        run: bundle install && bundle exec fastlane ios ad_hoc_build
+        run: |
+          security create-keychain -p "" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import signing-cert.p12 -k build.keychain -P "$SIGNING_KEY_PASSWORD" -A
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+
+          bundle install && bundle exec fastlane ios ad_hoc_build
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
