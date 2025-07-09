@@ -12,7 +12,6 @@ variables:
 # Default job
 am-i-up:
   stage: test
-  image: atlassian/default-image:3
   script:
     - echo 'This job runs'
     - echo $CI_PIPELINE_IID
