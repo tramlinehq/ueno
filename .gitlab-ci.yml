@@ -1,0 +1,39 @@
+stages:
+  - build
+
+variables:
+  VERSION_CODE: $CI_PIPELINE_IID
+
+android-debug-apk:
+  stage: build
+  image: ghcr.io/cirruslabs/flutter:3.22.0
+
+  cache:
+    key: gradle-cache
+    paths:
+      - .gradle/
+      - android/.gradle/
+
+  # Only run on manual trigger or specific branches
+  when: manual
+
+  script:
+    - echo 'Fetching Dependencies'
+    - flutter pub get
+
+    - echo 'Building apk'
+    - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+    - echo 'Prepare build for GitLab upload'
+    - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${CI_PIPELINE_ID}.apk
+
+  artifacts:
+    name: "android-debug-build-${CI_PIPELINE_ID}"
+    paths:
+      - build-${CI_PIPELINE_ID}.apk
+    expire_in: 1 week
+
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web" # Manual trigger from GitLab UI
+    - if: $CI_COMMIT_BRANCH == "main" # Or specific branch
+      when: manual
