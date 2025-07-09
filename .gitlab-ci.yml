@@ -58,10 +58,6 @@ android-debug-apk-firebase:
       - build-${CI_PIPELINE_ID}.apk
     expire_in: 1 week
 
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "web"
-      when: manual
-
 # Android Debug APK with Firebase Distribution (no artifact)
 android-debug-apk-firebase-no-artifact:
   stage: build
@@ -95,10 +91,6 @@ android-debug-apk-firebase-no-artifact:
 
   # No artifacts section - only uploads to Firebase
 
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "web"
-      when: manual
-
 # Android Debug APK (local build only)
 android-debug-apk:
   stage: build
@@ -127,10 +119,6 @@ android-debug-apk:
     paths:
       - build-${CI_PIPELINE_ID}.apk
     expire_in: 1 week
-
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "web"
-      when: manual
 
 # Android Release AAB (local build only)
 android-release-aab:
@@ -168,10 +156,6 @@ android-release-aab:
     paths:
       - build-${CI_PIPELINE_ID}.aab
     expire_in: 1 week
-
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "web"
-      when: manual
 
 # Android Release AAB with Play Store Upload
 android-release-aab-playstore:
@@ -211,7 +195,3 @@ android-release-aab-playstore:
     paths:
       - build-${CI_PIPELINE_ID}.aab
     expire_in: 1 week
-
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "web"
-      when: manual
