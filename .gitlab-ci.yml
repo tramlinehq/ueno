@@ -60,7 +60,6 @@ android-debug-apk-firebase:
 
   rules:
     - if: $CI_PIPELINE_SOURCE == "web"
-    - if: $CI_COMMIT_BRANCH == "main"
       when: manual
 
 # Android Debug APK with Firebase Distribution (no artifact)
@@ -98,7 +97,6 @@ android-debug-apk-firebase-no-artifact:
 
   rules:
     - if: $CI_PIPELINE_SOURCE == "web"
-    - if: $CI_COMMIT_BRANCH == "main"
       when: manual
 
 # Android Debug APK (local build only)
@@ -132,7 +130,6 @@ android-debug-apk:
 
   rules:
     - if: $CI_PIPELINE_SOURCE == "web"
-    - if: $CI_COMMIT_BRANCH == "main"
       when: manual
 
 # Android Release AAB (local build only)
@@ -174,7 +171,6 @@ android-release-aab:
 
   rules:
     - if: $CI_PIPELINE_SOURCE == "web"
-    - if: $CI_COMMIT_BRANCH == "main"
       when: manual
 
 # Android Release AAB with Play Store Upload
@@ -218,5 +214,4 @@ android-release-aab-playstore:
 
   rules:
     - if: $CI_PIPELINE_SOURCE == "web"
-    - if: $CI_COMMIT_BRANCH == "main"
       when: manual
