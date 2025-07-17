@@ -3,11 +3,8 @@ stages:
   - build
 
 variables:
-  # GitLab equivalent of Bitbucket variables
   BUILD_NUMBER: $CI_PIPELINE_IID
   VERSION_CODE: $CI_PIPELINE_IID
-  # KEYSTORE_B64: (set as variable)
-  # KEY_PROPERTIES_B64: (set as variable)
 
 # Default job
 am-i-up:
@@ -109,7 +106,7 @@ android-debug-apk:
     - flutter pub get
 
     - echo 'Building apk'
-    - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+    - flutter build apk --debug --build-number=$CI_JOB_ID --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
     - echo 'Prepare build for GitLab upload'
     - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${CI_PIPELINE_ID}.apk
