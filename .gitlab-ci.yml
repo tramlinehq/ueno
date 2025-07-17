@@ -4,7 +4,6 @@ stages:
 
 variables:
   BUILD_NUMBER: $CI_PIPELINE_IID
-  VERSION_CODE: $CI_PIPELINE_IID
 
 # Default job
 am-i-up:
@@ -30,7 +29,6 @@ android-debug-apk-firebase:
 
   script:
     - echo "Setting Fastlane variables"
-    - export BUILD_NUMBER=$CI_PIPELINE_IID
     - export FIREBASE_CREDENTIALS_JSON=$FIREBASE_CREDENTIALS_JSON
     - export FIREBASE_APP_ID=$FIREBASE_APP_ID
 
@@ -38,7 +36,7 @@ android-debug-apk-firebase:
     - flutter pub get
 
     - echo 'Building apk'
-    - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+    - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
     - echo 'Uploading to Firebase'
     - gem install fastlane
@@ -70,7 +68,6 @@ android-debug-apk-firebase-no-artifact:
 
   script:
     - echo "Setting Fastlane variables"
-    - export BUILD_NUMBER=$CI_PIPELINE_IID
     - export FIREBASE_CREDENTIALS_JSON=$FIREBASE_CREDENTIALS_JSON
     - export FIREBASE_APP_ID=$FIREBASE_APP_ID
 
@@ -78,7 +75,7 @@ android-debug-apk-firebase-no-artifact:
     - flutter pub get
 
     - echo 'Building apk'
-    - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+    - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
     - echo 'Uploading to Firebase'
     - gem install fastlane
@@ -102,11 +99,16 @@ android-debug-apk:
   when: manual
 
   script:
+    - echo "Checking inputs"
+    - echo $versionCode
+    - echo $versionName
+    - echo $CI_JOB_ID
+
     - echo 'Fetching Dependencies'
     - flutter pub get
 
     - echo 'Building apk'
-    - flutter build apk --debug --build-number=$CI_JOB_ID --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+    - flutter build apk --debug --build-number=$versionCode --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
     - echo 'Prepare build for GitLab upload'
     - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${CI_PIPELINE_ID}.apk
@@ -131,6 +133,11 @@ android-release-aab:
   when: manual
 
   script:
+    - echo "Checking inputs"
+    - echo $versionCode
+    - echo $versionName
+    - echo $CI_JOB_ID
+
     - echo "Setting Fastlane variables"
     - export BUILD_NUMBER=$CI_PIPELINE_IID
     - export GOOGLE_SERVICE_ACCOUNT_JSON=$GOOGLE_SERVICE_ACCOUNT_JSON
@@ -143,7 +150,7 @@ android-release-aab:
     - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
 
     - echo 'Building App Bundle'
-    - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+    - flutter build appbundle --release --build-number=$versionCode --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
     - echo 'Prepare build for GitLab upload'
     - cp build/app/outputs/bundle/prodRelease/app-prod-release.aab ./build-${CI_PIPELINE_ID}.aab
@@ -176,7 +183,7 @@ android-release-aab-playstore:
     - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
 
     - echo 'Building App Bundle'
-    - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+    - flutter build appbundle --release --build-number=$BUILD_NUMBER --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
 
     - echo 'Uploading to Play Store'
     - gem install fastlane
