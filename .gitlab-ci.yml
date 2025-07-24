@@ -11,6 +11,9 @@ am-i-up:
   script:
     - echo 'This job runs'
     - echo $CI_PIPELINE_IID
+    - echo 'Simulating long-running process...'
+    - sleep 300  # Sleep for 5 minutes to simulate delay
+    - echo 'Process completed!'
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
 
@@ -89,6 +92,8 @@ android-debug-apk-firebase-no-artifact:
 android-debug-apk:
   stage: build
   image: ghcr.io/cirruslabs/flutter:3.22.0
+  needs:
+    - am-i-up
 
   cache:
     key: gradle-cache
