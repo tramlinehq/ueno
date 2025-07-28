@@ -1,0 +1,49 @@
+name: Android Play Store Release Build APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: 'User-facing release version name'
+        required: true
+        default: "1.0.0"
+      versionCode:
+        description: 'versionCode or build number'
+        required: true
+        default: '1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: 11
+        cache: 'gradle'
+
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.22.0'
+        channel: 'stable'
+        cache: true
+
+    - run: flutter pub get
+
+    - name: Retrieve secrets
+      env:
+        KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+        KEY_PROPERTIES_B64: ${{ secrets.KEY_PROPERTIES_B64 }}
+      run: |
+        echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+        echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+
+    - run: flutter build apk --release --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --dart-define=BUGSNAG_API_KEY=${{ secrets.BUGSNAG_API_KEY }} --flavor prod
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: release-apk
+        path: build/app/outputs/bundle/prodRelease/app-prod-release.apk

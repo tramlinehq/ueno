@@ -1,0 +1,154 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: atlassian/default-image:3
+
+options:
+  size: 2x
+
+pipelines:
+  default:
+    - step:
+        name: Lint and Test
+        script:
+          - echo 'This will run the lint and test'
+          - echo $BITBUCKET_BUILD_NUMBER
+  custom:
+    android-debug-apk-firebase:
+      - step:
+          name: Android Debug Build APK To Firebase
+          image: ghcr.io/cirruslabs/flutter:3.22.0
+          caches:
+            - gradle
+          script:
+            - echo "Setting Fastlane variables"
+            - export BUILD_NUMBER=$BITBUCKET_BUILD_NUMBER
+            - export FIREBASE_CREDENTIALS_JSON=$FIREBASE_CREDENTIALS_JSON
+            - export FIREBASE_APP_ID=$FIREBASE_APP_ID
+
+            - echo 'Fetching Dependencies'
+            - flutter pub get
+
+            - echo 'Building apk'
+            - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+            - echo 'Uploading to Firebase'
+            - gem install fastlane
+            - cd android
+            - bundle install && bundle exec fastlane android distribute_to_firebase
+            - cd $OLDPWD
+
+            - echo 'Prepare build for bitbucket upload'
+            - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${BITBUCKET_PIPELINE_UUID}
+
+            - pipe: atlassian/bitbucket-upload-file:0.7.3
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: "build-${BITBUCKET_PIPELINE_UUID}"
+    android-debug-apk-firebase-no-artifact:
+      - step:
+          name: Android Debug Build APK To Firebase (no artifact)
+          image: ghcr.io/cirruslabs/flutter:3.22.0
+          caches:
+            - gradle
+          script:
+            - echo "Setting Fastlane variables"
+            - export BUILD_NUMBER=$BITBUCKET_BUILD_NUMBER
+            - export FIREBASE_CREDENTIALS_JSON=$FIREBASE_CREDENTIALS_JSON
+            - export FIREBASE_APP_ID=$FIREBASE_APP_ID
+
+            - echo 'Fetching Dependencies'
+            - flutter pub get
+
+            - echo 'Building apk'
+            - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+            - echo 'Uploading to Firebase'
+            - gem install fastlane
+            - cd android
+            - bundle install && bundle exec fastlane android distribute_to_firebase
+            - cd $OLDPWD
+    android-debug-apk:
+      - step:
+          name: Android Debug Build APK
+          image: ghcr.io/cirruslabs/flutter:3.22.0
+          caches:
+            - gradle
+          script:
+            - echo 'Fetching Dependencies'
+            - flutter pub get
+
+            - echo 'Building apk'
+            - flutter build apk --debug --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+            - echo 'Prepare build for upload'
+            - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${BITBUCKET_PIPELINE_UUID}
+
+            - pipe: atlassian/bitbucket-upload-file:0.7.3
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: "build-${BITBUCKET_PIPELINE_UUID}"
+    android-release-aab:
+      - step:
+          name: Android Release Build AAB
+          image: ghcr.io/cirruslabs/flutter:3.22.0
+          caches:
+            - gradle
+          script:
+            - echo "Setting Fastlane variables"
+            - export BUILD_NUMBER=$BITBUCKET_BUILD_NUMBER
+            - export GOOGLE_SERVICE_ACCOUNT_JSON=$GOOGLE_SERVICE_ACCOUNT_JSON
+
+            - echo 'Fetching Dependencies'
+            - flutter pub get
+
+            - echo 'Retrieving secrets'
+            - echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+            - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+
+            - echo 'Building App Bundle'
+            - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+            - echo 'Prepare build for upload'
+            - cp build/app/outputs/bundle/prodRelease/app-prod-release.aab ./build-${BITBUCKET_PIPELINE_UUID}
+
+            - pipe: atlassian/bitbucket-upload-file:0.7.3
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: "build-${BITBUCKET_PIPELINE_UUID}"
+    android-release-aab-playstore:
+      - step:
+          name: Android Release Build AAB to Play Store
+          image: ghcr.io/cirruslabs/flutter:3.22.0
+          caches:
+            - gradle
+          script:
+            - echo 'Fetching Dependencies'
+            - flutter pub get
+
+            - echo 'Retrieving secrets'
+            - echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+            - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+
+            - echo 'Building App Bundle'
+            - flutter build appbundle --release --build-number=$VERSION_CODE --build-name=$VERSION_NAME --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+            - echo 'Uploading to Play Store'
+            - gem install fastlane
+            - cd android
+            - bundle install && bundle exec fastlane android distribute_to_play_store
+            - cd $OLDPWD
+
+            - echo 'Prepare build for bitbucket upload'
+            - cp build/app/outputs/bundle/prodRelease/app-prod-release.aab ./build-${BITBUCKET_PIPELINE_UUID}
+
+            - pipe: atlassian/bitbucket-upload-file:0.7.3
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: "build-${BITBUCKET_PIPELINE_UUID}"

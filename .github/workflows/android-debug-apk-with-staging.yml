@@ -1,0 +1,54 @@
+name: Android Debug APK (dual - prod+staging)
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: 'User-facing release version name'
+        required: true
+        default: "1.0.0"
+      versionCode:
+        description: 'versionCode or build number'
+        required: true
+        default: '1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: 11
+        cache: 'gradle'
+
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.22.0'
+        channel: 'stable'
+        cache: true
+
+    - run: flutter pub get
+
+    - run: flutter --version
+
+    - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --flavor prod
+
+    - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --flavor staging
+
+    - name: 'Upload prod apk to firebase'
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
+        appId: ${{ vars.FIREBASE_APP_ID }}
+        file: build/app/outputs/flutter-apk/app-prod-debug.apk
+
+    - name: 'Upload staging apk to firebase'
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
+        appId: ${{ vars.FIREBASE_STAGING_APP_ID }}
+        file: build/app/outputs/flutter-apk/app-staging-debug.apk

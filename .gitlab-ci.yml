@@ -1,0 +1,206 @@
+stages:
+  - test
+  - build
+
+variables:
+  BUILD_NUMBER: $CI_PIPELINE_IID
+
+# Default job
+am-i-up:
+  stage: test
+  script:
+    - echo 'This job runs'
+    - echo $CI_PIPELINE_IID
+    - echo 'Simulating long-running process...'
+    - sleep 300  # Sleep for 5 minutes to simulate delay
+    - echo 'Process completed!'
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+
+# Android Debug APK with Firebase Distribution
+android-debug-apk-firebase:
+  stage: build
+  image: ghcr.io/cirruslabs/flutter:3.22.0
+
+  cache:
+    key: gradle-cache
+    paths:
+      - .gradle/
+      - android/.gradle/
+
+  when: manual
+
+  script:
+    - echo "Setting Fastlane variables"
+    - export FIREBASE_CREDENTIALS_JSON=$FIREBASE_CREDENTIALS_JSON
+    - export FIREBASE_APP_ID=$FIREBASE_APP_ID
+
+    - echo 'Fetching Dependencies'
+    - flutter pub get
+
+    - echo 'Building apk'
+    - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+    - echo 'Uploading to Firebase'
+    - gem install fastlane
+    - cd android
+    - bundle install && bundle exec fastlane android distribute_to_firebase
+    - cd $OLDPWD
+
+    - echo 'Prepare build for GitLab upload'
+    - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${CI_PIPELINE_ID}.apk
+
+  artifacts:
+    name: "android-debug-firebase-${CI_PIPELINE_ID}"
+    paths:
+      - build-${CI_PIPELINE_ID}.apk
+    expire_in: 1 week
+
+# Android Debug APK with Firebase Distribution (no artifact)
+android-debug-apk-firebase-no-artifact:
+  stage: build
+  image: ghcr.io/cirruslabs/flutter:3.22.0
+
+  cache:
+    key: gradle-cache
+    paths:
+      - .gradle/
+      - android/.gradle/
+
+  when: manual
+
+  script:
+    - echo "Setting Fastlane variables"
+    - export FIREBASE_CREDENTIALS_JSON=$FIREBASE_CREDENTIALS_JSON
+    - export FIREBASE_APP_ID=$FIREBASE_APP_ID
+
+    - echo 'Fetching Dependencies'
+    - flutter pub get
+
+    - echo 'Building apk'
+    - flutter build apk --debug --build-number=$BUILD_NUMBER --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+    - echo 'Uploading to Firebase'
+    - gem install fastlane
+    - cd android
+    - bundle install && bundle exec fastlane android distribute_to_firebase
+    - cd $OLDPWD
+
+  # No artifacts section - only uploads to Firebase
+
+# Android Debug APK (local build only)
+android-debug-apk:
+  stage: build
+  image: ghcr.io/cirruslabs/flutter:3.22.0
+  needs:
+    - am-i-up
+
+  cache:
+    key: gradle-cache
+    paths:
+      - .gradle/
+      - android/.gradle/
+
+  when: manual
+
+  script:
+    - echo "Checking inputs"
+    - echo $versionCode
+    - echo $versionName
+    - echo $CI_JOB_ID
+
+    - echo 'Fetching Dependencies'
+    - flutter pub get
+
+    - echo 'Building apk'
+    - flutter build apk --debug --build-number=$versionCode --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+    - echo 'Prepare build for GitLab upload'
+    - cp build/app/outputs/flutter-apk/app-prod-debug.apk ./build-${CI_PIPELINE_ID}.apk
+
+  artifacts:
+    name: "android-debug-build-${CI_PIPELINE_ID}"
+    paths:
+      - build-${CI_PIPELINE_ID}.apk
+    expire_in: 1 week
+
+# Android Release AAB (local build only)
+android-release-aab:
+  stage: build
+  image: ghcr.io/cirruslabs/flutter:3.22.0
+
+  cache:
+    key: gradle-cache
+    paths:
+      - .gradle/
+      - android/.gradle/
+
+  when: manual
+
+  script:
+    - echo "Checking inputs"
+    - echo $versionCode
+    - echo $versionName
+    - echo $CI_JOB_ID
+
+    - echo "Setting Fastlane variables"
+    - export BUILD_NUMBER=$CI_PIPELINE_IID
+    - export GOOGLE_SERVICE_ACCOUNT_JSON=$GOOGLE_SERVICE_ACCOUNT_JSON
+
+    - echo 'Fetching Dependencies'
+    - flutter pub get
+
+    - echo 'Retrieving secrets'
+    - echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+    - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+
+    - echo 'Building App Bundle'
+    - flutter build appbundle --release --build-number=$versionCode --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+    - echo 'Prepare build for GitLab upload'
+    - cp build/app/outputs/bundle/prodRelease/app-prod-release.aab ./build-${CI_PIPELINE_ID}.aab
+
+  artifacts:
+    name: "android-release-aab-${CI_PIPELINE_ID}"
+    paths:
+      - build-${CI_PIPELINE_ID}.aab
+    expire_in: 1 week
+
+# Android Release AAB with Play Store Upload
+android-release-aab-playstore:
+  stage: build
+  image: ghcr.io/cirruslabs/flutter:3.22.0
+
+  cache:
+    key: gradle-cache
+    paths:
+      - .gradle/
+      - android/.gradle/
+
+  when: manual
+
+  script:
+    - echo 'Fetching Dependencies'
+    - flutter pub get
+
+    - echo 'Retrieving secrets'
+    - echo $KEYSTORE_B64 | base64 --decode > android/app/ueno-upload-keystore.jks
+    - echo $KEY_PROPERTIES_B64 | base64 --decode > android/key.properties
+
+    - echo 'Building App Bundle'
+    - flutter build appbundle --release --build-number=$BUILD_NUMBER --build-name=$versionName --dart-define=BUGSNAG_API_KEY=$BUGSNAG_API_KEY --flavor prod
+
+    - echo 'Uploading to Play Store'
+    - gem install fastlane
+    - cd android
+    - bundle install && bundle exec fastlane android distribute_to_play_store
+    - cd $OLDPWD
+
+    - echo 'Prepare build for GitLab upload'
+    - cp build/app/outputs/bundle/prodRelease/app-prod-release.aab ./build-${CI_PIPELINE_ID}.aab
+
+  artifacts:
+    name: "android-release-playstore-${CI_PIPELINE_ID}"
+    paths:
+      - build-${CI_PIPELINE_ID}.aab
+    expire_in: 1 week

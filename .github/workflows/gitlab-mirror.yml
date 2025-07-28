@@ -1,0 +1,20 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches:
+      - main
+      - main-ios
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Mirror to GitLab
+        env:
+          GITLAB_URL: https://${{ secrets.GITLAB_MIRROR_USERNAME }}:${{ secrets.GITLAB_MIRROR_SECRET }}@gitlab.com/tramline/ueno-mirror.git
+        run: |
+          git remote add gitlab $GITLAB_URL
+          git push gitlab HEAD:${GITHUB_REF#refs/heads/} --force

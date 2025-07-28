@@ -8,12 +8,12 @@ on:
 
 jobs:
   deploy:
-    runs-on: tramline-macos-sonoma-md-dev
+    runs-on: macos-latest
 
     steps:
       - name: Configure Tramline
         id: tramline
-        uses: tramlinehq/deploy-action@v0.1.6
+        uses: tramlinehq/deploy-action@v0.1.7
         with:
           input: ${{ github.event.inputs.tramline-input }}
 
@@ -70,7 +70,7 @@ jobs:
           SIGNING_KEY_FILE_PATH: ../signing-cert.p12
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: iOS IPA
           path: ios/*.ipa

@@ -1,0 +1,49 @@
+name: Android Debug APK Fastlane (+firebase +noartifact)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tramline-input:
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure Tramline
+        id: tramline
+        uses: tramlinehq/deploy-action@v0.1.7
+        with:
+          input: ${{ github.event.inputs.tramline-input }}
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 11
+          cache: "gradle"
+
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.1
+          bundler-cache: true
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+          channel: "stable"
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter --version
+
+      - name: Build and send to firebase
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+          VERSION_NAME: ${{ steps.tramline.outputs.version_name }}
+          FIREBASE_CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
+          FIREBASE_APP_ID: ${{ vars.FIREBASE_APP_ID }}
+        run: |
+          cd android
+          bundle install && bundle exec fastlane android build_and_distribute_apk_to_firebase
