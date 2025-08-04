@@ -55,13 +55,17 @@ jobs:
       - name: Generate and sign the ipa
         working-directory: ios
         run: |
-          # In your CI script, add this to check the password without revealing it
           echo "MATCH_PASSWORD is set: $([ -n "$MATCH_PASSWORD" ] && echo "YES" || echo "NO")"
           echo "MATCH_PASSWORD length: ${#MATCH_PASSWORD}"
-
-          # Test if the password contains any problematic characters
           echo "$MATCH_PASSWORD" | od -c | head -1
 
+          export MATCH_PASSWORD="sixthdeputy"
+
+          echo "MATCH_PASSWORD is set: $([ -n "$MATCH_PASSWORD" ] && echo "YES" || echo "NO")"
+          echo "MATCH_PASSWORD length: ${#MATCH_PASSWORD}"
+          echo "$MATCH_PASSWORD" | od -c | head -1
+
+          bundle exec fastlane match adhoc --readonly --verbose
           bundle install && bundle exec fastlane ios ad_hoc_build
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
