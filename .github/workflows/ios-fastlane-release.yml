@@ -24,6 +24,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Create and setup keychain for CI
+        run: |
+          security create-keychain -p temp_password fastlane_tmp.keychain
+          security set-keychain-settings -t 3600 -u fastlane_tmp.keychain
+          security default-keychain -s fastlane_tmp.keychain
+          security unlock-keychain -p temp_password fastlane_tmp.keychain
+
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.171.0
         with:
@@ -54,6 +61,8 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
           ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_NAME: fastlane_tmp
+          MATCH_KEYCHAIN_PASSWORD: temp_password
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
