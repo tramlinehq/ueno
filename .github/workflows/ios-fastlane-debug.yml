@@ -75,6 +75,7 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_KEYCHAIN_NAME: fastlane_tmp.keychain
           MATCH_KEYCHAIN_PASSWORD: temp_password
+          MATCH_TYPE: adhoc
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
