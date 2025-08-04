@@ -1,6 +1,7 @@
-git_url("git@github.com:tramlinehq/ueno-certs.git")
+git_url("https://github.com/tramlinehq/ueno-certs.git")
 storage_mode("git")
 type("development")
 app_identifier(["com.tramline.ueno"])
 team_id("6XCS8KZXDA")
 git_branch("main")
+git_basic_authorization_base64(ENV["MATCH_GIT_BASIC_AUTHORIZATION"])
