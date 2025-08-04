@@ -55,16 +55,6 @@ jobs:
       - name: Generate and sign the ipa
         working-directory: ios
         run: |
-          echo "MATCH_PASSWORD is set: $([ -n "$MATCH_PASSWORD" ] && echo "YES" || echo "NO")"
-          echo "MATCH_PASSWORD length: ${#MATCH_PASSWORD}"
-          echo "$MATCH_PASSWORD" | od -c | head -1
-
-          export MATCH_PASSWORD="sixthdeputy"
-
-          echo "MATCH_PASSWORD is set: $([ -n "$MATCH_PASSWORD" ] && echo "YES" || echo "NO")"
-          echo "MATCH_PASSWORD length: ${#MATCH_PASSWORD}"
-          echo "$MATCH_PASSWORD" | od -c | head -1
-
           bundle install
           bundle exec fastlane match adhoc --readonly --verbose
           bundle exec fastlane ios ad_hoc_build
