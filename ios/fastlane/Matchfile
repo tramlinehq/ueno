@@ -1,0 +1,6 @@
+git_url("https://github.com/tramlinehq/ueno-certs.git")
+storage_mode("git")
+type("development")
+app_identifier(["com.tramline.ueno"])
+team_id("6XCS8KZXDA")
+git_branch("main")
