@@ -65,8 +65,9 @@ jobs:
           echo "MATCH_PASSWORD length: ${#MATCH_PASSWORD}"
           echo "$MATCH_PASSWORD" | od -c | head -1
 
+          bundle install
           bundle exec fastlane match adhoc --readonly --verbose
-          bundle install && bundle exec fastlane ios ad_hoc_build
+          bundle exec fastlane ios ad_hoc_build
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
