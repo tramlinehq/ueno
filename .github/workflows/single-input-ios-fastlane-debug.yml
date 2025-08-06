@@ -1,4 +1,4 @@
-name: Single Input iOS Fastlane Release
+name: Single Input iOS Fastlane AdHoc
 
 on:
   workflow_dispatch:
@@ -38,7 +38,7 @@ jobs:
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.171.0
         with:
-          ruby-version: 3.2.3
+          ruby-version: 3.2.2
           bundler-cache: true
 
       - name: Setup the flutter environment
@@ -69,16 +69,16 @@ jobs:
         working-directory: ios
         run: |
           bundle install
-          bundle exec fastlane match appstore --readonly --verbose
-          bundle exec fastlane ios appstore
+          bundle exec fastlane match adhoc --readonly --verbose
+          bundle exec fastlane ios ad_hoc_build
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
           ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_KEYCHAIN_NAME: fastlane_tmp
+          MATCH_KEYCHAIN_NAME: fastlane_tmp.keychain
           MATCH_KEYCHAIN_PASSWORD: temp_password
-          MATCH_TYPE: appstore
+          MATCH_TYPE: adhoc
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
