@@ -55,6 +55,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '946207521855',
     projectId: 'decoded-theme-355014',
     storageBucket: 'decoded-theme-355014.appspot.com',
+    iosBundleId: 'tramline.ueno.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -63,6 +64,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '946207521855',
     projectId: 'decoded-theme-355014',
     storageBucket: 'decoded-theme-355014.appspot.com',
-    iosBundleId: 'org.tramline.ueno',
+    iosBundleId: 'com.tramline.ueno',
   );
 }
