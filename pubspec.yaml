@@ -3,7 +3,7 @@ description: An aural experience of the very excellent Yamanote Line
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -35,11 +35,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   drop_shadow: ^0.1.0
-  sentry_flutter: ^7.4.2
+  sentry_flutter: ^8.14.2
   bugsnag_flutter: ^3.0.1
-  firebase_core: ^2.27.0
-  firebase_crashlytics: ^3.5.5
-  firebase_analytics: ^10.10.5
+  firebase_core: ^3.15.2
+  firebase_crashlytics: ^4.3.10
+  firebase_analytics: ^11.6.0
   rename_app: ^1.6.1
 
 dev_dependencies:
