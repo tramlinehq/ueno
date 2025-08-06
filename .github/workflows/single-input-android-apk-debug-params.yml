@@ -11,61 +11,60 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Configure Tramline
-      id: tramline
-      uses: tramlinehq/deploy-action@main
-      with:
-        input: ${{ github.event.inputs.tramline-input }}
+      - name: Configure Tramline
+        id: tramline
+        uses: tramlinehq/deploy-action@main
+        with:
+          input: ${{ github.event.inputs.tramline-input }}
 
-    - uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: 11
-        cache: 'gradle'
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 11
+          cache: "gradle"
 
-    - uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.22.0'
-        channel: 'stable'
-        cache: true
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+          channel: "stable"
+          cache: true
 
-    - run: flutter pub get
+      - run: flutter pub get
+      - run: flutter --version
 
-    - run: flutter --version
+      - name: Get the output
+        run: |
+          echo "vcode: ${{ steps.tramline.outputs.version_code }}"
+          echo "vname: ${{ steps.tramline.outputs.version_name }}"
+          echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
+          echo "cref: ${{ steps.tramline.outputs.build_notes }}"
+          echo "parameter_1: ${{ steps.tramline.outputs.parameter_1 }}"
 
-    - name: Get the output
-      run: |
-        echo "vcode: ${{ steps.tramline.outputs.version_code }}"
-        echo "vname: ${{ steps.tramline.outputs.version_name }}"
-        echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
-        echo "cref: ${{ steps.tramline.outputs.build_notes }}"
-        echo "parameter_1: ${{ steps.tramline.outputs.parameter_1 }}"
+      - run: flutter build apk --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --flavor prod
 
-    - run: flutter build apk --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --flavor prod
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: release-apk
-        path: build/app/outputs/flutter-apk/app-prod-debug.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-prod-debug.apk
 
   another:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Configure Tramline
-      id: tramline
-      uses: tramlinehq/deploy-action@v0.1.6
-      with:
-        input: ${{ github.event.inputs.tramline-input }}
+      - name: Configure Tramline
+        id: tramline
+        uses: tramlinehq/deploy-action@v0.1.6
+        with:
+          input: ${{ github.event.inputs.tramline-input }}
 
-    - name: Get the output
-      run: |
-        echo "vcode: ${{ steps.tramline.outputs.version_code }}"
-        echo "vname: ${{ steps.tramline.outputs.version_name }}"
-        echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
-        echo "cref: ${{ steps.tramline.outputs.build_notes }}"
+      - name: Get the output
+        run: |
+          echo "vcode: ${{ steps.tramline.outputs.version_code }}"
+          echo "vname: ${{ steps.tramline.outputs.version_name }}"
+          echo "cref: ${{ steps.tramline.outputs.commit_ref }}"
+          echo "cref: ${{ steps.tramline.outputs.build_notes }}"
 
-    - name: Fail randomly
-      run: |
-        echo "This will fail randomly"
-        exit $((RANDOM % 2))
+      - name: Fail randomly
+        run: |
+          echo "This will fail randomly"
+          exit $((RANDOM % 2))
