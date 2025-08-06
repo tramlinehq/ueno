@@ -34,7 +34,7 @@ jobs:
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.171.0
         with:
-          ruby-version: 3.2.1
+          ruby-version: 3.2.2
           bundler-cache: true
 
       - name: Setup the flutter environment
@@ -63,7 +63,7 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
           ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_KEYCHAIN_NAME: fastlane_tmp
+          MATCH_KEYCHAIN_NAME: fastlane_tmp.keychain
           MATCH_KEYCHAIN_PASSWORD: temp_password
           MATCH_TYPE: appstore
 
