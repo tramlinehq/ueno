@@ -14,9 +14,24 @@ on:
 
 jobs:
   deploy:
-    runs-on: macos-15
+    runs-on: macos-latest
 
     steps:
+      - name: Select Xcode version
+        run: |
+          echo "Available Xcode versions:"
+          ls /Applications | grep Xcode
+          echo "Current Xcode version:"
+          xcodebuild -version
+          # Try to select Xcode 16 if available
+          sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer || \
+          echo "Xcode 16 not found, using default"
+          echo "Selected Xcode version:"
+          xcodebuild -version
+
       - uses: actions/checkout@v2
 
       - name: Setup SSH Agent
