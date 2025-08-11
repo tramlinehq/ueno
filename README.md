@@ -24,47 +24,46 @@ To generate a release build you need two files that are not, for good reasons, p
 
 ### GitHub
 
-| Workflow Name                          | Type               | Category                   | Custom Parameters | Deploy-Action | Workflow Run Number as Build Number |
-|----------------------------------------|--------------------|----------------------------|-------------------|---------------|------------------------------------|
-| andoid-signed-apk.yml                 | Signed APK         | Release Build              | No                | No            | No                                 |
-| android-debug-apk-fastlane.yml         | Unsigned APK       | Debug Build & Firebase     | No                | No            | Yes                                |
-| android-debug-apk.yml                  | Unsigned APK       | Debug Build              | No                | No            | No                                 |
-| android-release-aab-fastlane.yml       | Signed AAB         | Release Build & Play Store | No                | No            | Yes                                |
-| android-debug-apk-no-artifact.yml      | Unsigned APK       | Debug build & Firebase & No Artifact     | No                | Yes           | Yes                                |
-| android-release-aab.yml                | Signed AAB         | Release Build              | No                | No            | No                                 |
-| android-apk-external.yml               | Unsigned APK       | Debug Build              | No                | No            | Yes                                |
-| android-staging-apk-params.yml         | Unsigned APK       | Staging Build              | Yes               | Yes           | No                                 |
-| android-staging-apk.yml                | Unsigned APK       | Staging Build              | No                | No            | No                                 |
-| ios-fastlane-debug.yml                 | Dev Signed IPA     | Debug Build              | No                | No            | No                                 |
-| ios-fastlane-release.yml               | Dev Signed IPA     | Release Build & TestFlight | No                | No            | No                                 |
-| ios-non-fastlane-release.yml           | Dev Signed IPA     | Release Build & TestFlight | No                | No            | No                                 |
-| single-input-android-apk-debug-params.yml | Unsigned APK       | Debug Build              | Yes               | Yes           | No                                 |
-| single-input-android-apk-debug.yml     | Unsigned APK       | Debug Build              | No                | Yes           | No                                 |
-| single-input-ios-fastlane-debug.yml    | Dev Signed IPA     | Debug Build              | Yes               | Yes           | No                                 |
+| Workflow Name | Type | Category | Custom Parameters | Workflow Run Number as Build Number |
+|--------------|------|----------|-------------------|-----------------------------------|
+| android-signed-apk.yml | Signed APK | Release Build | No | No |
+| android-debug-apk-fastlane.yml | Unsigned APK | Debug Build & Firebase | No | Yes |
+| android-debug-apk.yml | Unsigned APK | Debug Build | No | No |
+| android-debug-apk-params.yml | Unsigned APK | Debug Build | Yes | No |
+| android-release-aab-fastlane.yml | Signed AAB | Release Build & Play Store | No | Yes |
+| android-debug-apk-no-artifact.yml | Unsigned APK | Debug Build & Firebase & No Artifact | No | Yes |
+| android-release-aab.yml | Signed AAB | Release Build | No | No |
+| android-apk-external.yml | Unsigned APK | Debug Build | No | Yes |
+| android-staging-apk-params.yml | Unsigned APK | Staging Build | Yes | No |
+| android-staging-apk.yml | Unsigned APK | Staging Build | No | No |
+| ios-fastlane-debug.yml | Dev Signed IPA | Debug Build | No | No |
+| ios-fastlane-release.yml | Dev Signed IPA | Release Build & TestFlight | No | No |
+| ios-non-fastlane-release.yml | Dev Signed IPA | Release Build & TestFlight | No | No |
+| single-input-ios-fastlane-debug.yml | Dev Signed IPA | Debug Build | Yes | No |
 
 ### Bitrise
 
 #### Android
 
-| Workflow Name                           | Type          | Category            | Publishing Destination |
-|-----------------------------------------|---------------|---------------------|------------------------|
-| debug                                   | Signed APK    | Debug Build         | None                   |
-| debug_firebase                          | Signed APK    | Debug Build         | Firebase               |
-| release                                 | Signed AAB    | Release Build       | None                   |
-| release_play_store                      | Signed AAB    | Release Build       | Play Store             |
-| debug_firebase_no_artifact              | Unsigned APK  | Debug Build (no artifact) | Firebase         |
-| debug_no_artifact                       | Unsigned APK  | Debug Build (no artifact) | None             |
-| debug_firebase_tramline_no_artifact     | Unsigned APK  | Debug Build With Tramline inputs (no artifact) | Firebase         |
-| release_play_store_tramline_no_artifact | Signed AAB    | Release Build With Tramline inputs (no artifact) | Play Store             |
+| Workflow Name | Type | Category | Publishing Destination |
+|--------------|------|----------|----------------------|
+| debug | Signed APK | Debug Build | None |
+| debug_firebase | Signed APK | Debug Build | Firebase |
+| release | Signed AAB | Release Build | None |
+| release_play_store | Signed AAB | Release Build | Play Store |
+| debug_firebase_no_artifact | Unsigned APK | Debug Build (no artifact) | Firebase |
+| debug_no_artifact | Unsigned APK | Debug Build (no artifact) | None |
+| debug_firebase_tramline_no_artifact | Unsigned APK | Debug Build With Tramline inputs (no artifact) | Firebase |
+| release_play_store_tramline_no_artifact | Signed AAB | Release Build With Tramline inputs (no artifact) | Play Store |
 
 #### iOS
 
 This is available in the `main-ios` branch.
 
-| Workflow Name | Type                                    | Category      | Publishing Destination |
-|---------------|-----------------------------------------|---------------|------------------------|
-| deploy        | Signed app-store distribution certificate | Release Build | TestFlight             |
-| debug         | Signed ad-hoc distribution certificate  | Debug Build   | None                   |
+| Workflow Name | Type | Category | Publishing Destination |
+|--------------|------|----------|----------------------|
+| deploy | Signed app-store distribution certificate | Release Build | TestFlight |
+| debug | Signed ad-hoc distribution certificate | Debug Build | None |
 
 ### Bitbucket Pipelines
 
@@ -72,13 +71,13 @@ These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/uen
 
 #### Android
 
-| Workflow Name                      | Type          | Category            | Publishing Destination |
-|------------------------------------|---------------|---------------------|------------------------|
-| android-debug-apk-firebase         | Unsigned APK  | Debug Build         | Firebase               |
-| android-debug-apk                  | Unsigned APK  | Debug Build         | None                   |
-| android-release-aab                | Signed AAB    | Release Build       | None                   |
-| android-release-aab-playstore      | Signed AAB    | Release Build       | Play Store             |
-| android-debug-apk-firebase-no-artifact | Unsigned APK | Debug Build (no artifact) | Firebase      |
+| Workflow Name | Type | Category | Publishing Destination |
+|--------------|------|----------|----------------------|
+| android-debug-apk-firebase | Unsigned APK | Debug Build | Firebase |
+| android-debug-apk | Unsigned APK | Debug Build | None |
+| android-release-aab | Signed AAB | Release Build | None |
+| android-release-aab-playstore | Signed AAB | Release Build | Play Store |
+| android-debug-apk-firebase-no-artifact | Unsigned APK | Debug Build (no artifact) | Firebase |
 
 #### iOS
 
