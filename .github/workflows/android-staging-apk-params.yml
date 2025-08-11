@@ -1,18 +1,12 @@
-name: Android Staging Debug APK (with params)
+name: Android Staging Debug APK (+ custom params)
 
 on:
   workflow_dispatch:
     inputs:
-      versionName:
-        description: "User-facing release version name"
-        required: true
-        default: "1.0.0"
-      versionCode:
-        description: "versionCode or build number"
-        required: true
-        default: "1"
+      tramline-input:
+        required: false
       parameter_1:
-        desciption: "just a test parameter"
+        description: "just a test parameter"
         required: false
 
 jobs:
@@ -20,7 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Configure Tramline
+        id: tramline
+        uses: tramlinehq/deploy-action@v0.1.7
+        with:
+          input: ${{ github.event.inputs.tramline-input }}
 
       - uses: actions/setup-java@v3
         with:
@@ -30,7 +28,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.22.0"
+          flutter-version: "3.32.0"
           channel: "stable"
           cache: true
 

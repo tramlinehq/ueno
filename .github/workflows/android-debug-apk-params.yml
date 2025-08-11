@@ -1,9 +1,12 @@
-name: Single Input Android Debug APK (with params)
+name: Android Staging Debug APK (+custom params)
 
 on:
   workflow_dispatch:
     inputs:
       tramline-input:
+        required: false
+      parameter_1:
+        description: "just a test parameter"
         required: false
 
 jobs:
@@ -20,12 +23,12 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: "zulu"
-          java-version: 11
+          java-version: 17
           cache: "gradle"
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.22.0"
+          flutter-version: "3.32.0"
           channel: "stable"
           cache: true
 
