@@ -14,39 +14,13 @@ platform :ios do
    )
  end
 
- desc "Installs signing certificate in the keychain and downloads provisioning profiles from App Store Connect"
+ desc "Setup code signing using match"
   lane :prepare_signing do |options|
-    team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
-    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
-
-    keychain_name = "signing"
-    keychain_password = "temp"
-
-    delete_keychain(
-      name: keychain_name
-    ) if File.exist? File.expand_path("~/Library/Keychains/#{keychain_name}-db")
-
-    create_keychain(
-      name: keychain_name,
-      password: keychain_password,
-      default_keychain: false,
-      unlock: true,
-      timeout: 3600
-    )
-
-    import_certificate(
-      certificate_path: ENV["SIGNING_KEY_FILE_PATH"],
-      certificate_password: ENV["SIGNING_KEY_PASSWORD"],
-      keychain_name: keychain_name,
-      keychain_password: keychain_password
-    )
-
-    # fetches and installs provisioning profiles from ASC
-    sigh(
-      adhoc: (options[:release] ? false : true),
-      api_key: api_key,
-      readonly: false
-    )
+    if options[:release]
+      match(type: "appstore", readonly: true)
+    else
+      match(type: "adhoc", readonly: true)
+    end
   end
 
  desc "Upload to TestFlight / ASC"

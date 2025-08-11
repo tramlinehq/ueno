@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       versionName:
-        description: 'User-facing release version name'
+        description: "User-facing release version name"
         required: true
         default: "1.0.0"
       versionCode:
-        description: 'versionCode or build number'
+        description: "versionCode or build number"
         required: true
-        default: '1'
+        default: "1"
 
 jobs:
   deploy:
@@ -19,23 +19,29 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create and setup keychain for CI
+        run: |
+          security create-keychain -p temp_password fastlane_tmp.keychain
+          security set-keychain-settings -t 3600 -u fastlane_tmp.keychain
+          security default-keychain -s fastlane_tmp.keychain
+          security unlock-keychain -p temp_password fastlane_tmp.keychain
+
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.171.0
         with:
-          ruby-version: 3.2.1
+          ruby-version: 3.2.0
           bundler-cache: true
-
-      - name: Decode signing certificate into a file
-        env:
-          CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-        run: |
-          echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
 
       - name: Setup the flutter environment
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'
-          channel: 'stable'
+          flutter-version: "3.22.0"
+          channel: "stable"
           cache: true
 
       - name: Get flutter dependencies
@@ -48,13 +54,18 @@ jobs:
 
       - name: Sign and ship the ipa
         working-directory: ios
-        run: bundle install && bundle exec fastlane ios ship_to_testflight
+        run: |
+          bundle install
+          bundle exec fastlane match appstore --readonly --verbose
+          bundle exec fastlane ios ship_to_testflight
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
           ASC_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          SIGNING_KEY_FILE_PATH: ../signing-cert.p12
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_NAME: fastlane_tmp.keychain
+          MATCH_KEYCHAIN_PASSWORD: temp_password
+          MATCH_TYPE: appstore
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

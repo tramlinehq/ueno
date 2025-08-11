@@ -4,15 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       versionName:
-        description: 'User-facing release version name'
+        description: "User-facing release version name"
         required: true
         default: "1.0.0"
       versionCode:
-        description: 'versionCode or build number'
+        description: "versionCode or build number"
         required: true
-        default: '1'
+        default: "1"
       parameter_1:
-        desciption: 'just a test parameter'
+        desciption: "just a test parameter"
         required: false
 
 jobs:
@@ -24,14 +24,14 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
+          distribution: "zulu"
           java-version: 11
-          cache: 'gradle'
+          cache: "gradle"
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'
-          channel: 'stable'
+          flutter-version: "3.22.0"
+          channel: "stable"
           cache: true
 
       - run: |
@@ -39,9 +39,7 @@ jobs:
           echo ${{ github.event.inputs.parameter_1 }}
 
       - run: flutter pub get
-
       - run: flutter --version
-
       - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --flavor staging
 
       - uses: actions/upload-artifact@v4

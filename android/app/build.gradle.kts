@@ -1,78 +1,71 @@
-/* Dummy gradle.kts file to test version bumps, it isn't used and doesn't actually work */
+import java.util.Properties
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-  alias(libs.plugins.kotlin.multiplatform)
-  alias(libs.plugins.android.application)
-  alias(libs.plugins.compose)
-  alias(libs.plugins.ksp)
-  alias(libs.plugins.bugsnag)
-  alias(libs.plugins.kotlin.compose)
-}
-
-kotlin {
-  jvmToolchain(20)
-
-  androidTarget()
+    id("com.android.application")
+    id("kotlin-android")
+    // START: FlutterFire Configuration
+    id("com.google.gms.google-services")
+    // END: FlutterFire Configuration
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
-  compileSdk = libs.versions.android.sdk.compile.get().toInt()
-  namespace = "com.tramline.ueno"
+    namespace = "tramline.ueno.app"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
 
-  sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-
-  defaultConfig {
-    applicationId = "com.tramline.ueno"
-    minSdk = libs.versions.android.sdk.min.get().toInt()
-    targetSdk = libs.versions.android.sdk.target.get().toInt()
-
-    versionCode =
-      if (project.properties["VERSION_CODE"] != null) {
-        (project.properties["VERSION_CODE"] as String).toInt()
-      } else {
-        1
-      }
-
-    versionName = "1.9.0"
-  }
-
-  compileOptions { isCoreLibraryDesugaringEnabled = true }
-
-  signingConfigs {
-    create("release") {
-      versionName = 1.0.0
-      storeFile = file("$rootDir/release/reader.jks")
-      storePassword = "${project.properties["READER_KEYSTORE_PASSWORD"]}"
-      keyAlias = "reader_alias"
-      keyPassword = "${project.properties["READER_KEY_PASSWORD"]}"
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
-  }
 
-  buildTypes {
-    release {
-      isMinifyEnabled = true
-      isShrinkResources = true
-      signingConfig = signingConfigs.getByName("release")
-
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
-    debug { applicationIdSuffix = ".debug" }
-  }
 
-  packaging { resources { excludes.add("/META-INF/{AL2.0,LGPL2.1}") } }
+    defaultConfig {
+        applicationId = "tramline.ueno.app"
+        minSdk = 30
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
 
-  buildFeatures { buildConfig = true }
+    signingConfigs {
+        create("release") {
+            val keystorePropertiesFile = rootProject.file("key.properties")
+            if (keystorePropertiesFile.exists()) {
+                val keystoreProperties = Properties()
+                keystoreProperties.load(keystorePropertiesFile.inputStream())
+                
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storeFile = keystoreProperties.getProperty("storeFile")?.let { file(it) }
+                storePassword = keystoreProperties.getProperty("storePassword")
+            }
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+
+    flavorDimensions.add("default")
+
+    productFlavors {
+        create("prod") {
+            dimension = "default"
+        }
+        create("staging") {
+            dimension = "default"
+            applicationIdSuffix = ".staging"
+        }
+    }
 }
 
-dependencies {
-  debugImplementation(libs.leakcanary)
-
-  implementation(project(":shared"))
-  implementation(libs.kotlininject.runtime)
-  ksp(libs.kotlininject.compiler)
-  implementation(libs.androidx.work)
-  coreLibraryDesugaring(libs.desugarJdk)
-  implementation(libs.kotlinx.datetime)
-  implementation(libs.bugsnag)
+flutter {
+    source = "../.."
 }
