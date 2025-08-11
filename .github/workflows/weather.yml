@@ -1,19 +1,13 @@
-name: Weather
+name: Print Weather (no-op test workflow)
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
   workflow_dispatch:
     inputs:
-      versionName:
-        description: 'User-facing release version name'
-        required: true
-        default: "1.0.0"
-      versionCode:
-        description: 'versionCode or build number'
-        required: true
-        default: 1
+      tramline-input:
+        required: false
 
 jobs:
   tramline-1:
@@ -22,5 +16,5 @@ jobs:
       - run: echo ${{ github.event.inputs.versionCode }} > version.txt
       - uses: actions/upload-artifact@v4
         with:
-         name: version
-         path: version.txt
+          name: version
+          path: version.txt
