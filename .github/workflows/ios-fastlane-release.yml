@@ -29,6 +29,21 @@ jobs:
           security default-keychain -s fastlane_tmp.keychain
           security unlock-keychain -p temp_password fastlane_tmp.keychain
 
+      - name: Select Xcode version
+        run: |
+          echo "Available Xcode versions:"
+          ls /Applications | grep Xcode
+          echo "Current Xcode version:"
+          xcodebuild -version
+          # Try to select Xcode 16 if available
+          sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer || \
+          echo "Xcode 16 not found, using default"
+          echo "Selected Xcode version:"
+          xcodebuild -version
+
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.255.0
         with:
