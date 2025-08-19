@@ -29,20 +29,32 @@ jobs:
           security default-keychain -s fastlane_tmp.keychain
           security unlock-keychain -p temp_password fastlane_tmp.keychain
 
-      - name: Select Xcode version
+      - name: Setup Xcode and iOS Platform
         run: |
           echo "Available Xcode versions:"
           ls /Applications | grep Xcode
           echo "Current Xcode version:"
           xcodebuild -version
-          # Try to select Xcode 16 if available
-          sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer || \
-          sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer || \
-          sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer || \
-          sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer || \
-          echo "Xcode 16 not found, using default"
+
+          # Select latest available Xcode 16.x
+          if [ -d "/Applications/Xcode_16.4.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.3.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.3.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.2.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.1.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.0.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+          fi
+
           echo "Selected Xcode version:"
           xcodebuild -version
+
+          # Install iOS 18.0 platform if not available
+          echo "Installing iOS 18.0 platform..."
+          sudo xcodebuild -downloadPlatform iOS
 
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.255.0
