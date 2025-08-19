@@ -1,4 +1,4 @@
-name: Android Staging Debug APK (+build number from workflow)
+name: Android Debug APK (+build number from workflow)
 
 on:
   workflow_dispatch:

@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: "zulu"
-          java-version: 11
+          java-version: 17
           cache: "gradle"
 
       - uses: subosito/flutter-action@v2
@@ -38,7 +38,7 @@ jobs:
 
       - run: flutter pub get
       - run: flutter --version
-      - run: flutter build apk --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --flavor staging
+      - run: flutter build apk --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --flavor staging
 
       - uses: actions/upload-artifact@v4
         with:
