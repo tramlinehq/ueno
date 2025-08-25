@@ -57,7 +57,7 @@ jobs:
           sudo xcodebuild -downloadPlatform iOS
 
       - name: Set up ruby env
-        uses: ruby/setup-ruby@v1.171.0
+        uses: ruby/setup-ruby@v1.255.0
         with:
           ruby-version: 3.2.0
           bundler-cache: true
