@@ -38,8 +38,7 @@ To generate a release build you need two files that are not, for good reasons, p
 | android-staging-apk.yml | Unsigned APK | Staging Build | No | No |
 | ios-fastlane-debug.yml | Dev Signed IPA | Debug Build | No | No |
 | ios-fastlane-release.yml | Dev Signed IPA | Release Build & TestFlight | No | No |
-| ios-non-fastlane-release.yml | Dev Signed IPA | Release Build & TestFlight | No | No |
-| single-input-ios-fastlane-debug.yml | Dev Signed IPA | Debug Build | Yes | No |
+| ios-non-fastlane-release.yml (untested) | Dev Signed IPA | Release Build & TestFlight | No | No |
 
 ### Bitrise
 

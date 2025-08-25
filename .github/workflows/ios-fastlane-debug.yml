@@ -3,21 +3,19 @@ name: iOS Fastlane AdHoc
 on:
   workflow_dispatch:
     inputs:
-      versionName:
-        description: "User-facing release version name"
-        required: true
-        default: "1.0.0"
-      versionCode:
-        description: "versionCode or build number"
-        required: true
-        default: "1"
+      tramline-input:
+        required: false
 
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Configure Tramline
+        id: tramline
+        uses: tramlinehq/deploy-action@v0.1.7
+        with:
+          input: ${{ github.event.inputs.tramline-input }}
 
       - name: Setup SSH Agent
         uses: webfactory/ssh-agent@v0.7.0
@@ -31,6 +29,33 @@ jobs:
           security default-keychain -s fastlane_tmp.keychain
           security unlock-keychain -p temp_password fastlane_tmp.keychain
 
+      - name: Setup Xcode and iOS Platform
+        run: |
+          echo "Available Xcode versions:"
+          ls /Applications | grep Xcode
+          echo "Current Xcode version:"
+          xcodebuild -version
+
+          # Select latest available Xcode 16.x
+          if [ -d "/Applications/Xcode_16.4.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.3.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.3.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.2.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.1.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
+          elif [ -d "/Applications/Xcode_16.0.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+          fi
+
+          echo "Selected Xcode version:"
+          xcodebuild -version
+
+          # Install iOS 18.0 platform if not available
+          echo "Installing iOS 18.0 platform..."
+          sudo xcodebuild -downloadPlatform iOS
+
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.171.0
         with:
@@ -40,7 +65,7 @@ jobs:
       - name: Setup the flutter environment
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.22.0"
+          flutter-version: "3.32.0"
           channel: "stable"
           cache: true
 
@@ -49,7 +74,7 @@ jobs:
 
       - name: Build the app
         run: |
-          flutter build ipa --debug --build-number=${{ github.event.inputs.versionCode }} --build-name=${{ github.event.inputs.versionName }} --no-codesign --dart-define=BUGSNAG_API_KEY=${{ secrets.BUGSNAG_API_KEY }}
+          flutter build ipa --debug --build-number=${{ steps.tramline.outputs.version_code }} --build-name=${{ steps.tramline.outputs.version_name }} --no-codesign --dart-define=BUGSNAG_API_KEY=${{ secrets.BUGSNAG_API_KEY }}
           ls -la build/ios/archive
 
       - name: Generate and sign the ipa
