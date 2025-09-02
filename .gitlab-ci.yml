@@ -104,6 +104,7 @@ android-debug-apk:
   when: manual
 
   script:
+    - exit 1
     - echo "Checking inputs"
     - echo $versionCode
     - echo $versionName
