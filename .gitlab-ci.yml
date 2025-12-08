@@ -20,7 +20,7 @@ am-i-up:
 # Android Debug APK with Firebase Distribution
 android-debug-apk-firebase:
   stage: build
-  image: ghcr.io/cirruslabs/flutter:3.22.0
+  image: ghcr.io/cirruslabs/flutter:3.32.0
 
   cache:
     key: gradle-cache
@@ -59,7 +59,7 @@ android-debug-apk-firebase:
 # Android Debug APK with Firebase Distribution (no artifact)
 android-debug-apk-firebase-no-artifact:
   stage: build
-  image: ghcr.io/cirruslabs/flutter:3.22.0
+  image: ghcr.io/cirruslabs/flutter:3.32.0
 
   cache:
     key: gradle-cache
@@ -91,7 +91,7 @@ android-debug-apk-firebase-no-artifact:
 # Android Debug APK (local build only)
 android-debug-apk:
   stage: build
-  image: ghcr.io/cirruslabs/flutter:3.22.0
+  image: ghcr.io/cirruslabs/flutter:3.32.0
   needs:
     - am-i-up
 
@@ -128,7 +128,7 @@ android-debug-apk:
 # Android Release AAB (local build only)
 android-release-aab:
   stage: build
-  image: ghcr.io/cirruslabs/flutter:3.22.0
+  image: ghcr.io/cirruslabs/flutter:3.32.0
 
   cache:
     key: gradle-cache
@@ -170,7 +170,7 @@ android-release-aab:
 # Android Release AAB with Play Store Upload
 android-release-aab-playstore:
   stage: build
-  image: ghcr.io/cirruslabs/flutter:3.22.0
+  image: ghcr.io/cirruslabs/flutter:3.32.0
 
   cache:
     key: gradle-cache

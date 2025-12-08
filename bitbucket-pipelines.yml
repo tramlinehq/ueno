@@ -19,7 +19,7 @@ pipelines:
     android-debug-apk-firebase:
       - step:
           name: Android Debug Build APK To Firebase
-          image: ghcr.io/cirruslabs/flutter:3.22.0
+          image: ghcr.io/cirruslabs/flutter:3.32.0
           caches:
             - gradle
           script:
@@ -51,7 +51,7 @@ pipelines:
     android-debug-apk-firebase-no-artifact:
       - step:
           name: Android Debug Build APK To Firebase (no artifact)
-          image: ghcr.io/cirruslabs/flutter:3.22.0
+          image: ghcr.io/cirruslabs/flutter:3.32.0
           caches:
             - gradle
           script:
@@ -74,7 +74,7 @@ pipelines:
     android-debug-apk:
       - step:
           name: Android Debug Build APK
-          image: ghcr.io/cirruslabs/flutter:3.22.0
+          image: ghcr.io/cirruslabs/flutter:3.32.0
           caches:
             - gradle
           script:
@@ -95,7 +95,7 @@ pipelines:
     android-release-aab:
       - step:
           name: Android Release Build AAB
-          image: ghcr.io/cirruslabs/flutter:3.22.0
+          image: ghcr.io/cirruslabs/flutter:3.32.0
           caches:
             - gradle
           script:
@@ -124,7 +124,7 @@ pipelines:
     android-release-aab-playstore:
       - step:
           name: Android Release Build AAB to Play Store
-          image: ghcr.io/cirruslabs/flutter:3.22.0
+          image: ghcr.io/cirruslabs/flutter:3.32.0
           caches:
             - gradle
           script:
