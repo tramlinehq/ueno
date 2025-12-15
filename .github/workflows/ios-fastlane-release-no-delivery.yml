@@ -82,7 +82,7 @@ jobs:
         run: |
           bundle install
           bundle exec fastlane match appstore --readonly --verbose
-          bundle exec fastlane ios ship_to_testflight upload:false
+          bundle exec fastlane ios app_store_build
         env:
           ASC_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
