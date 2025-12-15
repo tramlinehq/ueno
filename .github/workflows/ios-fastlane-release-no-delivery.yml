@@ -1,4 +1,4 @@
-name: iOS Fastlane Release
+name: iOS Fastlane Release (no testflight)
 
 on:
   workflow_dispatch:
