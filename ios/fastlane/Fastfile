@@ -52,7 +52,15 @@ platform :ios do
    load_asc_api_key
    prepare_signing(release: true)
    build_ipa(release: true)
-   upload_release
+   upload = options.fetch(:upload, true)
+   upload_release if upload
+ end
+
+ desc "Generate app-store build"
+ lane :app_store_build do
+   load_asc_api_key
+   prepare_signing(release: false)
+   build_ipa(release: false)
  end
 
  desc "Generate ad-hoc build"
