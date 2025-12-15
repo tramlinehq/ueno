@@ -52,9 +52,9 @@ jobs:
           echo "Selected Xcode version:"
           xcodebuild -version
 
-          # Install iOS 18.0 platform if not available
-          echo "Installing iOS 18.0 platform..."
-          sudo xcodebuild -downloadPlatform iOS
+          # # Install iOS 18.0 platform if not available
+          # echo "Installing iOS 18.0 platform..."
+          # sudo xcodebuild -downloadPlatform iOS
 
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1.255.0
