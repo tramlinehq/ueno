@@ -125,6 +125,11 @@ pipelines:
                 BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
                 FILENAME: "build-${BITBUCKET_PIPELINE_UUID}"
     android-release-aab-playstore:
+      - variables:          
+          - name: VERSION_NAME  
+            default: "1.0.0"
+          - name: VERSION_CODE
+            default: "1"
       - step:
           name: Android Release Build AAB to Play Store
           image: ghcr.io/cirruslabs/flutter:3.32.0
