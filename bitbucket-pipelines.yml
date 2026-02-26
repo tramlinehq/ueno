@@ -17,9 +17,9 @@ pipelines:
           - echo $BITBUCKET_BUILD_NUMBER
   custom:
     android-debug-apk-firebase:
-      - variables:
-          name: VERSION_NAME
-          default: "1.0.0"
+      - variables:          
+          - name: VERSION_NAME  
+            default: "1.0.0"
       - step:
           name: Android Debug Build APK To Firebase
           image: ghcr.io/cirruslabs/flutter:3.32.0
