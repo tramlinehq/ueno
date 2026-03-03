@@ -10,7 +10,7 @@ an aural experience of the very excellent [yamanote line](https://en.wikipedia.o
 
 ## Creating release builds for android
 
-### Google Play Stores
+### Google Play Store
 
 To generate a release build you need two files that are not, for good reasons, part of this repository:
 
