@@ -66,7 +66,7 @@ This is available in the `main-ios` branch.
 
 ### Bitbucket Pipelines
 
-These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/ueno) of this repository.
+These are available in the [Bitbucket mirror](https://bitbucket.org/tramline/ueno) of this repository..
 
 #### Android
 
